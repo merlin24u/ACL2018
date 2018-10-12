@@ -17,6 +17,7 @@ import engine.Game;
 public class PacmanGame implements Game {
 
 	private Pacman joueur;
+	private Map map;
 
 	/**
 	 * constructeur avec fichier source pour le help
