@@ -9,18 +9,22 @@ import engine.Game;
 
 /**
  * @author Horatiu Cirstea, Vincent Thomas
- *
+ * 
  *         Version avec personnage qui peut se deplacer. A completer dans les
  *         versions suivantes.
  * 
  */
 public class PacmanGame implements Game {
 
+	private Pacman joueur;
+
 	/**
 	 * constructeur avec fichier source pour le help
 	 * 
 	 */
 	public PacmanGame(String source) {
+
+		joueur = new Pacman();
 		BufferedReader helpReader;
 		try {
 			helpReader = new BufferedReader(new FileReader(source));
@@ -41,7 +45,13 @@ public class PacmanGame implements Game {
 	 */
 	@Override
 	public void evolve(Cmd commande) {
-		System.out.println("Execute "+commande);
+		if (commande != Cmd.IDLE) {
+			joueur.evolve(commande);
+			System.out.println("Pacman(" + joueur.getPosX() + ","
+					+ joueur.getPosY() + ")");
+			System.out.println("Ecrire commande (Z,Q,S,D)");
+		}
+
 	}
 
 	/**

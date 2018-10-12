@@ -1,5 +1,7 @@
 package model;
 
+import engine.Cmd;
+
 public class Pacman {
 
 	private int nbVies;
@@ -34,6 +36,28 @@ public class Pacman {
 
 	public int getPosY() {
 		return posY;
+	}
+
+	public void evolve(Cmd commande) {
+		switch (commande) {
+		case DOWN:
+			posY++;
+			System.out.println("D");
+			break;
+		case LEFT:
+			posX--;
+			System.out.println("L");
+			break;
+		case RIGHT:
+			posX++;
+			System.out.println("R");
+			break;
+		case UP:
+			posY--;
+			System.out.println("U");
+			break;
+		}
+
 	}
 
 }

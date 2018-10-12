@@ -2,9 +2,9 @@ package engine;
 
 /**
  * @author Horatiu Cirstea, Vincent Thomas
- *
- * moteur de game generique.
- * On lui passe un game et un afficheur et il permet d'executer un game.
+ * 
+ *         moteur de game generique. On lui passe un game et un afficheur et il
+ *         permet d'executer un game.
  */
 public class GameEngineGraphical {
 
@@ -37,9 +37,10 @@ public class GameEngineGraphical {
 	 *            afficheur a utiliser
 	 * @param gameController
 	 *            controlleur a utiliser
-	 *            
+	 * 
 	 */
-	public GameEngineGraphical(Game game, GamePainter gamePainter, GameController gameController) {
+	public GameEngineGraphical(Game game, GamePainter gamePainter,
+			GameController gameController) {
 		// creation du game
 		this.game = game;
 		this.gamePainter = gamePainter;
@@ -52,7 +53,9 @@ public class GameEngineGraphical {
 	public void run() throws InterruptedException {
 
 		// creation de l'interface graphique
-		this.gui = new GraphicalInterface(this.gamePainter,this.gameController);
+		this.gui = new GraphicalInterface(this.gamePainter, this.gameController);
+
+		System.out.println("Ecrire commande (Z,Q,S,D)");
 
 		// boucle de game
 		while (!this.game.isFinished()) {
