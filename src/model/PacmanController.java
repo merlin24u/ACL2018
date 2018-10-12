@@ -5,11 +5,10 @@ import java.awt.event.KeyEvent;
 import engine.Cmd;
 import engine.GameController;
 
-
 /**
  * @author Horatiu Cirstea, Vincent Thomas
- *
- * controleur de type KeyListener
+ * 
+ *         controleur de type KeyListener
  * 
  */
 public class PacmanController implements GameController {
@@ -18,7 +17,7 @@ public class PacmanController implements GameController {
 	 * commande en cours
 	 */
 	private Cmd commandeEnCours;
-	
+
 	/**
 	 * construction du controleur par defaut le controleur n'a pas de commande
 	 */
@@ -43,10 +42,21 @@ public class PacmanController implements GameController {
 	public void keyPressed(KeyEvent e) {
 
 		switch (e.getKeyChar()) {
-		// si on appuie sur 'q',commande joueur est gauche
-		case 'l':
-		case 'L':
+		case 'q':
+		case 'Q':
 			this.commandeEnCours = Cmd.LEFT;
+			break;
+		case 'd':
+		case 'D':
+			this.commandeEnCours = Cmd.RIGHT;
+			break;
+		case 'z':
+		case 'Z':
+			this.commandeEnCours = Cmd.UP;
+			break;
+		case 's':
+		case 'S':
+			this.commandeEnCours = Cmd.DOWN;
 			break;
 		}
 
