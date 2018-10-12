@@ -25,7 +25,8 @@ public class PacmanGame implements Game {
 	 */
 	public PacmanGame(String source) {
 
-		joueur = new Pacman();
+		joueur = new Pacman(this);
+		map = new Map();
 		BufferedReader helpReader;
 		try {
 			helpReader = new BufferedReader(new FileReader(source));
@@ -52,7 +53,6 @@ public class PacmanGame implements Game {
 					+ joueur.getPosY() + ")");
 			System.out.println("Ecrire commande (Z,Q,S,D)");
 		}
-
 	}
 
 	/**
@@ -62,6 +62,14 @@ public class PacmanGame implements Game {
 	public boolean isFinished() {
 		// le jeu n'est jamais fini
 		return false;
+	}
+
+	public int getMaxH() {
+		return map.getHeigh();
+	}
+
+	public int getMaxW() {
+		return map.getWidth();
 	}
 
 }

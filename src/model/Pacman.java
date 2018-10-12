@@ -1,17 +1,20 @@
 package model;
 
 import engine.Cmd;
+import engine.Game;
 
 public class Pacman {
 
+	private PacmanGame game;
 	private int nbVies;
 	private int posX;
 	private int posY;
 
-	public Pacman() {
+	public Pacman(PacmanGame p) {
 		nbVies = 5;
 		posX = 0;
 		posY = 0;
+		game = p;
 	}
 
 	public void setNbVies(int nbVies) {
@@ -41,8 +44,10 @@ public class Pacman {
 	public void evolve(Cmd commande) {
 		switch (commande) {
 		case DOWN:
-			posY++;
-			System.out.println("D");
+			if (posY < game.getMaxH()) {
+				posY++;
+				System.out.println("D");
+			}
 			break;
 		case LEFT:
 			if (posX != 0) {
@@ -51,8 +56,10 @@ public class Pacman {
 			}
 			break;
 		case RIGHT:
-			posX++;
-			System.out.println("R");
+			if (posX < game.getMaxW()) {
+				posX++;
+				System.out.println("R");
+			}
 			break;
 		case UP:
 			if (posY != 0) {

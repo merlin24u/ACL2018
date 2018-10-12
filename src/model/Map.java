@@ -12,4 +12,12 @@ public class Map {
 		tab = new int[10][10];
 	}
 
+	public int getHeigh() {
+		return tab.length;
+	}
+
+	public int getWidth() {
+		return tab[0].length;
+	}
+
 }
