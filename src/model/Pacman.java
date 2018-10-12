@@ -41,13 +41,11 @@ public class Pacman {
 	public void evolve(Cmd commande) {
 		switch (commande) {
 		case DOWN:
-			if (!(posY >= 0)){			
-				posY++;
-				System.out.println("D");
-			}
+			posY++;
+			System.out.println("D");
 			break;
 		case LEFT:
-			if(!(posX >=0)){
+			if (posX != 0) {
 				posX--;
 				System.out.println("L");
 			}
@@ -57,8 +55,10 @@ public class Pacman {
 			System.out.println("R");
 			break;
 		case UP:
-			posY--;
-			System.out.println("U");
+			if (posY != 0) {
+				posY--;
+				System.out.println("U");
+			}
 			break;
 		}
 
