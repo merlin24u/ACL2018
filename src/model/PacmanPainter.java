@@ -9,7 +9,7 @@ import engine.GamePainter;
 /**
  * @author Horatiu Cirstea, Vincent Thomas
  *
- * afficheur graphique pour le game
+ *         afficheur graphique pour le game
  * 
  */
 public class PacmanPainter implements GamePainter {
@@ -17,8 +17,11 @@ public class PacmanPainter implements GamePainter {
 	/**
 	 * la taille des cases
 	 */
-	protected static final int WIDTH = 100;
-	protected static final int HEIGHT = 100;
+	protected static int WIDTH;
+	protected static int HEIGHT;
+
+	private Pacman player;
+	private Map map;
 
 	/**
 	 * appelle constructeur parent
@@ -26,17 +29,21 @@ public class PacmanPainter implements GamePainter {
 	 * @param game
 	 *            le jeutest a afficher
 	 */
-	public PacmanPainter() {
+	public PacmanPainter(Pacman p, Map m) {
+		player = p;
+		map = m;
+		WIDTH = map.getWidth() + 10;
+		HEIGHT = map.getHeigh() + 10;
 	}
 
 	/**
-	 * methode  redefinie de Afficheur retourne une image du jeu
+	 * methode redefinie de Afficheur retourne une image du jeu
 	 */
 	@Override
 	public void draw(BufferedImage im) {
 		Graphics2D crayon = (Graphics2D) im.getGraphics();
 		crayon.setColor(Color.blue);
-		crayon.fillOval(0,0,10,10);
+		crayon.fillOval(player.getPosX(), player.getPosY(), 10, 10);
 	}
 
 	@Override

@@ -16,7 +16,7 @@ import engine.Game;
  */
 public class PacmanGame implements Game {
 
-	private Pacman joueur;
+	private Pacman player;
 	private Map map;
 
 	/**
@@ -25,7 +25,7 @@ public class PacmanGame implements Game {
 	 */
 	public PacmanGame(String source) {
 
-		joueur = new Pacman(this);
+		player = new Pacman(this);
 		map = new Map();
 		BufferedReader helpReader;
 		try {
@@ -48,9 +48,8 @@ public class PacmanGame implements Game {
 	@Override
 	public void evolve(Cmd commande) {
 		if (commande != Cmd.IDLE) {
-			joueur.evolve(commande);
-			System.out.println("Pacman(" + joueur.getPosX() + ","
-					+ joueur.getPosY() + ")");
+			player.evolve(commande);
+			System.out.println("Pacman(" + player.getPosX() + "," + player.getPosY() + ")");
 			System.out.println("Ecrire commande (Z,Q,S,D)");
 		}
 	}
@@ -70,6 +69,14 @@ public class PacmanGame implements Game {
 
 	public int getMaxW() {
 		return map.getWidth();
+	}
+
+	public Pacman getPlayer() {
+		return player;
+	}
+
+	public Map getMap() {
+		return map;
 	}
 
 }

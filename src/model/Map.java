@@ -9,7 +9,7 @@ public class Map {
 	public Map() {
 		id = nbMap;
 		nbMap++;
-		tab = new int[10][10];
+		tab = new int[100][100];
 	}
 
 	public int getHeigh() {
