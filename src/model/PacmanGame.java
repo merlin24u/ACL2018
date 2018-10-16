@@ -64,11 +64,11 @@ public class PacmanGame implements Game {
 	}
 
 	public int getMaxH() {
-		return map.getHeigh();
+		return map.getHeigh()-1;
 	}
 
 	public int getMaxW() {
-		return map.getWidth();
+		return map.getWidth()-1;
 	}
 
 	public Pacman getPlayer() {
