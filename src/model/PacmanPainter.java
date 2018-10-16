@@ -19,9 +19,12 @@ public class PacmanPainter implements GamePainter {
 	 */
 	protected static int WIDTH;
 	protected static int HEIGHT;
+	protected static int TILE_WIDTH = 10;
+	protected static int TILE_HEIGHT = 10;
 
 	private Pacman player;
 	private Map map;
+	private CollisionPainterResponsability collisionPainter;
 
 	/**
 	 * appelle constructeur parent
@@ -32,8 +35,9 @@ public class PacmanPainter implements GamePainter {
 	public PacmanPainter(Pacman p, Map m) {
 		player = p;
 		map = m;
-		WIDTH = map.getWidth() + 10;
-		HEIGHT = map.getHeigh() + 10;
+		WIDTH = map.getWidth() * TILE_WIDTH;
+		HEIGHT = map.getHeigh() * TILE_HEIGHT;
+		collisionPainter = new WallCollisionPainterResponsability(ECollisionType.WALL);
 	}
 
 	/**
@@ -42,8 +46,13 @@ public class PacmanPainter implements GamePainter {
 	@Override
 	public void draw(BufferedImage im) {
 		Graphics2D crayon = (Graphics2D) im.getGraphics();
+		for(int y = 0; y < map.getHeigh(); y++) {
+			for(int x = 0; x < map.getWidth(); x++) {
+				collisionPainter.drawCollision(crayon, x, y, TILE_WIDTH, TILE_HEIGHT, map.get(x,y));
+			}
+		}
 		crayon.setColor(Color.blue);
-		crayon.fillOval(player.getPosX(), player.getPosY(), 10, 10);
+		crayon.fillOval(player.getPosX()*TILE_WIDTH, player.getPosY()*TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
 	}
 
 	@Override
