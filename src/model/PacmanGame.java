@@ -27,6 +27,7 @@ public class PacmanGame implements Game {
 
 		player = new Pacman(this);
 		map = new Map();
+
 		BufferedReader helpReader;
 		try {
 			helpReader = new BufferedReader(new FileReader(source));
@@ -64,11 +65,11 @@ public class PacmanGame implements Game {
 	}
 
 	public int getMaxH() {
-		return map.getHeigh()-1;
+		return map.getHeigh() - 1;
 	}
 
 	public int getMaxW() {
-		return map.getWidth()-1;
+		return map.getWidth() - 1;
 	}
 
 	public Pacman getPlayer() {
@@ -77,6 +78,13 @@ public class PacmanGame implements Game {
 
 	public Map getMap() {
 		return map;
+	}
+
+	public boolean isWall(int x, int y) {
+		if (map.get(x, y) == ECollisionType.WALL.getValue())
+			return true;
+		else
+			return false;
 	}
 
 }

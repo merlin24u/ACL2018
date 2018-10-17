@@ -13,7 +13,7 @@ public class Pacman {
 	public Pacman(PacmanGame p) {
 		nbVies = 5;
 		posX = 0;
-		posY = 0;
+		posY = 1;
 		game = p;
 	}
 
@@ -45,26 +45,34 @@ public class Pacman {
 		switch (commande) {
 		case DOWN:
 			if (posY < game.getMaxH()) {
-				posY++;
-				System.out.println("D");
+				if (!game.isWall(posX, posY + 1)) {
+					posY++;
+					System.out.println("D");
+				}
 			}
 			break;
 		case LEFT:
 			if (posX != 0) {
-				posX--;
-				System.out.println("L");
+				if (!game.isWall(posX - 1, posY)) {
+					posX--;
+					System.out.println("L");
+				}
 			}
 			break;
 		case RIGHT:
 			if (posX < game.getMaxW()) {
-				posX++;
-				System.out.println("R");
+				if (!game.isWall(posX + 1, posY)) {
+					posX++;
+					System.out.println("R");
+				}
 			}
 			break;
 		case UP:
 			if (posY != 0) {
-				posY--;
-				System.out.println("U");
+				if (!game.isWall(posX, posY - 1)) {
+					posY--;
+					System.out.println("U");
+				}
 			}
 			break;
 		}

@@ -19,8 +19,8 @@ public class PacmanPainter implements GamePainter {
 	 */
 	protected static int WIDTH;
 	protected static int HEIGHT;
-	protected static int TILE_WIDTH = 10;
-	protected static int TILE_HEIGHT = 10;
+	protected static int TILE_WIDTH = 50;
+	protected static int TILE_HEIGHT = 50;
 
 	private Pacman player;
 	private Map map;
