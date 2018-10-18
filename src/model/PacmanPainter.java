@@ -3,7 +3,6 @@ package model;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-
 import engine.GamePainter;
 
 /**
@@ -46,13 +45,13 @@ public class PacmanPainter implements GamePainter {
 	@Override
 	public void draw(BufferedImage im) {
 		Graphics2D crayon = (Graphics2D) im.getGraphics();
-		for(int y = 0; y < map.getHeigh(); y++) {
-			for(int x = 0; x < map.getWidth(); x++) {
-				collisionPainter.drawCollision(crayon, x, y, TILE_WIDTH, TILE_HEIGHT, map.get(x,y));
+		for (int y = 0; y < map.getHeigh(); y++) {
+			for (int x = 0; x < map.getWidth(); x++) {
+				collisionPainter.drawCollision(crayon, x, y, TILE_WIDTH, TILE_HEIGHT, map.get(x, y));
 			}
 		}
 		crayon.setColor(Color.blue);
-		crayon.fillOval(player.getPosX()*TILE_WIDTH, player.getPosY()*TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
+		crayon.fillOval(player.getPosX() * TILE_WIDTH, player.getPosY() * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
 	}
 
 	@Override

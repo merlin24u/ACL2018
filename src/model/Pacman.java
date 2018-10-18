@@ -1,7 +1,6 @@
 package model;
 
 import engine.Cmd;
-import engine.Game;
 
 public class Pacman {
 
