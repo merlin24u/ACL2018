@@ -50,7 +50,7 @@ public class PacmanGame implements Game {
 	public void evolve(Cmd commande) {
 		if (commande != Cmd.IDLE) {
 			player.evolve(commande);
-			System.out.println("Pacman(" + player.getPosX() + "," + player.getPosY() + ")");
+			System.out.println("Pacman(" + player.getPosition().x + "," + player.getPosition().y + ")");
 			System.out.println("Ecrire commande (Z,Q,S,D)");
 		}
 	}
