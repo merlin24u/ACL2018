@@ -12,8 +12,10 @@ public class GroundCollisionHandler {
 	public void moveOnPosition(Movable movable) {
 		int nextPositionX = (int) (movable.getPosition().getX()+movable.getCurrentSpeedX());
 		int nextPositionY = (int) (movable.getPosition().getY()+movable.getCurrentSpeedY());
-		if (!game.isWall(nextPositionX, nextPositionY)) {
-			movable.translate(movable.getCurrentSpeedX(), movable.getCurrentSpeedY());
+		if (nextPositionX >=0 && nextPositionX < game.getMaxW() && nextPositionY >=0 && nextPositionY < game.getMaxH()) {
+			if (!game.isWall(nextPositionX, nextPositionY)) {
+				movable.translate(movable.getCurrentSpeedX(), movable.getCurrentSpeedY());
+			}
 		}
 		
 	}
