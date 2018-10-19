@@ -41,39 +41,44 @@ public class Pacman {
 	}
 
 	public void evolve(Cmd commande) {
+
+		int B_posX = posX;
+		int B_posY = posY;
+		String move = null;
+
 		switch (commande) {
 		case DOWN:
 			if (posY < game.getMaxH()) {
-				if (!game.isWall(posX, posY + 1)) {
-					posY++;
-					System.out.println("D");
-				}
+				B_posY++;
+				move = "D";
 			}
 			break;
 		case LEFT:
 			if (posX != 0) {
-				if (!game.isWall(posX - 1, posY)) {
-					posX--;
-					System.out.println("L");
-				}
+				B_posX--;
+				move = "L";
 			}
 			break;
 		case RIGHT:
 			if (posX < game.getMaxW()) {
-				if (!game.isWall(posX + 1, posY)) {
-					posX++;
-					System.out.println("R");
-				}
+				B_posX++;
+				move = "R";
 			}
 			break;
 		case UP:
 			if (posY != 0) {
-				if (!game.isWall(posX, posY - 1)) {
-					posY--;
-					System.out.println("U");
-				}
+				B_posY--;
+				move = "U";
 			}
 			break;
+		default:
+			break;
+		}
+
+		if (!game.isWall(B_posX, B_posY)) {
+			posX = B_posX;
+			posY = B_posY;
+			System.out.println(move);
 		}
 
 	}
