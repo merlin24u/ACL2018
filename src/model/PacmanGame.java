@@ -1,9 +1,9 @@
 package model;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-
+//import java.io.BufferedReader;
+//import java.io.FileReader;
+//import java.io.IOException;
+import dao.DAOFactory;
 import engine.Cmd;
 import engine.Game;
 
@@ -26,19 +26,18 @@ public class PacmanGame implements Game {
 	public PacmanGame(String source) {
 
 		player = new Pacman(this);
-		map = new Map();
-
-		BufferedReader helpReader;
 		try {
-			helpReader = new BufferedReader(new FileReader(source));
-			String ligne;
-			while ((ligne = helpReader.readLine()) != null) {
-				System.out.println(ligne);
-			}
-			helpReader.close();
-		} catch (IOException e) {
-			System.out.println("Help not available");
+			map = (Map) DAOFactory.getAbstractDAOFactory(1).getClassDAO().load("res/map.xml");
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+
+		/*
+		 * BufferedReader helpReader; try { helpReader = new BufferedReader(new
+		 * FileReader(source)); String ligne; while ((ligne = helpReader.readLine()) !=
+		 * null) { System.out.println(ligne); } helpReader.close(); } catch (IOException
+		 * e) { System.out.println("Help not available"); }
+		 */
 	}
 
 	/**
@@ -81,7 +80,7 @@ public class PacmanGame implements Game {
 	}
 
 	public boolean isWall(int x, int y) {
-		if (map.get(x, y) == ECollisionType.WALL.getValue())
+		if (map.getValue(x, y) == ECollisionType.WALL.getValue())
 			return true;
 		else
 			return false;

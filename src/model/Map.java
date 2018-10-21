@@ -9,7 +9,6 @@ public class Map {
 	public Map() {
 		id = nbMap;
 		nbMap++;
-		// tab = new int[100][100];
 
 		// Recuperation des valeurs des collisions
 		int wallCollision = ECollisionType.WALL.getValue();
@@ -19,11 +18,20 @@ public class Map {
 		grid = new int[][] {
 				{ wallCollision, wallCollision, wallCollision, wallCollision, wallCollision, wallCollision,
 						wallCollision, wallCollision, wallCollision, wallCollision },
-				{ 0, 0, 0, 0, 0, 0, 0, 0, 0, wallCollision },
-				{ wallCollision, 0, 0, wallCollision, 0, 0, 0, 0, 0, wallCollision },
-				{ wallCollision, 0, 0, 0, 0, 0, 0, 0, 0, wallCollision },
+				{ noneCollision, noneCollision, noneCollision, noneCollision, noneCollision, noneCollision,
+						noneCollision, noneCollision, noneCollision, wallCollision },
+				{ wallCollision, noneCollision, noneCollision, wallCollision, noneCollision, noneCollision,
+						noneCollision, noneCollision, noneCollision, wallCollision },
+				{ wallCollision, noneCollision, noneCollision, noneCollision, noneCollision, noneCollision,
+						noneCollision, noneCollision, noneCollision, wallCollision },
 				{ wallCollision, wallCollision, wallCollision, wallCollision, wallCollision, wallCollision,
 						wallCollision, wallCollision, wallCollision, wallCollision } };
+	}
+
+	public Map(int[][] g) {
+		id = nbMap;
+		nbMap++;
+		grid = g;
 	}
 
 	public int getHeigh() {
@@ -34,7 +42,7 @@ public class Map {
 		return grid[0].length;
 	}
 
-	public int get(int x, int y) {
+	public int getValue(int x, int y) {
 		return grid[y][x];
 	}
 

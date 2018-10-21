@@ -47,7 +47,7 @@ public class PacmanPainter implements GamePainter {
 		Graphics2D crayon = (Graphics2D) im.getGraphics();
 		for (int y = 0; y < map.getHeigh(); y++) {
 			for (int x = 0; x < map.getWidth(); x++) {
-				collisionPainter.drawCollision(crayon, x, y, TILE_WIDTH, TILE_HEIGHT, map.get(x, y));
+				collisionPainter.drawCollision(crayon, x, y, TILE_WIDTH, TILE_HEIGHT, map.getValue(x, y));
 			}
 		}
 		crayon.setColor(Color.blue);

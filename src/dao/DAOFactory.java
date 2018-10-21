@@ -4,12 +4,12 @@ public abstract class DAOFactory {
 
 	public final static int XML = 1;
 
-	public abstract ClassDAO getClass1DAO();
+	public abstract MapDAO getClassDAO();
 
 	public static DAOFactory getAbstractDAOFactory(int type) throws Exception {
 		switch (type) {
 		case XML:
-			return new XMLFactory();
+			return XmlFactory.getInstance();
 		default:
 			throw new Exception();
 		}
