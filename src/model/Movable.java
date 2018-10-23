@@ -38,11 +38,14 @@ public int getCurrentSpeedX() {
 public int getCurrentSpeedY() {
 	return this.currentSpeedY;
 }
+protected void resetCurrentSpeed() {
+	this.currentSpeedX = 0;
+	this.currentSpeedY = 0;
+}
 @Override
 public void update() {
 	groundCollisionHandler.handleMove(this);
-	this.currentSpeedX = 0;
-	this.currentSpeedY = 0;
+	resetCurrentSpeed();
 }
 @Override
 public Point getPosition() {

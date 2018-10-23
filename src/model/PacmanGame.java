@@ -25,8 +25,9 @@ public class PacmanGame implements Game {
 	 */
 	public PacmanGame(String source) {
 
+		this.map = new Map();
 		player = new Pacman(this);
-		map = new Map();
+		this.map.addCharacter(player);
 
 		BufferedReader helpReader;
 		try {
@@ -81,11 +82,6 @@ public class PacmanGame implements Game {
 		return map;
 	}
 
-	public boolean isWall(int x, int y) {
-		if (map.get(x, y) == ECollisionType.WALL.getValue())
-			return true;
-		else
-			return false;
-	}
+	
 
 }

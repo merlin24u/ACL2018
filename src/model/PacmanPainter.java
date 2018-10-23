@@ -52,7 +52,10 @@ public class PacmanPainter implements GamePainter {
 			}
 		}
 		crayon.setColor(Color.blue);
-		crayon.fillOval(player.getPosition().x*TILE_WIDTH, player.getPosition().y*TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
+		for(Character c: map.getCharacters()) {
+			crayon.fillOval(c.getPosition().x*TILE_WIDTH, c.getPosition().y*TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
+		}
+		
 	}
 
 	@Override

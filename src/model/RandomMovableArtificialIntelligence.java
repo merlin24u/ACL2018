@@ -1,17 +1,23 @@
 package model;
 
-public class RandomMovableArtificialIntelligence {
+public class RandomMovableArtificialIntelligence extends MovableArtificialIntelligence{
 	public void execute(Movable movable) {
 		final int  STAY = 0;
 		final int LEFT = 1;
 		final int RIGHT = 2;
-		final int UP = 1;
-		final int DOWN = 2;
+		final int UP = 3;
+		final int DOWN = 4;
 		
-		int randomX = (int)(Math.random()*3);
-		int randomY = (int)(Math.random()*3);
+		int randomMove = (int)(Math.random()*5);
 		
-		switch(randomX) {
+		switch(randomMove) {
+		case UP:
+			movable.moveUp();
+			break;
+		case DOWN:
+			System.out.println("down");
+			movable.moveDown();
+			break;
 		case LEFT:
 			movable.moveLeft();
 			break;
@@ -22,15 +28,5 @@ public class RandomMovableArtificialIntelligence {
 			break;
 		}
 		
-		switch(randomY) {
-		case UP:
-			movable.moveUp();
-			break;
-		case DOWN:
-			movable.moveDown();
-			break;
-		case STAY:
-			break;
-		}
 	}
 }

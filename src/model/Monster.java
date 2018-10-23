@@ -14,6 +14,7 @@ public class Monster extends Character{
 	public void update() {
 		movableArtificialIntelligence.execute(this);
 		groundCollisionHandler.handleMove(this);
+		resetCurrentSpeed();
 	}
 
 }
