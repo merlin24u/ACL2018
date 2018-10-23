@@ -9,7 +9,7 @@ public class XmlFactory extends DAOFactory {
 	}
 
 	@Override
-	public MapDAO getClassDAO() {
+	public MapDAO getMapDAO() {
 		return MapXmlDAO.getInstance();
 	}
 

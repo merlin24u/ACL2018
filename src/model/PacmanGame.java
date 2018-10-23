@@ -27,9 +27,9 @@ public class PacmanGame implements Game {
 
 		player = new Pacman(this);
 		try {
-			map = (Map) DAOFactory.getAbstractDAOFactory(1).getClassDAO().load("res/map.xml");
+			map = DAOFactory.getAbstractDAOFactory(1).getMapDAO().load("res/map.xml");
 		} catch (Exception e) {
-			e.printStackTrace();
+			map = new Map();
 		}
 
 		/*

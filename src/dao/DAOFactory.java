@@ -4,7 +4,7 @@ public abstract class DAOFactory {
 
 	public final static int XML = 1;
 
-	public abstract MapDAO getClassDAO();
+	public abstract MapDAO getMapDAO();
 
 	public static DAOFactory getAbstractDAOFactory(int type) throws Exception {
 		switch (type) {

@@ -1,8 +1,10 @@
 package dao;
 
+import model.Map;
+
 public interface MapDAO {
 
-	public Object load(String file);
+	public Map load(String file) throws Exception;
 
-	public void save(Object obj);
+	public void save(Map map);
 }
