@@ -9,7 +9,7 @@ public class GroundCollisionHandler {
 	public GroundCollisionHandler(PacmanGame game) {
 		this.game = game;
 	}
-	public void moveOnPosition(Movable movable) {
+	public void handleMove(Movable movable) {
 		int nextPositionX = (int) (movable.getPosition().getX()+movable.getCurrentSpeedX());
 		int nextPositionY = (int) (movable.getPosition().getY()+movable.getCurrentSpeedY());
 		if (nextPositionX >=0 && nextPositionX < game.getMaxW() && nextPositionY >=0 && nextPositionY < game.getMaxH()) {

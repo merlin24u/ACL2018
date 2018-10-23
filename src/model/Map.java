@@ -1,6 +1,6 @@
 package model;
 
-public class Map {
+public class Map implements IUpdate{
 
 	public static int nbMap;
 	private int id;
@@ -33,6 +33,11 @@ public class Map {
 
 	public int get(int x, int y) {
 		return grid[y][x];
+	}
+
+	@Override
+	public void update() {
+		
 	}
 	
 

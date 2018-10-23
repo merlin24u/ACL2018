@@ -3,7 +3,7 @@ package model;
 import java.awt.Point;
 
 public class Movable implements IUpdate, ICoordinate{
-private GroundCollisionHandler groundCollisionHandler;
+protected GroundCollisionHandler groundCollisionHandler;
 private int movingSpeedXMax;
 private int movingSpeedYMax;
 protected int currentSpeedX;
@@ -40,7 +40,7 @@ public int getCurrentSpeedY() {
 }
 @Override
 public void update() {
-	groundCollisionHandler.moveOnPosition(this);
+	groundCollisionHandler.handleMove(this);
 	this.currentSpeedX = 0;
 	this.currentSpeedY = 0;
 }
