@@ -9,6 +9,7 @@ public class Map implements IUpdate{
 	private int id;
 	private int[][] grid;
 	private ArrayList<Character> characters;
+	private ArrayList<OnMoveOver> events;
 
 	public Map() {
 		id = nbMap;
@@ -26,9 +27,21 @@ public class Map implements IUpdate{
 			  { wallCollision, wallCollision, wallCollision, wallCollision, wallCollision, wallCollision, wallCollision, wallCollision, wallCollision, wallCollision }
 			};
 		this.characters = new ArrayList<Character>();
-		// TODO: TEMPORAIRE !
+		this.events = new ArrayList<OnMoveOver>();
+		
+		
+		TEMPORAIRE();
+	}
+	
+	// TODO: A supprimer
+	private void TEMPORAIRE() {
 		Monster m = new Monster(new RandomMovableArtificialIntelligence(),5,5,0,new GroundCollisionHandler(this),1,1,new Point(3,2));
 		this.characters.add(m);
+		
+		TreasureEffectFactory tf = new TreasureEffectFactory(10,3);
+		OnMoveOver omo = new OnMoveOver(this, new Point(1,1), true, false, true);
+		omo.addEffectFactory(tf);
+		this.events.add(omo);
 	}
 
 	public int getHeigh() {
@@ -53,6 +66,9 @@ public class Map implements IUpdate{
 	
 	@Override
 	public void update() {
+		for(OnMoveOver omo: events) {
+			omo.update();
+		}
 		for(Character character: characters){
 			character.update();
 		}

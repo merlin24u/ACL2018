@@ -12,6 +12,7 @@ public class Monster extends Character{
 	
 	@Override
 	public void update() {
+		applyEffects();
 		movableArtificialIntelligence.execute(this);
 		groundCollisionHandler.handleMove(this);
 		resetCurrentSpeed();
