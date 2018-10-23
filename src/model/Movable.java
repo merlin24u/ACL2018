@@ -1,22 +1,24 @@
 package model;
 
-public class Movable implements Coordinate{
+import java.awt.Point;
+
+public class Movable implements IUpdate, ICoordinate{
+private GroundCollisionHandler groundCollisionHandler;
 private int movingSpeedXMax;
 private int movingSpeedYMax;
 protected int currentSpeedX;
 protected int currentSpeedY;
-private GroundCollisionHandler groundCollisionHandler;
+protected Point position;
 
-public Movable(GroundCollisionHandler groundCollisionHandler) {
-	this(groundCollisionHandler, 0, 0, 1,1);
-}
-public Movable(GroundCollisionHandler groundCollisionHandler, int x, int y, int movingSpeedXMax, int movingSpeedYMax) {
+
+public Movable(GroundCollisionHandler groundCollisionHandler, int movingSpeedXMax, int movingSpeedYMax, Point position) {
+	super();
 	this.groundCollisionHandler = groundCollisionHandler;
 	this.movingSpeedXMax = movingSpeedXMax;
 	this.movingSpeedYMax = movingSpeedYMax;
+	this.position = position;
 	this.currentSpeedX = 0;
 	this.currentSpeedY = 0;
-	this.setPosition(x, y);
 }
 public void moveUp() {
 	this.currentSpeedY -= this.movingSpeedYMax;
@@ -36,9 +38,22 @@ public int getCurrentSpeedX() {
 public int getCurrentSpeedY() {
 	return this.currentSpeedY;
 }
+@Override
 public void update() {
 	groundCollisionHandler.moveOnPosition(this);
 	this.currentSpeedX = 0;
 	this.currentSpeedY = 0;
+}
+@Override
+public Point getPosition() {
+	return position;
+}
+@Override
+public void setPosition(int x, int y) {
+	this.position.setLocation(x, y);
+}
+@Override
+public void translate(int x, int y) {
+	this.position.translate(x, y);
 }
 }

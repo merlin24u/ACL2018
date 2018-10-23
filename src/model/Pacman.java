@@ -1,28 +1,18 @@
 package model;
 
+import java.awt.Point;
+
 import engine.Cmd;
 import engine.Game;
 
-public class Pacman extends Movable{
+public class Pacman extends Character{
 
 	private PacmanGame game;
-	private int nbVies;
 
 	public Pacman(PacmanGame p) {
-		super(new GroundCollisionHandler(p), 0, 1, 1, 1);
-		nbVies = 5;
+		super(5,5,0,new GroundCollisionHandler(p),1,1,new Point(0,0));
 		game = p;
 	}
-
-	public void setNbVies(int nbVies) {
-		this.nbVies = nbVies;
-	}
-
-
-	public int getNbVies() {
-		return nbVies;
-	}
-
 
 	public void evolve(Cmd commande) {
 		switch (commande) {
