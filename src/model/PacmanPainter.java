@@ -50,9 +50,10 @@ public class PacmanPainter implements GamePainter {
 				collisionPainter.drawCollision(crayon, x, y, TILE_WIDTH, TILE_HEIGHT, map.getValue(x, y));
 			}
 		}
-		crayon.setColor(Color.blue);
-		for(Character c: map.getCharacters()) {
-			crayon.fillOval(c.getPosition().x*TILE_WIDTH, c.getPosition().y*TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
+
+		for (Character c : map.getCharacters()) {
+			crayon.setColor(c.getColor());
+			crayon.fillOval(c.getPosition().x * TILE_WIDTH, c.getPosition().y * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
 		}
 	}
 

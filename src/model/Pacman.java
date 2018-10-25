@@ -1,16 +1,16 @@
 package model;
 
+import java.awt.Color;
 import java.awt.Point;
-
 import engine.Cmd;
 
-public class Pacman extends Character{
+public class Pacman extends Character {
 
 	private PacmanGame game;
 	private int moneyAmount;
 
 	public Pacman(PacmanGame p) {
-		super(5,5,0,new GroundCollisionHandler(p.getMap()),1,1,new Point(0,0));
+		super(5, 5, 0, new GroundCollisionHandler(p.getMap()), 1, 1, new Point(0, 1), Color.blue);
 		game = p;
 	}
 
