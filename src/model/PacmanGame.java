@@ -25,12 +25,13 @@ public class PacmanGame implements Game {
 	 */
 	public PacmanGame(String source) {
 
-		player = new Pacman(this);
 		try {
 			map = DAOFactory.getAbstractDAOFactory(1).getMapDAO().load("res/map.xml");
 		} catch (Exception e) {
 			map = new Map();
 		}
+		player = new Pacman(this);
+		this.map.addCharacter(player);
 
 		/*
 		 * BufferedReader helpReader; try { helpReader = new BufferedReader(new
@@ -49,9 +50,10 @@ public class PacmanGame implements Game {
 	public void evolve(Cmd commande) {
 		if (commande != Cmd.IDLE) {
 			player.evolve(commande);
-			System.out.println("Pacman(" + player.getPosX() + "," + player.getPosY() + ")");
+			System.out.println("Pacman(" + player.getPosition().x + "," + player.getPosition().y + ")");
 			System.out.println("Ecrire commande (Z,Q,S,D)");
 		}
+		map.update();
 	}
 
 	/**
@@ -77,13 +79,6 @@ public class PacmanGame implements Game {
 
 	public Map getMap() {
 		return map;
-	}
-
-	public boolean isWall(int x, int y) {
-		if (map.getValue(x, y) == ECollisionType.WALL.getValue())
-			return true;
-		else
-			return false;
 	}
 
 }
