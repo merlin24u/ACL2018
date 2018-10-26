@@ -3,20 +3,21 @@ package model;
 import java.awt.Point;
 import java.util.ArrayList;
 
-public class OnMoveOver implements IUpdate, ICoordinate{
+public class OnMoveOver implements IUpdate, ICoordinate {
 	private Map map;
 	private Point position;
 	// Si l'objet est visible
 	private boolean isVisible;
-	// Si l'objet a été activé
+	// Si l'objet a ï¿½tï¿½ activï¿½
 	private boolean isActivated;
-	// Si l'objet doit être détruit une fois activé
+	// Si l'objet doit ï¿½tre dï¿½truit une fois activï¿½
 	private boolean isPersistingAfterActivation;
-	
+
 	private ArrayList<Character> charactersAlreadyOn;
 	private ArrayList<EffectFactory> effectsFactories;
-	
-	public OnMoveOver(Map map, Point position, boolean isVisible, boolean isActivated, boolean isPersistingAfterActivation) {
+
+	public OnMoveOver(Map map, Point position, boolean isVisible,
+			boolean isActivated, boolean isPersistingAfterActivation) {
 		super();
 		this.map = map;
 		this.position = position;
@@ -26,34 +27,34 @@ public class OnMoveOver implements IUpdate, ICoordinate{
 		this.charactersAlreadyOn = new ArrayList<Character>();
 		this.effectsFactories = new ArrayList<EffectFactory>();
 	}
-	
+
 	protected void applyTo(Character character) {
-		for(EffectFactory ef: effectsFactories) {
+		for (EffectFactory ef : effectsFactories) {
 			ef.applyTo(character);
 		}
 	}
-	
+
 	public void addEffectFactory(EffectFactory effectFactory) {
 		this.effectsFactories.add(effectFactory);
 	}
-	
+
 	private boolean hasSamePosition(Point position) {
 		return this.position.x == position.x && this.position.y == position.y;
 	}
-	
+
 	private boolean wasAlreadyOn(Character character) {
 		return charactersAlreadyOn.contains(character);
 	}
-	
+
 	@Override
 	public void update() {
-		for(Character character: map.getCharacters()) {
-			if(hasSamePosition(character.getPosition())) {
-				if(!wasAlreadyOn(character)) {
+		for (Character character : map.getCharacters()) {
+			if (hasSamePosition(character.getPosition())) {
+				if (!wasAlreadyOn(character)) {
 					applyTo(character);
 					charactersAlreadyOn.add(character);
 				}
-			}else {
+			} else {
 				charactersAlreadyOn.remove(character);
 			}
 		}
@@ -66,11 +67,11 @@ public class OnMoveOver implements IUpdate, ICoordinate{
 
 	@Override
 	public void setPosition(int x, int y) {
-		// Inutilisé
+		// Inutilisï¿½
 	}
 
 	@Override
 	public void translate(int distanceX, int distanceY) {
-		// Inutilisé
+		// Inutilisï¿½
 	}
 }

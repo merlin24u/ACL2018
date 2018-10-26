@@ -7,7 +7,7 @@ import engine.GamePainter;
 
 /**
  * @author Horatiu Cirstea, Vincent Thomas
- *
+ * 
  *         afficheur graphique pour le game
  * 
  */
@@ -36,7 +36,8 @@ public class PacmanPainter implements GamePainter {
 		map = m;
 		WIDTH = map.getWidth() * TILE_WIDTH;
 		HEIGHT = map.getHeigh() * TILE_HEIGHT;
-		collisionPainter = new WallCollisionPainterResponsability(ECollisionType.WALL);
+		collisionPainter = new WallCollisionPainterResponsability(
+				ECollisionType.WALL);
 	}
 
 	/**
@@ -47,13 +48,15 @@ public class PacmanPainter implements GamePainter {
 		Graphics2D crayon = (Graphics2D) im.getGraphics();
 		for (int y = 0; y < map.getHeigh(); y++) {
 			for (int x = 0; x < map.getWidth(); x++) {
-				collisionPainter.drawCollision(crayon, x, y, TILE_WIDTH, TILE_HEIGHT, map.getValue(x, y));
+				collisionPainter.drawCollision(crayon, x, y, TILE_WIDTH,
+						TILE_HEIGHT, map.getValue(x, y));
 			}
 		}
 
 		for (Character c : map.getCharacters()) {
 			crayon.setColor(c.getColor());
-			crayon.fillOval(c.getPosition().x * TILE_WIDTH, c.getPosition().y * TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
+			crayon.fillOval(c.getPosition().x * TILE_WIDTH, c.getPosition().y
+					* TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
 		}
 	}
 

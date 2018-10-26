@@ -1,7 +1,8 @@
 package model;
 
-public class TreasureEffect extends Effect{
+public class TreasureEffect extends Effect {
 	private int moneyAmount;
+
 	public TreasureEffect(Character character, int moneyAmount, int tickDuration) {
 		super(character, tickDuration);
 		this.moneyAmount = moneyAmount;
@@ -9,6 +10,6 @@ public class TreasureEffect extends Effect{
 
 	@Override
 	public void _apply() {
-		((Pacman)character).increaseMoneyAmount(moneyAmount);
+		((Pacman) character).increaseMoneyAmount(moneyAmount);
 	}
 }

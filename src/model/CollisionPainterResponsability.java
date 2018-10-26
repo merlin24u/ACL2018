@@ -25,6 +25,6 @@ public abstract class CollisionPainterResponsability {
 	}
 
 	// Dessine la collision si il en est le responsable
-	public abstract void drawCollision(Graphics2D crayon, int tileWidth, int tileHeight, int x, int y,
-			int collisionValue);
+	public abstract void drawCollision(Graphics2D crayon, int tileWidth,
+			int tileHeight, int x, int y, int collisionValue);
 }

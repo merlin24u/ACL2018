@@ -10,7 +10,8 @@ public class Pacman extends Character {
 	private int moneyAmount;
 
 	public Pacman(PacmanGame p) {
-		super(5, 5, 0, new GroundCollisionHandler(p.getMap()), 1, 1, new Point(0, 1), Color.blue);
+		super(5, 5, 0, new GroundCollisionHandler(p.getMap()), 1, 1, new Point(
+				0, 1), Color.blue);
 		game = p;
 	}
 

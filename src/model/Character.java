@@ -11,9 +11,11 @@ public class Character extends Movable {
 	private ArrayList<Effect> effects;
 	private Color color;
 
-	public Character(int currentHP, int maximumHP, int defensePoints, GroundCollisionHandler groundCollisionHandler,
-			int movingSpeedXMax, int movingSpeedYMax, Point position, Color c) {
-		super(groundCollisionHandler, movingSpeedXMax, movingSpeedYMax, position);
+	public Character(int currentHP, int maximumHP, int defensePoints,
+			GroundCollisionHandler groundCollisionHandler, int movingSpeedXMax,
+			int movingSpeedYMax, Point position, Color c) {
+		super(groundCollisionHandler, movingSpeedXMax, movingSpeedYMax,
+				position);
 		this.currentHP = currentHP;
 		this.maximumHP = maximumHP;
 		this.defensePoints = defensePoints;
