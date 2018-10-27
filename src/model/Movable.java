@@ -45,7 +45,7 @@ public class Movable implements IUpdate, ICoordinate {
 		return this.currentSpeedY;
 	}
 
-	protected void resetCurrentSpeed() {
+	public void resetCurrentSpeed() {
 		this.currentSpeedX = 0;
 		this.currentSpeedY = 0;
 	}
