@@ -54,4 +54,11 @@ public class Character extends Movable {
 			e.apply();
 		}
 	}
+	
+	public int getEffectsSize(){
+		return effects.size();
+	}
+	public Effect getEffect(int index) {
+		return effects.get(index);
+	}
 }

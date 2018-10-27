@@ -7,6 +7,10 @@ public abstract class EffectFactory {
 		super();
 		this.tickDuration = tickDuration;
 	}
-
+	
+	public int getTickDuration() {
+		return this.tickDuration;
+	}
+	
 	public abstract void applyTo(Character character);
 }

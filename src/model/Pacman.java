@@ -42,5 +42,9 @@ public class Pacman extends Character {
 	public void increaseMoneyAmount(int moneyAmount) {
 		this.moneyAmount += moneyAmount;
 	}
+	
+	public int getMoneyAmount() {
+		return this.moneyAmount;
+	}
 
 }

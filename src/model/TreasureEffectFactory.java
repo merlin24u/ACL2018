@@ -14,4 +14,8 @@ public class TreasureEffectFactory extends EffectFactory {
 			character.addEffect(new TreasureEffect(character, moneyAmount,
 					tickDuration));
 	}
+	
+	public int getMoneyAmount() {
+		return moneyAmount;
+	}
 }

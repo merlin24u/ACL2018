@@ -9,12 +9,20 @@ public abstract class Effect {
 		this.character = character;
 		this.tickDuration = tickDuration;
 	}
+	
+	public Character getCharacter() {
+		return character;
+	}
 
+	public int getTickDuration() {
+		return tickDuration;
+	}
+	
 	public final void apply() {
 		if (tickDuration-- > 0) {
 			_apply();
 		}
 	};
-
+	
 	protected abstract void _apply();
 }

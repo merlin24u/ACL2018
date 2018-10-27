@@ -8,6 +8,10 @@ public class TreasureEffect extends Effect {
 		this.moneyAmount = moneyAmount;
 	}
 
+	public int getMoneyAmount() {
+		return moneyAmount;
+	}
+	
 	@Override
 	public void _apply() {
 		((Pacman) character).increaseMoneyAmount(moneyAmount);
