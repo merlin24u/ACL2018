@@ -1,28 +1,39 @@
 <project name="ACL2018_Napoleon" default="compile" basedir=".">
     <description>Builds, tests, and runs the project Toucan.</description>
+	
+	<!-- Nom du jar --> 
     <property name="jar.name" value="${ant.project.name}"/>
-	<property name="source.dir" value="src"/>
+	
+	<!-- Chemin des dossiers -->
+	<property name="source.dir" value=".\src"/>
 	<property name="lib.dir" value="${source.dir}\lib"/>
 	<property name="resource.dir" value="${source}\res"/>
+	<property name="test.dir" value="${source.dir}\test"/>
+	
 	<property name="build.dir" value="${source.dir}\bin"/>
 	<property name="class.dir" value="${build.dir}\classes"/>
 	<property name="jar.dir" value="${build.dir}\jar"/>
-	<property name="main-class" value="start.Main" />
-	<property name="test.dir" value="${source.dir}\test"/>
 	<property name="test.report.dir" value="${build.dir}\testrep"/>
 	
+	<!-- Classe principale -->
+	<property name="main-class" value="start.Main" />
+	
+	<!-- Chemin vers le jar de junit -->
 	<path id="classpath.test">
 	    <pathelement location="${lib.dir}/junit-4.12.jar"/>
 	  </path>
 	
-	<target name="cjar" depends="clean,jar" />
-	<target name="crun" depends="clean,run" />
 	
+	<target name="main" depends="clean,run" />
+	<target name="clean-build" depends="clean,jar" />
+
+	<!-- Execution du jar -->
 	<target name="run" depends="jar" description="Execute jar.">
 		<echo message="execution du jar" />
 		<java jar="${jar.dir}/${jar.name}.jar" fork="true"/>	
 	</target>
 
+	<!-- Creation du jar -->
 	<target name="jar" depends="compile" description="Jar creation."  >
 		<echo message="création du jar" />
 		<mkdir dir="${jar.dir}" />
@@ -33,6 +44,7 @@
 		</jar>
 	</target>
 	
+	<!-- Execution des tests JUnit -->
 	<target name="junit" depends="compile">
 		<mkdir dir="${test.report.dir}"/>
 		<junit printsummary="yes" fork="yes" haltonfailure="off">
@@ -49,7 +61,8 @@
 			</batchtest>
 		</junit>
 	</target>
-		
+	
+	<!-- Compilation des sources -->
 	<target name="compile"
 	        description="Compile project." >
 	    <echo message="compilation du code" />
@@ -62,9 +75,8 @@
 		<javac srcdir="${test.dir}" destdir="${class.dir}" />
 	</target>
 		
-	<target name="clean" depends="clean-build,clean-jar" />
-	
-	<target name="clean-build" description="Clean build.">
+	<!-- Nettoyage des fichiers du dossier build -->
+	<target name="clean" description="Clean build.">
 		<echo message="nettoyage du dossier de build" />
 		<delete dir="${build.dir}"/>
 	</target>
