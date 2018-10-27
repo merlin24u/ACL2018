@@ -41,7 +41,6 @@ public class TestCharacter {
 
 	@Test
 	public void testMonsterPresent() {
-		game.evolve(Cmd.UP);
 		assertTrue("monstre pas présent", listM.size() == 1);
 	}
 

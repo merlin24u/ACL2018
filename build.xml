@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project name="ACL2018_Napoleon" default="run" basedir=".">
+  <!-- set global properties for this build -->
+  <property name="src" location="src"/>
+  <property name="bin" location="bin"/>
+
+  <target name="init">
+    <!-- Create the build directory structure used by compile -->
+    <mkdir dir="${bin}"/>
+  </target>
+
+  <target name="compile" depends="init">
+    <!-- Compile the Java code from ${src} into ${bin} -->
+    <javac srcdir="${src}" destdir="${bin}" includeantruntime="false">
+      <exclude name="test/**"/>
+    </javac>
+  </target>
+
+  <target name="run" depends="compile">
+    <java classname="start.Main" classpath="${bin}" failonerror="true" fork="true"/>
+  </target>
+
+  <target name="clean">
+    <!-- Delete the ${build} directory tree -->
+    <delete dir="${bin}"/>
+  </target>
+</project>
