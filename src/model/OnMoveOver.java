@@ -50,7 +50,7 @@ public abstract class OnMoveOver implements IUpdate, ICoordinate {
 	public void update() {
 		for (Character character : map.getCharacters()) {
 			if (hasSamePosition(character.getPosition())) {
-				if (!wasAlreadyOn(character)) {
+				if (!wasAlreadyOn(character) && hasRequirements(character)) {
 					applyTo(character);
 					charactersAlreadyOn.add(character);
 				}

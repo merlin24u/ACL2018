@@ -16,6 +16,7 @@ public class Pacman extends Character {
 		super(5, 5, 0, new GroundCollisionHandler(p.getMap()), 1, 1, new Point(
 				0, 1), Color.blue);
 		game = p;
+		this.items = new ArrayList<Item>();
 	}
 
 	public void evolve(Cmd commande) {
@@ -40,6 +41,7 @@ public class Pacman extends Character {
 		default:
 			break;
 		}
+		System.out.println("money: "+this.moneyAmount);
 	}
 
 	public void increaseMoneyAmount(int moneyAmount) {

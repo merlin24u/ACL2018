@@ -5,6 +5,7 @@ public class ItemEffectFactory extends EffectFactory{
 	
 	public ItemEffectFactory(Item item) {
 		super(0);
+		this.item = item;
 	}
 	
 	@Override

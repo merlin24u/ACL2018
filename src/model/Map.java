@@ -47,6 +47,7 @@ public class Map implements IUpdate {
 		this.events = new ArrayList<OnMoveOver>();
 
 		TEMPORAIRE();
+		
 	}
 
 	// TODO: A supprimer
@@ -55,11 +56,23 @@ public class Map implements IUpdate {
 				5, 0, new GroundCollisionHandler(this), 1, 1, new Point(3, 2));
 		this.characters.add(m);
 
-		TreasureEffectFactory tf = new TreasureEffectFactory(10, 3);
-		OnMoveOver omo = new SimpleOnMoveOver(this, new Point(1, 1), true, false,
+
+		Item item1 = new Key("K01","Clef verte");
+		// Case qui donnera la clef
+		ItemEffectFactory ief = new ItemEffectFactory(item1);
+		OnMoveOver omo1 = new SimpleOnMoveOver(this, new Point(1, 2), true, false,
 				true);
-		omo.addEffectFactory(tf);
-		this.events.add(omo);
+		omo1.addEffectFactory(ief);
+		this.events.add(omo1);
+		
+		// Case qui necessite la clef
+		ArrayList<Item> itemsRequired = new ArrayList<Item>();
+		itemsRequired.add(item1);
+		TreasureEffectFactory tf = new TreasureEffectFactory(10, 3);
+		OnMoveOver omo2 = new ItemRequiredOnMoveOver(this, new Point(2, 1), true, false,
+				true, itemsRequired, true);
+		omo2.addEffectFactory(tf);
+		this.events.add(omo2);
 	}
 
 	public int getHeigh() {
