@@ -3,7 +3,7 @@ package model;
 import java.awt.Point;
 import java.util.ArrayList;
 
-public class OnMoveOver implements IUpdate, ICoordinate {
+public abstract class OnMoveOver implements IUpdate, ICoordinate {
 	private Map map;
 	private Point position;
 	// Si l'objet est visible
@@ -67,11 +67,13 @@ public class OnMoveOver implements IUpdate, ICoordinate {
 
 	@Override
 	public void setPosition(int x, int y) {
-		// Inutilis�
+		// Inutilisé
 	}
 
 	@Override
 	public void translate(int distanceX, int distanceY) {
-		// Inutilis�
+		// Inutilisé
 	}
+	
+	protected abstract boolean hasRequirements(Character character);
 }

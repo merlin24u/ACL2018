@@ -56,7 +56,7 @@ public class Map implements IUpdate {
 		this.characters.add(m);
 
 		TreasureEffectFactory tf = new TreasureEffectFactory(10, 3);
-		OnMoveOver omo = new OnMoveOver(this, new Point(1, 1), true, false,
+		OnMoveOver omo = new SimpleOnMoveOver(this, new Point(1, 1), true, false,
 				true);
 		omo.addEffectFactory(tf);
 		this.events.add(omo);
