@@ -26,20 +26,19 @@ public class PacmanGame implements Game {
 	public PacmanGame(String source) {
 
 		try {
-			map = DAOFactory.getAbstractDAOFactory(DAOFactory.XML).getMapDAO()
-					.load("res/map.xml");
+			map = DAOFactory.getAbstractDAOFactory(DAOFactory.XML).getMapDAO().load("res/map.xml");
 		} catch (Exception e) {
+			e.printStackTrace();
 			map = new Map();
 		}
-		player = new Pacman(this);
+		player = new Pacman(map);
 		this.map.addCharacter(player);
 
 		/*
 		 * BufferedReader helpReader; try { helpReader = new BufferedReader(new
-		 * FileReader(source)); String ligne; while ((ligne =
-		 * helpReader.readLine()) != null) { System.out.println(ligne); }
-		 * helpReader.close(); } catch (IOException e) {
-		 * System.out.println("Help not available"); }
+		 * FileReader(source)); String ligne; while ((ligne = helpReader.readLine()) !=
+		 * null) { System.out.println(ligne); } helpReader.close(); } catch (IOException
+		 * e) { System.out.println("Help not available"); }
 		 */
 	}
 
@@ -52,8 +51,7 @@ public class PacmanGame implements Game {
 	public void evolve(Cmd commande) {
 		if (commande != Cmd.IDLE) {
 			player.evolve(commande);
-			System.out.println("Pacman(" + player.getPosition().x + ","
-					+ player.getPosition().y + ")");
+			System.out.println("Pacman(" + player.getPosition().x + "," + player.getPosition().y + ")");
 			System.out.println("Ecrire commande (Z,Q,S,D)");
 		}
 		map.update();

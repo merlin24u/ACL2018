@@ -11,11 +11,15 @@ public class TreasureEffectFactory extends EffectFactory {
 	@Override
 	public void applyTo(Character character) {
 		if (character instanceof Pacman)
-			character.addEffect(new TreasureEffect(character, moneyAmount,
-					tickDuration));
+			character.addEffect(new TreasureEffect(character, moneyAmount, tickDuration));
 	}
-	
+
 	public int getMoneyAmount() {
 		return moneyAmount;
+	}
+
+	@Override
+	public String getTexture() {
+		return null;
 	}
 }

@@ -8,16 +8,16 @@ public abstract class OnMoveOver implements IUpdate, ICoordinate {
 	private Point position;
 	// Si l'objet est visible
 	private boolean isVisible;
-	// Si l'objet a �t� activ�
+	// Si l'objet a ete active
 	private boolean isActivated;
-	// Si l'objet doit �tre d�truit une fois activ�
+	// Si l'objet doit etre detruit une fois active
 	private boolean isPersistingAfterActivation;
 
 	private ArrayList<Character> charactersAlreadyOn;
 	private ArrayList<EffectFactory> effectsFactories;
 
-	public OnMoveOver(Map map, Point position, boolean isVisible,
-			boolean isActivated, boolean isPersistingAfterActivation) {
+	public OnMoveOver(Map map, Point position, boolean isVisible, boolean isActivated,
+			boolean isPersistingAfterActivation) {
 		super();
 		this.map = map;
 		this.position = position;
@@ -65,6 +65,10 @@ public abstract class OnMoveOver implements IUpdate, ICoordinate {
 		return position;
 	}
 
+	public ArrayList<EffectFactory> getEffectFactory() {
+		return effectsFactories;
+	}
+
 	@Override
 	public void setPosition(int x, int y) {
 		// Inutilisé
@@ -74,6 +78,6 @@ public abstract class OnMoveOver implements IUpdate, ICoordinate {
 	public void translate(int distanceX, int distanceY) {
 		// Inutilisé
 	}
-	
+
 	protected abstract boolean hasRequirements(Character character);
 }

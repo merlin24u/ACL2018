@@ -11,7 +11,7 @@ public class TreasureEffect extends Effect {
 	public int getMoneyAmount() {
 		return moneyAmount;
 	}
-	
+
 	@Override
 	public void _apply() {
 		((Pacman) character).increaseMoneyAmount(moneyAmount);

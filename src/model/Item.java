@@ -18,5 +18,7 @@ public abstract class Item {
 		return name;
 	}
 	
+	public abstract String getTexture();
+	
 	public abstract Item clone();
 }
