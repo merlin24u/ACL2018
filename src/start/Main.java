@@ -13,7 +13,7 @@ public class Main {
 	public static void main(String[] args) throws InterruptedException {
 
 		// creation du jeu particulier et de son afficheur
-		PacmanGame game = new PacmanGame("helpFilePacman.txt");
+		PacmanGame game = new PacmanGame("res/map.xml");
 		PacmanPainter painter = new PacmanPainter(game.getMap());
 		PacmanController controller = new PacmanController();
 
