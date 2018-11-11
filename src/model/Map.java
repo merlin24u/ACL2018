@@ -30,8 +30,8 @@ public class Map implements IUpdate {
 				{ wallCollision, wallCollision, wallCollision, wallCollision, wallCollision, wallCollision,
 						wallCollision, wallCollision, wallCollision, wallCollision } };
 
-		start = new Point(0, 1);
-		finish = start;
+		start = new Point(1, 1);
+		finish = new Point(0, 1);
 
 		TEMPORAIRE();
 

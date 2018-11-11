@@ -8,12 +8,12 @@ public class Key extends Item {
 
 	@Override
 	public Item clone() {
-		return new Key(this.id, this.name);
+		return new Key(super.getId(), super.getName());
 	}
 
 	@Override
 	public String getTexture() {
-		return "res/key.png";
+		return "key";
 	}
 
 }

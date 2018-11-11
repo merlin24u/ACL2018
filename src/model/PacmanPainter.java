@@ -3,12 +3,8 @@ package model;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-
 import engine.GamePainter;
+import texture.TextureFactory;
 
 /**
  * @author Horatiu Cirstea, Vincent Thomas
@@ -60,10 +56,10 @@ public class PacmanPainter implements GamePainter {
 			for (EffectFactory ef : m.getEffectFactory()) {
 				try {
 					texture = ef.getTexture();
-					img = ImageIO.read(new File(texture));
+					img = TextureFactory.getInstance().get(texture);
 					crayon.drawImage(img, m.getPosition().x * TILE_WIDTH, m.getPosition().y * TILE_HEIGHT, TILE_WIDTH,
 							TILE_HEIGHT, null);
-				} catch (IOException e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}

@@ -50,12 +50,13 @@ public class Pacman extends Character {
 	}
 
 	public void addItem(Item item) {
+		System.out.println("you've collected " + item.getName());
 		this.items.add(item);
 	}
 
 	public Item getItem(String itemId) {
 		for (Item i : items) {
-			if (i.id.equals(itemId))
+			if (i.getId().equals(itemId))
 				return i;
 		}
 		return null;

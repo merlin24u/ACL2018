@@ -14,7 +14,7 @@ public class ExitEffectFactory extends EffectFactory {
 
 	@Override
 	public String getTexture() {
-		return "res/door.png";
+		return "door";
 	}
 
 }

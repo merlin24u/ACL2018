@@ -20,6 +20,6 @@ public class TreasureEffectFactory extends EffectFactory {
 
 	@Override
 	public String getTexture() {
-		return null;
+		return "treasure";
 	}
 }
