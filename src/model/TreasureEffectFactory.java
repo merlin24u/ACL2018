@@ -9,9 +9,12 @@ public class TreasureEffectFactory extends EffectFactory {
 	}
 
 	@Override
-	public void applyTo(Character character) {
-		if (character instanceof Pacman)
+	public boolean applyTo(Character character) {
+		if (character instanceof Pacman) {
 			character.addEffect(new TreasureEffect(character, moneyAmount, tickDuration));
+			return true;
+		} else
+			return false;
 	}
 
 	public int getMoneyAmount() {

@@ -12,6 +12,8 @@ public abstract class OnMoveOver implements IUpdate, ICoordinate {
 	private boolean isActivated;
 	// Si l'objet doit etre detruit une fois active
 	private boolean isPersistingAfterActivation;
+	// a detruire
+	private boolean toDestroy;
 
 	private ArrayList<Character> charactersAlreadyOn;
 	private ArrayList<EffectFactory> effectsFactories;
@@ -24,13 +26,16 @@ public abstract class OnMoveOver implements IUpdate, ICoordinate {
 		this.isVisible = isVisible;
 		this.isActivated = isActivated;
 		this.isPersistingAfterActivation = isPersistingAfterActivation;
+		this.toDestroy = false;
 		this.charactersAlreadyOn = new ArrayList<Character>();
 		this.effectsFactories = new ArrayList<EffectFactory>();
 	}
 
 	protected void applyTo(Character character) {
 		for (EffectFactory ef : effectsFactories) {
-			ef.applyTo(character);
+			boolean res = ef.applyTo(character);
+			if (!isPersistingAfterActivation && res)
+				toDestroy = true;
 		}
 	}
 
@@ -77,6 +82,10 @@ public abstract class OnMoveOver implements IUpdate, ICoordinate {
 	@Override
 	public void translate(int distanceX, int distanceY) {
 		// Inutilisé
+	}
+
+	public boolean getDestroy() {
+		return toDestroy;
 	}
 
 	protected abstract boolean hasRequirements(Character character);

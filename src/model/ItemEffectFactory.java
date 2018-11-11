@@ -9,9 +9,12 @@ public class ItemEffectFactory extends EffectFactory {
 	}
 
 	@Override
-	public void applyTo(Character character) {
-		if (character instanceof Pacman)
+	public boolean applyTo(Character character) {
+		if (character instanceof Pacman) {
 			((Pacman) character).addItem(item.clone());
+			return true;
+		} else
+			return false;
 	}
 
 	public Item getItem() {

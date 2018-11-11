@@ -7,9 +7,12 @@ public class ExitEffectFactory extends EffectFactory {
 	}
 
 	@Override
-	public void applyTo(Character character) {
-		if (character instanceof Pacman)
+	public boolean applyTo(Character character) {
+		if (character instanceof Pacman) {
 			character.addEffect(new ExitEffect(character, tickDuration));
+			return true;
+		} else
+			return false;
 	}
 
 	@Override

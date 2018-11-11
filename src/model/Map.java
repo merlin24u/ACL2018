@@ -11,12 +11,15 @@ public class Map implements IUpdate {
 	private Point start, finish;
 	private ArrayList<Character> characters;
 	private ArrayList<OnMoveOver> events;
+	private ArrayList<OnMoveOver> toDestroy;
 
 	public Map() {
 		int wallCollision = ECollisionType.WALL.getValue();
 		int noneCollision = ECollisionType.NONE.getValue();
 		this.characters = new ArrayList<Character>();
 		this.events = new ArrayList<OnMoveOver>();
+		toDestroy = new ArrayList<OnMoveOver>();
+
 		// Creation de la map en dur.
 		grid = new int[][] {
 				{ wallCollision, wallCollision, wallCollision, wallCollision, wallCollision, wallCollision,
@@ -46,6 +49,7 @@ public class Map implements IUpdate {
 
 		this.characters = new ArrayList<Character>();
 		this.events = new ArrayList<OnMoveOver>();
+		toDestroy = new ArrayList<OnMoveOver>();
 
 		TEMPORAIRE();
 
@@ -60,7 +64,7 @@ public class Map implements IUpdate {
 		Item item1 = new Key("K01", "Clef verte");
 		// Case qui donnera la clef
 		ItemEffectFactory ief = new ItemEffectFactory(item1);
-		OnMoveOver onMove1 = new SimpleOnMoveOver(this, new Point(1, 2), true, false, true);
+		OnMoveOver onMove1 = new SimpleOnMoveOver(this, new Point(1, 2), true, false, false);
 		onMove1.addEffectFactory(ief);
 		this.events.add(onMove1);
 
@@ -105,10 +109,19 @@ public class Map implements IUpdate {
 	public void update() {
 		for (OnMoveOver omo : events) {
 			omo.update();
+			if (omo.getDestroy())
+				toDestroy.add(omo);
 		}
+
 		for (Character character : characters) {
 			character.update();
 		}
+
+		for (OnMoveOver omo : toDestroy) {
+			events.remove(omo);
+		}
+
+		toDestroy.clear();
 	}
 
 }

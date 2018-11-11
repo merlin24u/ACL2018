@@ -13,7 +13,7 @@ public abstract class EffectFactory {
 		return this.tickDuration;
 	}
 
-	public abstract void applyTo(Character character);
+	public abstract boolean applyTo(Character character);
 
 	public abstract String getTexture();
 }
