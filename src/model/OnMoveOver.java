@@ -3,7 +3,7 @@ package model;
 import java.awt.Point;
 import java.util.ArrayList;
 
-public abstract class OnMoveOver implements IUpdate, ICoordinate {
+public abstract class OnMoveOver implements IUpdate, ICoordinate, IDestructible {
 	private Map map;
 	private Point position;
 	// Si l'objet est visible
@@ -83,8 +83,9 @@ public abstract class OnMoveOver implements IUpdate, ICoordinate {
 	public void translate(int distanceX, int distanceY) {
 		// Inutilisé
 	}
-
-	public boolean getDestroy() {
+	
+	@Override
+	public boolean isToDestroy() {
 		return toDestroy;
 	}
 

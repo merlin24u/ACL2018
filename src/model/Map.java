@@ -109,16 +109,32 @@ public class Map implements IUpdate {
 	public void update() {
 		for (OnMoveOver omo : events) {
 			omo.update();
-			if (omo.getDestroy())
+			if (omo.isToDestroy())
 				toDestroy.add(omo);
 		}
-
+		// Gestion des collisions
+		for(int i =0, l =characters.size(); i< l-1; i++) {
+			Character character1=characters.get(i);
+			for(int j =i+1; j<l; j++) {
+				Character character2 = characters.get(j);
+				if(character1.getPosition().x == character2.getPosition().x && character1.getPosition().y == character2.getPosition().y) {
+					character1.onCollision(character2);
+					character2.onCollision(character1);
+				}
+			}
+		}
 		for (Character character : characters) {
 			character.update();
+			if(character instanceof Pacman)
+				System.out.println("Life : "+character.getCurrentHp());
 		}
 
 		for (OnMoveOver omo : toDestroy) {
 			events.remove(omo);
+		}
+		for (Character character : characters) {
+			if(character.isToDestroy())
+				characters.remove(character);
 		}
 
 		toDestroy.clear();

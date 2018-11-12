@@ -4,12 +4,14 @@ import java.awt.Color;
 import java.awt.Point;
 import java.util.ArrayList;
 
-public class Character extends Movable {
+public abstract class Character extends Movable implements IDestructible {
 	private int currentHP;
 	private int maximumHP;
 	private int defensePoints;
 	private ArrayList<Effect> effects;
 	private Color color;
+	// a detruire
+	private boolean toDestroy;
 
 	public Character(int currentHP, int maximumHP, int defensePoints,
 			GroundCollisionHandler groundCollisionHandler, int movingSpeedXMax,
@@ -37,6 +39,9 @@ public class Character extends Movable {
 
 	public void applyDamages(int damages) {
 		this.currentHP -= damages;
+		if(currentHP<=0) {
+			this.toDestroy = true;
+		}
 	}
 
 	public void addEffect(Effect effect) {
@@ -61,4 +66,11 @@ public class Character extends Movable {
 	public Effect getEffect(int index) {
 		return effects.get(index);
 	}
+	
+	@Override
+	public boolean isToDestroy() {
+		return toDestroy;
+	}
+	
+	public abstract void onCollision(Character character);
 }

@@ -6,14 +6,15 @@ import java.util.ArrayList;
 
 import engine.Cmd;
 
-public class Pacman extends Character {
-
+public class Pacman extends Character implements IDamager {
+	private int damages;
 	private int moneyAmount;
 	private ArrayList<Item> items;
 
 	public Pacman(Map m) {
 		super(5, 5, 0, new GroundCollisionHandler(m), 1, 1, m.getStart(), Color.blue);
 		this.items = new ArrayList<Item>();
+		this.damages = 1;
 	}
 
 	public void evolve(Cmd commande) {
@@ -64,5 +65,15 @@ public class Pacman extends Character {
 
 	public void removeItem(Item item) {
 		items.remove(item);
+	}
+	
+	@Override
+	public void onCollision(Character character) {
+		// Aucune action
+	}
+
+	@Override
+	public int getDamages() {
+		return damages;
 	}
 }
