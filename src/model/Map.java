@@ -133,8 +133,15 @@ public class Map implements IUpdate {
 			events.remove(omo);
 		}
 		for (Character character : characters) {
-			if(character.isToDestroy())
+			if(character.isToDestroy()) {
+				
+				if(character instanceof Pacman) {
+					// TODO: TEMPORAIRE
+					System.out.println("You've lost !");
+					System.exit(1);
+				}
 				characters.remove(character);
+			}
 		}
 
 		toDestroy.clear();
