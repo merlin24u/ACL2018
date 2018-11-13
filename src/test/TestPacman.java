@@ -261,9 +261,6 @@ public class TestPacman {
 		assertNull("Le clé de joueur n'a pas été supprimer!", player.getItem(keyId));
 	}
 
-	// TODO:
-	// More that 1 key with the same ID could be added
-
 	@Test
 	public void testPlayerRemoveTwoItemsWithTheSameKey()
 			throws IOException, SAXException, ParserConfigurationException {
