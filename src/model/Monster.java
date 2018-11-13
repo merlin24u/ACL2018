@@ -3,7 +3,8 @@ package model;
 import java.awt.Color;
 import java.awt.Point;
 
-public class Monster extends Character {
+public class Monster extends Character implements IDamager {
+	private int damages;
 	private MovableArtificialIntelligence movableArtificialIntelligence;
 
 	public Monster(MovableArtificialIntelligence movableArtificialIntelligence,
@@ -13,6 +14,7 @@ public class Monster extends Character {
 		super(currentHP, maximumHP, defensePoints, groundCollisionHandler,
 				movingSpeedXMax, movingSpeedYMax, position, Color.red);
 		this.movableArtificialIntelligence = movableArtificialIntelligence;
+		this.damages = 1;
 	}
 
 	@Override
@@ -21,6 +23,18 @@ public class Monster extends Character {
 		movableArtificialIntelligence.execute(this);
 		groundCollisionHandler.handleMove(this);
 		resetCurrentSpeed();
+	}
+
+	@Override
+	public void onCollision(Character character) {
+		if(character instanceof Pacman) {
+			attack(character);
+		}
+	}
+
+	@Override
+	public int getDamages() {
+		return damages;
 	}
 
 }
