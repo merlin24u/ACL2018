@@ -24,15 +24,15 @@ public class TestTreasureEffect {
 		game = new PacmanGame("");
 		player = game.getPlayer();
 		startMoneyAmount = player.getMoneyAmount();
-		te=new TreasureEffect(player, 10, 2);
-		
+		te = new TreasureEffect(player, 10, 2);
+
 	}
 
 	@Test
 	public void testTreasureEffectCharacter() {
 		assertEquals("n'a pas le bon character", player, te.getCharacter());
 	}
-	
+
 	@Test
 	public void testTreasureEffectMoneyAmount() {
 		assertEquals("n'a pas 10 d'argent", 10, te.getMoneyAmount());
@@ -47,21 +47,26 @@ public class TestTreasureEffect {
 	public void testTreasureEffectFactoryApplyOnTime() {
 		te.apply();
 		assertEquals("durée de l'effet n'est pas bon", 1, te.getTickDuration());
-		assertEquals("le character n'a pas reçu le bon montant d'argent", startMoneyAmount+10, player.getMoneyAmount());
+		assertEquals("le character n'a pas reçu le bon montant d'argent", startMoneyAmount + 10,
+				player.getMoneyAmount());
 	}
+
 	@Test
 	public void testTreasureEffectFactoryApplyTwoTimes() {
 		te.apply();
 		te.apply();
 		assertEquals("durée de l'effet n'est pas bon", 0, te.getTickDuration());
-		assertEquals("le character n'a pas reçu le bon montant d'argent", startMoneyAmount+20, player.getMoneyAmount());
+		assertEquals("le character n'a pas reçu le bon montant d'argent", startMoneyAmount + 20,
+				player.getMoneyAmount());
 	}
+
 	@Test
 	public void testTreasureEffectFactoryApplyThreeTimes() {
 		te.apply();
 		te.apply();
 		te.apply();
 		assertEquals("durée de l'effet n'est pas bon", -1, te.getTickDuration());
-		assertEquals("le character n'a pas reçu le bon montant d'argent", startMoneyAmount+20, player.getMoneyAmount());
+		assertEquals("le character n'a pas reçu le bon montant d'argent", startMoneyAmount + 20,
+				player.getMoneyAmount());
 	}
 }

@@ -24,7 +24,7 @@ public class TestTreasureEffectFactory {
 		game = new PacmanGame("");
 		player = game.getPlayer();
 		startMoneyAmount = player.getMoneyAmount();
-		tef = new TreasureEffectFactory(10,5);
+		tef = new TreasureEffectFactory(10, 5);
 	}
 
 	@Test
@@ -41,8 +41,9 @@ public class TestTreasureEffectFactory {
 	public void testTreasureEffectFactoryApplyTo() {
 		tef.applyTo(player);
 		assertEquals("le joueur n'a pas reçu le bon nombre d'effets", 1, player.getEffectsSize());
-		assertEquals("le joueur n'a pas reçu le bon effet", TreasureEffect.class , player.getEffect(0).getClass());
-		assertEquals("l'effet créé n'a pas la bonne valeur d'argent", 10, ((TreasureEffect)player.getEffect(0)).getMoneyAmount());
+		assertEquals("le joueur n'a pas reçu le bon effet", TreasureEffect.class, player.getEffect(0).getClass());
+		assertEquals("l'effet créé n'a pas la bonne valeur d'argent", 10,
+				((TreasureEffect) player.getEffect(0)).getMoneyAmount());
 		assertEquals("l'effet créé n'a pas la bonne valeur de durée", 5, player.getEffect(0).getTickDuration());
 	}
 }

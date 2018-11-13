@@ -30,11 +30,11 @@ public class TestRandomMovableArtificialIntelligence {
 	public void testRandomMovableArtificialIntelligenceExecuteOneTime() {
 		player.resetCurrentSpeed();
 		rmai.execute(player);
-		
+
 		assertEquals("Le currentSpeedX du player n'a pas la bonne valeur", 0, player.getCurrentSpeedX());
 		assertEquals("Le currentSpeedY du player n'a pas la bonne valeur", 0, player.getCurrentSpeedY());
 	}
-	
+
 	@Test
 	public void testRandomMovableArtificialIntelligenceExecuteTwoTimes() {
 		rmai.execute(player);
@@ -43,6 +43,7 @@ public class TestRandomMovableArtificialIntelligence {
 		assertEquals("Le currentSpeedX du player n'a pas la bonne valeur", 0, player.getCurrentSpeedX());
 		assertEquals("Le currentSpeedY du player n'a pas la bonne valeur", 1, player.getCurrentSpeedY());
 	}
+
 	@Test
 	public void testRandomMovableArtificialIntelligenceExecuteThreeTimes() {
 		rmai.execute(player);
@@ -52,6 +53,7 @@ public class TestRandomMovableArtificialIntelligence {
 		assertEquals("Le currentSpeedX du player n'a pas la bonne valeur", 1, player.getCurrentSpeedX());
 		assertEquals("Le currentSpeedY du player n'a pas la bonne valeur", 0, player.getCurrentSpeedY());
 	}
+
 	@Test
 	public void testRandomMovableArtificialIntelligenceExecuteFourTimes() {
 		rmai.execute(player);
@@ -62,6 +64,7 @@ public class TestRandomMovableArtificialIntelligence {
 		assertEquals("Le currentSpeedX du player n'a pas la bonne valeur", -1, player.getCurrentSpeedX());
 		assertEquals("Le currentSpeedY du player n'a pas la bonne valeur", 0, player.getCurrentSpeedY());
 	}
+
 	@Test
 	public void testRandomMovableArtificialIntelligenceExecuteFiveTimes() {
 		rmai.execute(player);

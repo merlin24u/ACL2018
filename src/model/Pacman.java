@@ -51,8 +51,10 @@ public class Pacman extends Character implements IDamager {
 	}
 
 	public void addItem(Item item) {
-		System.out.println("you've collected " + item.getName());
-		this.items.add(item);
+		if (!items.contains(item)) {
+			System.out.println("you've collected " + item.getName());
+			this.items.add(item);
+		}
 	}
 
 	public Item getItem(String itemId) {
@@ -66,7 +68,7 @@ public class Pacman extends Character implements IDamager {
 	public void removeItem(Item item) {
 		items.remove(item);
 	}
-	
+
 	@Override
 	public void onCollision(Character character) {
 		// Aucune action

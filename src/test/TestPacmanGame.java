@@ -16,55 +16,58 @@ import static org.junit.Assert.assertTrue;
 
 public class TestPacmanGame {
 
-    PacmanGame game;
-    ArrayList<Character> listM;
+	PacmanGame game;
+	ArrayList<Character> listM;
 
-    @Before
-    public void initialise() {
-        game = new PacmanGame("src/test/res/test_map_1.xml");
+	@Before
+	public void initialise() {
+		game = new PacmanGame("src/test/res/test_map_1.xml");
 
-        listM = new ArrayList<>();
-        for (Character c : game.getMap().getCharacters()) {
-            if (c instanceof Monster)
-                listM.add(c);
-        }
-    }
+		listM = new ArrayList<>();
+		for (Character c : game.getMap().getCharacters()) {
+			if (c instanceof Monster)
+				listM.add(c);
+		}
+	}
 
-    @Test
-    public void checkSumOfWall() {
+	@Test
+	public void checkSumOfWall() {
 
-        int numberOfWallsInXML = 25;
-        int numberOfWallsInMap = 0;
+		int numberOfWallsInXML = 25;
+		int numberOfWallsInMap = 0;
 
-        for (int width = 0; width < game.getMap().getWidth(); width++) {
-            for (int height = 0; height < game.getMap().getHeigh(); height++) {
-                if (game.getMap().getValue(width, height) == 1) {
-                    numberOfWallsInMap = numberOfWallsInMap + 1;
-                }
-            }
-        }
-        assertEquals("Le nombre de murs sur la map ne correspond pas au numéro de contrôle", numberOfWallsInXML, numberOfWallsInMap);
-    }
-    @Test
-    public void checkSumOfEmptyFields() {
+		for (int width = 0; width < game.getMap().getWidth(); width++) {
+			for (int height = 0; height < game.getMap().getHeigh(); height++) {
+				if (game.getMap().getValue(width, height) == 1) {
+					numberOfWallsInMap = numberOfWallsInMap + 1;
+				}
+			}
+		}
+		assertEquals("Le nombre de murs sur la map ne correspond pas au numéro de contrôle", numberOfWallsInXML,
+				numberOfWallsInMap);
+	}
 
-        int numberOfEmptyFieldsInXML = 25;
-        int numberOfEmptyFieldsInMap = 0;
+	@Test
+	public void checkSumOfEmptyFields() {
 
-        for (int width = 0; width < game.getMap().getWidth(); width++) {
-            for (int height = 0; height < game.getMap().getHeigh(); height++) {
-                if (game.getMap().getValue(width, height) == 0) {
-                    numberOfEmptyFieldsInMap = numberOfEmptyFieldsInMap + 1;
-                }
-            }
-        }
-        assertEquals("Le nombre de champs vides sur la map ne correspond pas au numéro de contrôle", numberOfEmptyFieldsInXML, numberOfEmptyFieldsInMap);
-    }
+		int numberOfEmptyFieldsInXML = 25;
+		int numberOfEmptyFieldsInMap = 0;
 
-    @Test
-    public void testMonsterPresent() throws IOException, SAXException, ParserConfigurationException {
+		for (int width = 0; width < game.getMap().getWidth(); width++) {
+			for (int height = 0; height < game.getMap().getHeigh(); height++) {
+				if (game.getMap().getValue(width, height) == 0) {
+					numberOfEmptyFieldsInMap = numberOfEmptyFieldsInMap + 1;
+				}
+			}
+		}
+		assertEquals("Le nombre de champs vides sur la map ne correspond pas au numéro de contrôle",
+				numberOfEmptyFieldsInXML, numberOfEmptyFieldsInMap);
+	}
 
-        assertTrue("monstre pas présent", listM.size() == 1);
-    }
+	@Test
+	public void testMonsterPresent() throws IOException, SAXException, ParserConfigurationException {
+
+		assertTrue("monstre pas présent", listM.size() == 1);
+	}
 
 }
