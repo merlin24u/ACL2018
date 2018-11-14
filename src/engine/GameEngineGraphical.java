@@ -28,6 +28,8 @@ public class GameEngineGraphical {
 	 */
 	private GraphicalInterface gui;
 
+	private static int timeIter = 1000 / 15;
+
 	/**
 	 * construit un moteur
 	 * 
@@ -39,8 +41,7 @@ public class GameEngineGraphical {
 	 *            controlleur a utiliser
 	 * 
 	 */
-	public GameEngineGraphical(Game game, GamePainter gamePainter,
-			GameController gameController) {
+	public GameEngineGraphical(Game game, GamePainter gamePainter, GameController gameController) {
 		// creation du game
 		this.game = game;
 		this.gamePainter = gamePainter;
@@ -54,6 +55,7 @@ public class GameEngineGraphical {
 
 		// creation de l'interface graphique
 		this.gui = new GraphicalInterface(this.gamePainter, this.gameController);
+		long tDeb, tFin;
 
 		System.out.println("Ecrire commande (Z,Q,S,D)");
 
@@ -63,10 +65,14 @@ public class GameEngineGraphical {
 			Cmd c = this.gameController.getCommand();
 			// fait evoluer le game
 			this.game.evolve(c);
+
 			// affiche le game
+			tDeb = System.currentTimeMillis();
 			this.gui.paint();
+			tFin = System.currentTimeMillis();
+
 			// met en attente
-			Thread.sleep(100);
+			Thread.sleep(timeIter - (tDeb - tFin));
 		}
 	}
 
