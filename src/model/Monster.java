@@ -43,6 +43,6 @@ public class Monster extends Character implements IDamager {
 
 	@Override
 	public String getTexture() {
-		return "character";
+		return "monster";
 	}
 }
