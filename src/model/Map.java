@@ -57,7 +57,7 @@ public class Map implements IUpdate {
 
 	// TODO: A supprimer
 	private void TEMPORAIRE() {
-		Monster m = new Monster(new RandomMovableArtificialIntelligence(), 5, 5, 0, new GroundCollisionHandler(this), 1,
+		Monster m = new Monster(new DamageEffectFactory(1,1),new RandomMovableArtificialIntelligence(), 5, 5, 0, new GroundCollisionHandler(this), 1,
 				1, new Point(3, 2));
 		this.characters.add(m);
 

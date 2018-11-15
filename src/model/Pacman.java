@@ -7,14 +7,14 @@ import java.util.ArrayList;
 import engine.Cmd;
 
 public class Pacman extends Character implements IDamager {
-	private int damages;
+	private DamageEffectFactory damageEffectFactory;
 	private int moneyAmount;
 	private ArrayList<Item> items;
 
 	public Pacman(Map m) {
 		super(5, 5, 0, new GroundCollisionHandler(m), 1, 1, m.getStart(), Color.blue);
 		this.items = new ArrayList<Item>();
-		this.damages = 1;
+		this.damageEffectFactory = new DamageEffectFactory(1, 1);
 	}
 
 	public void evolve(Cmd commande) {
@@ -76,6 +76,11 @@ public class Pacman extends Character implements IDamager {
 
 	@Override
 	public int getDamages() {
-		return damages;
+		return damageEffectFactory.getDamages();
+	}
+	
+	@Override
+	public void attack(Character character) {
+		damageEffectFactory.applyTo(character);
 	}
 }

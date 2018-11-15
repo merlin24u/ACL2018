@@ -4,17 +4,17 @@ import java.awt.Color;
 import java.awt.Point;
 
 public class Monster extends Character implements IDamager {
-	private int damages;
+	private DamageEffectFactory damageEffectFactory;
 	private MovableArtificialIntelligence movableArtificialIntelligence;
 
-	public Monster(MovableArtificialIntelligence movableArtificialIntelligence,
+	public Monster(DamageEffectFactory damageEffectFactory, MovableArtificialIntelligence movableArtificialIntelligence,
 			int currentHP, int maximumHP, int defensePoints,
 			GroundCollisionHandler groundCollisionHandler, int movingSpeedXMax,
 			int movingSpeedYMax, Point position) {
 		super(currentHP, maximumHP, defensePoints, groundCollisionHandler,
 				movingSpeedXMax, movingSpeedYMax, position, Color.red);
 		this.movableArtificialIntelligence = movableArtificialIntelligence;
-		this.damages = 1;
+		this.damageEffectFactory = damageEffectFactory;
 	}
 
 	@Override
@@ -34,7 +34,11 @@ public class Monster extends Character implements IDamager {
 
 	@Override
 	public int getDamages() {
-		return damages;
+		return damageEffectFactory.getDamages();
 	}
-
+	
+	@Override
+	public void attack(Character character) {
+		damageEffectFactory.applyTo(character);
+	}
 }
