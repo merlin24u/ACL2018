@@ -83,4 +83,9 @@ public class Pacman extends Character implements IDamager {
 	public void attack(Character character) {
 		character.applyDamages(getDamages());
 	}
+
+	@Override
+	public String getTexture() {
+		return "character";
+	}
 }

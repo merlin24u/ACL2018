@@ -123,6 +123,7 @@ public class Map implements IUpdate {
 				}
 			}
 		}
+		
 		for (Character character : characters) {
 			character.update();
 			if(character instanceof Pacman)
@@ -132,6 +133,7 @@ public class Map implements IUpdate {
 		for (OnMoveOver omo : toDestroy) {
 			events.remove(omo);
 		}
+		
 		for (Character character : characters) {
 			if(character.isToDestroy()) {
 				

@@ -27,7 +27,7 @@ public class Monster extends Character implements IDamager {
 
 	@Override
 	public void onCollision(Character character) {
-		if(character instanceof Pacman) {
+		if (character instanceof Pacman) {
 			attack(character);
 		}
 	}
@@ -36,8 +36,13 @@ public class Monster extends Character implements IDamager {
 	public int getDamages() {
 		return damages;
 	}
-	
+
 	public void attack(Character character) {
 		character.applyDamages(getDamages());
+	}
+
+	@Override
+	public String getTexture() {
+		return "character";
 	}
 }
