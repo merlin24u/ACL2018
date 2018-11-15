@@ -6,10 +6,12 @@ public class RandomMovableArtificialIntelligence extends
 		MovableArtificialIntelligence {
 	private Random random;
 	
-	public RandomMovableArtificialIntelligence() {
+	public RandomMovableArtificialIntelligence(Map map) {
+		super(map);
 		this.random = new Random();
 	}
-	public RandomMovableArtificialIntelligence(int randomSeed) {
+	public RandomMovableArtificialIntelligence(Map map, int randomSeed) {
+		super(map);
 		this.random = new Random(randomSeed);
 	}
 	public void execute(Movable movable) {

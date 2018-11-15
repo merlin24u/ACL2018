@@ -10,24 +10,33 @@ public class Monster extends Character implements IDamager {
 	public Monster(DamageEffectFactory damageEffectFactory, MovableArtificialIntelligence movableArtificialIntelligence,
 			int currentHP, int maximumHP, int defensePoints,
 			GroundCollisionHandler groundCollisionHandler, int movingSpeedXMax,
-			int movingSpeedYMax, Point position) {
+			int movingSpeedYMax, int movingTick, Point position) {
 		super(currentHP, maximumHP, defensePoints, groundCollisionHandler,
-				movingSpeedXMax, movingSpeedYMax, position, Color.red);
+				movingSpeedXMax, movingSpeedYMax, movingTick, position, Color.red);
 		this.movableArtificialIntelligence = movableArtificialIntelligence;
 		this.damageEffectFactory = damageEffectFactory;
+	}
+	
+	public boolean isType(String type) {
+		if(type.equals("Monster"))
+			return true;
+		else
+			return super.isType(type);
 	}
 
 	@Override
 	public void update() {
 		applyEffects();
-		movableArtificialIntelligence.execute(this);
+		if(movingTick == 0 || Time.getInstance().getTick() %movingTick ==0) {
+			movableArtificialIntelligence.execute(this);
+		}
 		groundCollisionHandler.handleMove(this);
 		resetCurrentSpeed();
 	}
 
 	@Override
 	public void onCollision(Character character) {
-		if(character instanceof Pacman) {
+		if(character.isType("Player")) {
 			attack(character);
 		}
 	}

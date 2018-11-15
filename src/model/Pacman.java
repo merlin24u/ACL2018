@@ -12,7 +12,7 @@ public class Pacman extends Character implements IDamager {
 	private ArrayList<Item> items;
 
 	public Pacman(Map m) {
-		super(5, 5, 0, new GroundCollisionHandler(m), 1, 1, m.getStart(), Color.blue);
+		super(5, 5, 0, new GroundCollisionHandler(m), 1, 1, 3, m.getStart(), Color.blue);
 		this.items = new ArrayList<Item>();
 		this.damageEffectFactory = new DamageEffectFactory(1, 1);
 	}
@@ -67,6 +67,12 @@ public class Pacman extends Character implements IDamager {
 
 	public void removeItem(Item item) {
 		items.remove(item);
+	}
+	public boolean isType(String type) {
+		if(type.equals("Player"))
+			return true;
+		else
+			return super.isType(type);
 	}
 
 	@Override

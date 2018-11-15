@@ -8,19 +8,36 @@ public class Movable implements IUpdate, ICoordinate {
 	private int movingSpeedYMax;
 	protected int currentSpeedX;
 	protected int currentSpeedY;
+	protected int movingTick;
 	protected Point position;
 
 	public Movable(GroundCollisionHandler groundCollisionHandler,
-			int movingSpeedXMax, int movingSpeedYMax, Point position) {
+			int movingSpeedXMax, int movingSpeedYMax, int movingTick, Point position) {
 		super();
 		this.groundCollisionHandler = groundCollisionHandler;
 		this.movingSpeedXMax = movingSpeedXMax;
 		this.movingSpeedYMax = movingSpeedYMax;
-		this.position = position;
 		this.currentSpeedX = 0;
 		this.currentSpeedY = 0;
+		this.movingTick = movingTick;
+		this.position = position;
 	}
-
+	
+	public void move(int x, int y) {
+		int movingX = x - (int)position.getX();
+		if(movingX > 0) {
+			this.moveRight();
+		}else if(movingX < 0) {
+			this.moveLeft();
+		}
+		int movingY = y - (int)position.getY();
+		if(movingY > 0) {
+			this.moveDown();
+		}else if(movingY < 0) {
+			this.moveUp();
+		}
+	}
+	
 	public void moveUp() {
 		this.currentSpeedY -= this.movingSpeedYMax;
 	}
@@ -49,10 +66,15 @@ public class Movable implements IUpdate, ICoordinate {
 		this.currentSpeedX = 0;
 		this.currentSpeedY = 0;
 	}
+	
+	public boolean canMove() {
+		return movingTick == 0 || (Time.getInstance().getTick() % movingTick == 0);
+	}
 
 	@Override
 	public void update() {
-		groundCollisionHandler.handleMove(this);
+		if(canMove())
+			groundCollisionHandler.handleMove(this);
 		resetCurrentSpeed();
 	}
 

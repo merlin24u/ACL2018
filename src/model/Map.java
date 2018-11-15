@@ -57,8 +57,10 @@ public class Map implements IUpdate {
 
 	// TODO: A supprimer
 	private void TEMPORAIRE() {
-		Monster m = new Monster(new DamageEffectFactory(1,1),new RandomMovableArtificialIntelligence(), 5, 5, 0, new GroundCollisionHandler(this), 1,
-				1, new Point(3, 2));
+		GroundCollisionHandler gch = new GroundCollisionHandler(this);
+		MovableArtificialIntelligence mai = new FollowMovableArtificialIntelligence(this, gch);
+		Monster m = new Monster(mai, 5, 5, 0, gch, 1,
+				1, 5, new Point(3, 3));
 		this.characters.add(m);
 
 		Item item1 = new Key("K01", "Clef verte");
@@ -75,6 +77,15 @@ public class Map implements IUpdate {
 		OnMoveOver onMove2 = new ItemRequiredOnMoveOver(this, finish, true, false, true, itemsRequired, true);
 		onMove2.addEffectFactory(ef);
 		this.events.add(onMove2);
+	}
+	
+	public ArrayList<Character> getCharactersOfType(String type){
+		ArrayList<Character> list = new ArrayList<Character>();
+		for(Character c: characters) {
+			if(c.isType(type))
+				list.add(c);
+		}
+		return list;
 	}
 
 	public int getHeigh() {
@@ -125,8 +136,6 @@ public class Map implements IUpdate {
 		}
 		for (Character character : characters) {
 			character.update();
-			if(character instanceof Pacman)
-				System.out.println("Life : "+character.getCurrentHp());
 		}
 
 		for (OnMoveOver omo : toDestroy) {
@@ -135,7 +144,7 @@ public class Map implements IUpdate {
 		for (Character character : characters) {
 			if(character.isToDestroy()) {
 				
-				if(character instanceof Pacman) {
+				if(character.isType("Player")) {
 					// TODO: TEMPORAIRE
 					System.out.println("You've lost !");
 					System.exit(1);

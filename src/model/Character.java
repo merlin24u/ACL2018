@@ -15,8 +15,8 @@ public abstract class Character extends Movable implements IDestructible {
 
 	public Character(int currentHP, int maximumHP, int defensePoints,
 			GroundCollisionHandler groundCollisionHandler, int movingSpeedXMax,
-			int movingSpeedYMax, Point position, Color c) {
-		super(groundCollisionHandler, movingSpeedXMax, movingSpeedYMax,
+			int movingSpeedYMax, int movingTick, Point position, Color c) {
+		super(groundCollisionHandler, movingSpeedXMax, movingSpeedYMax, movingTick,
 				position);
 		this.currentHP = currentHP;
 		this.maximumHP = maximumHP;
@@ -65,6 +65,10 @@ public abstract class Character extends Movable implements IDestructible {
 	}
 	public Effect getEffect(int index) {
 		return effects.get(index);
+	}
+	
+	public boolean isType(String type) {
+		return type.equals("Character");
 	}
 	
 	@Override
