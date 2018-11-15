@@ -20,7 +20,22 @@ public class Movable implements IUpdate, ICoordinate {
 		this.currentSpeedX = 0;
 		this.currentSpeedY = 0;
 	}
-
+	
+	public void move(int x, int y) {
+		int movingX = x - (int)position.getX();
+		if(movingX > 0) {
+			this.moveRight();
+		}else if(movingX < 0) {
+			this.moveLeft();
+		}
+		int movingY = y - (int)position.getY();
+		if(movingY > 0) {
+			this.moveDown();
+		}else if(movingY < 0) {
+			this.moveUp();
+		}
+	}
+	
 	public void moveUp() {
 		this.currentSpeedY -= this.movingSpeedYMax;
 	}
