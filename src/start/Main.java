@@ -18,7 +18,8 @@ public class Main {
 		PacmanController controller = new PacmanController();
 
 		// classe qui lance le moteur de jeu generique
-		GameEngineGraphical engine = new GameEngineGraphical(game, painter, controller);
+		GameEngineGraphical engine = new GameEngineGraphical(game, painter,
+				controller);
 		engine.run();
 	}
 
