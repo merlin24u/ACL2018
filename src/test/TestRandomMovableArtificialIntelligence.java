@@ -23,7 +23,7 @@ public class TestRandomMovableArtificialIntelligence {
 	public void initialise() {
 		game = new PacmanGame("");
 		player = game.getPlayer();
-		rmai = new RandomMovableArtificialIntelligence(14);
+		rmai = new RandomMovableArtificialIntelligence(game.getMap(), 14);
 	}
 
 	@Test

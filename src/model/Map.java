@@ -23,21 +23,16 @@ public class Map implements IUpdate {
 
 		// Creation de la map en dur.
 		grid = new int[][] {
-				{ wallCollision, wallCollision, wallCollision, wallCollision,
-						wallCollision, wallCollision, wallCollision,
-						wallCollision, wallCollision, wallCollision },
-				{ noneCollision, noneCollision, noneCollision, noneCollision,
-						noneCollision, noneCollision, noneCollision,
-						noneCollision, noneCollision, wallCollision },
-				{ wallCollision, noneCollision, noneCollision, wallCollision,
-						noneCollision, noneCollision, noneCollision,
-						noneCollision, noneCollision, wallCollision },
-				{ wallCollision, noneCollision, noneCollision, noneCollision,
-						noneCollision, noneCollision, noneCollision,
-						noneCollision, noneCollision, wallCollision },
-				{ wallCollision, wallCollision, wallCollision, wallCollision,
-						wallCollision, wallCollision, wallCollision,
-						wallCollision, wallCollision, wallCollision } };
+				{ wallCollision, wallCollision, wallCollision, wallCollision, wallCollision, wallCollision,
+						wallCollision, wallCollision, wallCollision, wallCollision },
+				{ noneCollision, noneCollision, noneCollision, noneCollision, noneCollision, noneCollision,
+						noneCollision, noneCollision, noneCollision, wallCollision },
+				{ wallCollision, noneCollision, noneCollision, wallCollision, noneCollision, noneCollision,
+						noneCollision, noneCollision, noneCollision, wallCollision },
+				{ wallCollision, noneCollision, noneCollision, noneCollision, noneCollision, noneCollision,
+						noneCollision, noneCollision, noneCollision, wallCollision },
+				{ wallCollision, wallCollision, wallCollision, wallCollision, wallCollision, wallCollision,
+						wallCollision, wallCollision, wallCollision, wallCollision } };
 
 		start = new Point(1, 1);
 		finish = new Point(0, 1);
@@ -65,15 +60,13 @@ public class Map implements IUpdate {
 	private void TEMPORAIRE() {
 		GroundCollisionHandler gch = new GroundCollisionHandler(this);
 		MovableArtificialIntelligence mai = new FollowMovableArtificialIntelligence(this, gch);
-		Monster m = new Monster(new DamageEffectFactory(1,1),mai, 5, 5, 0, gch, 1,
-				1, 5, new Point(3, 3));
+		Monster m = new Monster(new DamageEffectFactory(1, 1), mai, 5, 5, 0, gch, 1, 1, 5, new Point(3, 3));
 		this.characters.add(m);
 
 		Item item1 = new Key("K01", "Clef verte");
 		// Case qui donnera la clef
 		ItemEffectFactory ief = new ItemEffectFactory(item1);
-		OnMoveOver onMove1 = new SimpleOnMoveOver(this, new Point(1, 2), true,
-				false, false);
+		OnMoveOver onMove1 = new SimpleOnMoveOver(this, new Point(1, 2), true, false, false);
 		onMove1.addEffectFactory(ief);
 		this.events.add(onMove1);
 
@@ -81,16 +74,15 @@ public class Map implements IUpdate {
 		ArrayList<Item> itemsRequired = new ArrayList<Item>();
 		itemsRequired.add(item1);
 		ExitEffectFactory ef = new ExitEffectFactory(1);
-		OnMoveOver onMove2 = new ItemRequiredOnMoveOver(this, finish, true,
-				false, true, itemsRequired, true);
+		OnMoveOver onMove2 = new ItemRequiredOnMoveOver(this, finish, true, false, true, itemsRequired, true);
 		onMove2.addEffectFactory(ef);
 		this.events.add(onMove2);
 	}
-	
-	public ArrayList<Character> getCharactersOfType(String type){
+
+	public ArrayList<Character> getCharactersOfType(String type) {
 		ArrayList<Character> list = new ArrayList<Character>();
-		for(Character c: characters) {
-			if(c.isType(type))
+		for (Character c : characters) {
+			if (c.isType(type))
 				list.add(c);
 		}
 		return list;
@@ -138,8 +130,7 @@ public class Map implements IUpdate {
 			for (int j = i + 1; j < l; j++) {
 				Character character2 = characters.get(j);
 				if (character1.getPosition().x == character2.getPosition().x
-						&& character1.getPosition().y == character2
-								.getPosition().y) {
+						&& character1.getPosition().y == character2.getPosition().y) {
 					character1.onCollision(character2);
 					character2.onCollision(character1);
 				}
@@ -151,8 +142,8 @@ public class Map implements IUpdate {
 		}
 
 		for (Character character : characters) {
-			if(character.isToDestroy()) {		
-				if(character.isType("Player")) {
+			if (character.isToDestroy()) {
+				if (character.isType("Player")) {
 					// TODO: TEMPORAIRE
 					System.out.println("You've lost !");
 					game.setFinished();
