@@ -9,28 +9,21 @@ public abstract class Character extends Movable implements IDestructible {
 	private int maximumHP;
 	private int defensePoints;
 	private ArrayList<Effect> effects;
-	private Color color;
+
 	// a detruire
 	private boolean toDestroy;
 
-	public Character(int currentHP, int maximumHP, int defensePoints,
-			GroundCollisionHandler groundCollisionHandler, int movingSpeedXMax,
-			int movingSpeedYMax, int movingTick, Point position, Color c) {
-		super(groundCollisionHandler, movingSpeedXMax, movingSpeedYMax, movingTick,
-				position);
+	public Character(int currentHP, int maximumHP, int defensePoints, GroundCollisionHandler groundCollisionHandler,
+			int movingSpeedXMax, int movingSpeedYMax, int movingTick, Point position, Color c) {
+		super(groundCollisionHandler, movingSpeedXMax, movingSpeedYMax, movingTick, position);
 		this.currentHP = currentHP;
 		this.maximumHP = maximumHP;
 		this.defensePoints = defensePoints;
-		this.color = c;
 		this.effects = new ArrayList<Effect>();
 	}
 
 	public int getCurrentHp() {
 		return this.currentHP;
-	}
-
-	public Color getColor() {
-		return color;
 	}
 
 	public boolean isAlive() {
@@ -39,7 +32,7 @@ public abstract class Character extends Movable implements IDestructible {
 
 	public void applyDamages(int damages) {
 		this.currentHP -= damages;
-		if(currentHP<=0) {
+		if (currentHP <= 0) {
 			this.toDestroy = true;
 		}
 	}
@@ -59,22 +52,25 @@ public abstract class Character extends Movable implements IDestructible {
 			e.apply();
 		}
 	}
-	
-	public int getEffectsSize(){
+
+	public int getEffectsSize() {
 		return effects.size();
 	}
+
 	public Effect getEffect(int index) {
 		return effects.get(index);
 	}
-	
+
 	public boolean isType(String type) {
 		return type.equals("Character");
 	}
-	
+
 	@Override
 	public boolean isToDestroy() {
 		return toDestroy;
 	}
-	
+
 	public abstract void onCollision(Character character);
+
+	public abstract String getTexture();
 }

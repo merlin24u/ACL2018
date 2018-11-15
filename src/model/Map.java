@@ -119,11 +119,13 @@ public class Map implements IUpdate {
 	@Override
 	public void update() {
 		boolean lost = false;
+
 		for (OnMoveOver omo : events) {
 			omo.update();
 			if (omo.isToDestroy())
 				toDestroy.add(omo);
 		}
+
 		// Gestion des collisions
 		for (int i = 0, l = characters.size(); i < l - 1; i++) {
 			Character character1 = characters.get(i);

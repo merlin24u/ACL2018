@@ -7,7 +7,7 @@ import javax.imageio.ImageIO;
 
 public class TextureFactory {
 
-	private Image wall, door, key, treasure;
+	private Image wall, door, key, treasure, character, monster, ground;
 	private static TextureFactory instance;
 
 	private TextureFactory() throws IOException {
@@ -15,6 +15,9 @@ public class TextureFactory {
 		door = ImageIO.read(new File("res/door.png"));
 		key = ImageIO.read(new File("res/key.png"));
 		treasure = ImageIO.read(new File("res/treasure.png"));
+		character = ImageIO.read(new File("res/character.png"));
+		monster = ImageIO.read(new File("res/monster.png"));
+		ground = ImageIO.read(new File("res/ground.png"));
 	}
 
 	public static TextureFactory getInstance() throws IOException {
@@ -22,22 +25,6 @@ public class TextureFactory {
 			instance = new TextureFactory();
 
 		return instance;
-	}
-
-	public Image getWall() {
-		return wall;
-	}
-
-	public Image getDoor() {
-		return door;
-	}
-
-	public Image getKey() {
-		return key;
-	}
-
-	public Image getTreasure() {
-		return treasure;
 	}
 
 	public Image get(String texture) throws Exception {
@@ -48,6 +35,14 @@ public class TextureFactory {
 			return key;
 		case "treasure":
 			return treasure;
+		case "character":
+			return character;
+		case "ground":
+			return ground;
+		case "wall":
+			return wall;
+		case "monster":
+			return monster;
 		default:
 			throw new Exception("texture non implementee");
 		}
