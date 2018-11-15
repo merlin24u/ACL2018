@@ -18,4 +18,10 @@ public class DamageEffect extends Effect implements IDamager{
 	public int getDamages() {
 		return damages;
 	}
+
+
+	@Override
+	public void attack(Character character) {
+		character.applyDamages(damages);
+	}
 }
