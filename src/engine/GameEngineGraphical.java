@@ -28,7 +28,7 @@ public class GameEngineGraphical {
 	 */
 	private GraphicalInterface gui;
 
-	private static int timeIter = 1000 / 20;
+	private static int timeIter = 1000 / 25;
 
 	/**
 	 * construit un moteur
