@@ -10,9 +10,9 @@ public class Monster extends Character implements IDamager {
 	public Monster(MovableArtificialIntelligence movableArtificialIntelligence,
 			int currentHP, int maximumHP, int defensePoints,
 			GroundCollisionHandler groundCollisionHandler, int movingSpeedXMax,
-			int movingSpeedYMax, Point position) {
+			int movingSpeedYMax, int movingTick, Point position) {
 		super(currentHP, maximumHP, defensePoints, groundCollisionHandler,
-				movingSpeedXMax, movingSpeedYMax, position, Color.red);
+				movingSpeedXMax, movingSpeedYMax, movingTick, position, Color.red);
 		this.movableArtificialIntelligence = movableArtificialIntelligence;
 		this.damages = 1;
 	}
@@ -27,7 +27,9 @@ public class Monster extends Character implements IDamager {
 	@Override
 	public void update() {
 		applyEffects();
-		movableArtificialIntelligence.execute(this);
+		if(movingTick == 0 || Time.getInstance().getTick() %movingTick ==0) {
+			movableArtificialIntelligence.execute(this);
+		}
 		groundCollisionHandler.handleMove(this);
 		resetCurrentSpeed();
 	}

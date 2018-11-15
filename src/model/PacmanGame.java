@@ -52,6 +52,7 @@ public class PacmanGame implements Game {
 			System.out.println("Ecrire commande (Z,Q,S,D)");
 		}
 		map.update();
+		Time.getInstance().update();
 	}
 
 	/**

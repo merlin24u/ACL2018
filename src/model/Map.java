@@ -60,7 +60,7 @@ public class Map implements IUpdate {
 		GroundCollisionHandler gch = new GroundCollisionHandler(this);
 		MovableArtificialIntelligence mai = new FollowMovableArtificialIntelligence(this, gch);
 		Monster m = new Monster(mai, 5, 5, 0, gch, 1,
-				1, new Point(3, 3));
+				1, 5, new Point(3, 3));
 		this.characters.add(m);
 
 		Item item1 = new Key("K01", "Clef verte");
