@@ -45,6 +45,17 @@ public class PacmanPainter implements GamePainter {
 	@Override
 	public void draw(BufferedImage im) {
 		Graphics2D crayon = (Graphics2D) im.getGraphics();
+		String texture;
+		Image img;
+
+		try {
+			texture = "ground";
+			img = TextureFactory.getInstance().get(texture);
+			crayon.drawImage(img, 0, 0, im.getWidth(), im.getHeight(), null);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		for (int y = 0; y < map.getHeigh(); y++) {
 			for (int x = 0; x < map.getWidth(); x++) {
 				collisionPainter.drawCollision(crayon, x, y, TILE_WIDTH,
@@ -52,8 +63,6 @@ public class PacmanPainter implements GamePainter {
 			}
 		}
 
-		String texture;
-		Image img;
 		for (OnMoveOver m : map.getEvents()) {
 			for (EffectFactory ef : m.getEffectFactory()) {
 				try {
