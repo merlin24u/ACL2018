@@ -2,8 +2,11 @@ package model;
 
 public class ExitEffectFactory extends EffectFactory {
 
+	private String texture;
+
 	public ExitEffectFactory(int tickDuration) {
 		super(tickDuration);
+		texture = "door_closed";
 	}
 
 	@Override
@@ -17,7 +20,11 @@ public class ExitEffectFactory extends EffectFactory {
 
 	@Override
 	public String getTexture() {
-		return "door";
+		return texture;
 	}
 
+	public void changeTexture() {
+		texture = "door";
+
+	}
 }

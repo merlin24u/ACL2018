@@ -16,4 +16,6 @@ public abstract class EffectFactory {
 	public abstract boolean applyTo(Character character);
 
 	public abstract String getTexture();
+
+	public abstract void changeTexture();
 }

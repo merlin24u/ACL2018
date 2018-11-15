@@ -25,4 +25,9 @@ public class TreasureEffectFactory extends EffectFactory {
 	public String getTexture() {
 		return "treasure";
 	}
+
+	@Override
+	public void changeTexture() {
+		// TODO Auto-generated method stub
+	}
 }

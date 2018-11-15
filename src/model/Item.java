@@ -3,11 +3,13 @@ package model;
 public abstract class Item {
 	private String id;
 	private String name;
+	private boolean collected;
 
 	public Item(String id, String name) {
 		super();
 		this.id = id;
 		this.name = name;
+		collected = false;
 	}
 
 	public String getId() {
@@ -18,7 +20,16 @@ public abstract class Item {
 		return name;
 	}
 
+	public void setCollected() {
+		collected = true;
+	}
+
+	public boolean isCollected() {
+		return collected;
+	}
+
 	public abstract String getTexture();
 
 	public abstract Item clone();
+
 }

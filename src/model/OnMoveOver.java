@@ -16,7 +16,7 @@ public abstract class OnMoveOver implements IUpdate, ICoordinate, IDestructible 
 	private boolean toDestroy;
 
 	private ArrayList<Character> charactersAlreadyOn;
-	private ArrayList<EffectFactory> effectsFactories;
+	private EffectFactory effectsFactorie;
 
 	public OnMoveOver(Map map, Point position, boolean isVisible, boolean isActivated,
 			boolean isPersistingAfterActivation) {
@@ -28,19 +28,16 @@ public abstract class OnMoveOver implements IUpdate, ICoordinate, IDestructible 
 		this.isPersistingAfterActivation = isPersistingAfterActivation;
 		this.toDestroy = false;
 		this.charactersAlreadyOn = new ArrayList<Character>();
-		this.effectsFactories = new ArrayList<EffectFactory>();
 	}
 
 	protected void applyTo(Character character) {
-		for (EffectFactory ef : effectsFactories) {
-			boolean res = ef.applyTo(character);
-			if (!isPersistingAfterActivation && res)
-				toDestroy = true;
-		}
+		boolean res = effectsFactorie.applyTo(character);
+		if (!isPersistingAfterActivation && res)
+			toDestroy = true;
 	}
 
-	public void addEffectFactory(EffectFactory effectFactory) {
-		this.effectsFactories.add(effectFactory);
+	public void addEffectFactory(EffectFactory ef) {
+		effectsFactorie = ef;
 	}
 
 	private boolean hasSamePosition(Point position) {
@@ -70,8 +67,8 @@ public abstract class OnMoveOver implements IUpdate, ICoordinate, IDestructible 
 		return position;
 	}
 
-	public ArrayList<EffectFactory> getEffectFactory() {
-		return effectsFactories;
+	public EffectFactory getEffectFactory() {
+		return effectsFactorie;
 	}
 
 	@Override
@@ -83,7 +80,7 @@ public abstract class OnMoveOver implements IUpdate, ICoordinate, IDestructible 
 	public void translate(int distanceX, int distanceY) {
 		// Inutilisé
 	}
-	
+
 	@Override
 	public boolean isToDestroy() {
 		return toDestroy;

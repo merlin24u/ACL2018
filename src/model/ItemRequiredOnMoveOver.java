@@ -18,8 +18,9 @@ public class ItemRequiredOnMoveOver extends OnMoveOver {
 	protected boolean hasRequirements(Character character) {
 		if (character.isType("Player")) {
 			ArrayList<Item> playerItems = new ArrayList<Item>();
+			Item itemFound;
 			for (Item i : itemsRequired) {
-				Item itemFound = ((Pacman) character).getItem(i.getId());
+				itemFound = ((Pacman) character).getItem(i.getId());
 				if (itemFound == null)
 					return false;
 				else
@@ -34,6 +35,22 @@ public class ItemRequiredOnMoveOver extends OnMoveOver {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public void update() {
+		super.update();
+		boolean none = true;
+		for (Item i : itemsRequired) {
+			if (!i.isCollected()) {
+				none = false;
+				break;
+			}
+		}
+
+		if (none) {
+			super.getEffectFactory().changeTexture();
+		}
 	}
 
 }

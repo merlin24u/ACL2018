@@ -25,4 +25,9 @@ public class DamageEffectFactory extends EffectFactory {
 	public String getTexture() {
 		return "trap";
 	}
+
+	@Override
+	public void changeTexture() {
+		// TODO Auto-generated method stub
+	}
 }

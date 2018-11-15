@@ -7,12 +7,13 @@ import javax.imageio.ImageIO;
 
 public class TextureFactory {
 
-	private Image wall, door, key, treasure, character, monster, ground;
+	private Image wall, door, door_closed, key, treasure, character, monster, ground;
 	private static TextureFactory instance;
 
 	private TextureFactory() throws IOException {
 		wall = ImageIO.read(new File("res/wall.png"));
 		door = ImageIO.read(new File("res/door.png"));
+		door_closed = ImageIO.read(new File("res/door_closed.png"));
 		key = ImageIO.read(new File("res/key.png"));
 		treasure = ImageIO.read(new File("res/treasure.png"));
 		character = ImageIO.read(new File("res/character.png"));
@@ -43,6 +44,8 @@ public class TextureFactory {
 			return wall;
 		case "monster":
 			return monster;
+		case "door_closed":
+			return door_closed;
 		default:
 			throw new Exception("texture non implementee");
 		}

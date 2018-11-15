@@ -12,6 +12,7 @@ public class ItemEffectFactory extends EffectFactory {
 	public boolean applyTo(Character character) {
 		if (character.isType("Player")) {
 			((Pacman) character).addItem(item.clone());
+			item.setCollected();
 			return true;
 		} else
 			return false;
@@ -24,5 +25,10 @@ public class ItemEffectFactory extends EffectFactory {
 	@Override
 	public String getTexture() {
 		return item.getTexture();
+	}
+
+	@Override
+	public void changeTexture() {
+		// TODO Auto-generated method stub	
 	}
 }

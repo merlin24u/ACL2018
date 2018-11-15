@@ -27,4 +27,8 @@ public class TeleportationEffectFactory extends EffectFactory {
 		return "Teleportation";
 	}
 
+	@Override
+	public void changeTexture() {
+		// TODO Auto-generated method stub
+	}
 }

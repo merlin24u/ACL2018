@@ -63,11 +63,11 @@ public class GameEngineGraphical {
 		while (!this.game.isFinished()) {
 			// demande controle utilisateur
 			Cmd c = this.gameController.getCommand();
-			// fait evoluer le game
-			this.game.evolve(c);
 
-			// affiche le game
+			// fait evoluer le game
 			tDeb = System.currentTimeMillis();
+			this.game.evolve(c);
+			// affiche le game
 			this.gui.paint();
 			tFin = System.currentTimeMillis();
 
