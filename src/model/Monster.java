@@ -36,5 +36,8 @@ public class Monster extends Character implements IDamager {
 	public int getDamages() {
 		return damages;
 	}
-
+	
+	public void attack(Character character) {
+		character.applyDamages(getDamages());
+	}
 }

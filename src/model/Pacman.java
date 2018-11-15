@@ -12,7 +12,8 @@ public class Pacman extends Character implements IDamager {
 	private ArrayList<Item> items;
 
 	public Pacman(Map m) {
-		super(5, 5, 0, new GroundCollisionHandler(m), 1, 1, m.getStart(), Color.blue);
+		super(5, 5, 0, new GroundCollisionHandler(m), 1, 1, m.getStart(),
+				Color.blue);
 		this.items = new ArrayList<Item>();
 		this.damages = 1;
 	}
@@ -77,5 +78,9 @@ public class Pacman extends Character implements IDamager {
 	@Override
 	public int getDamages() {
 		return damages;
+	}
+
+	public void attack(Character character) {
+		character.applyDamages(getDamages());
 	}
 }
