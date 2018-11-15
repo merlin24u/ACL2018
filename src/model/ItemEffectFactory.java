@@ -10,7 +10,7 @@ public class ItemEffectFactory extends EffectFactory {
 
 	@Override
 	public boolean applyTo(Character character) {
-		if (character instanceof Pacman) {
+		if (character.isType("Player")) {
 			((Pacman) character).addItem(item.clone());
 			return true;
 		} else

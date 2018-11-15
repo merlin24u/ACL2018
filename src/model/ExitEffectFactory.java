@@ -8,7 +8,7 @@ public class ExitEffectFactory extends EffectFactory {
 
 	@Override
 	public boolean applyTo(Character character) {
-		if (character instanceof Pacman) {
+		if (character.isType("Player")) {
 			character.addEffect(new ExitEffect(character, tickDuration));
 			return true;
 		} else

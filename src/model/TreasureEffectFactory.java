@@ -10,7 +10,7 @@ public class TreasureEffectFactory extends EffectFactory {
 
 	@Override
 	public boolean applyTo(Character character) {
-		if (character instanceof Pacman) {
+		if (character.isType("Player")) {
 			character.addEffect(new TreasureEffect(character, moneyAmount, tickDuration));
 			return true;
 		} else

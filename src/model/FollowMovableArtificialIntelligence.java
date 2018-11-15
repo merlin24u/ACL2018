@@ -15,7 +15,6 @@ MovableArtificialIntelligence {
 	private ArrayList<Point> path;
 
 	public void createNodes() {
-		Map map = groundCollisionHandler.getMap();
 		nodes.clear();
 		AStarAlgorithm.Node[][] nodesArray = new AStarAlgorithm.Node[map.getHeigh()][map.getWidth()];
 		for(int y =0; y<map.getHeigh(); y++) {
@@ -52,27 +51,45 @@ MovableArtificialIntelligence {
 		return null;
 	}
 
-	public FollowMovableArtificialIntelligence(GroundCollisionHandler groundCollisionHandler) {
+	public FollowMovableArtificialIntelligence(Map map, GroundCollisionHandler groundCollisionHandler) {
+		super(map);
 		this.groundCollisionHandler = groundCollisionHandler;
 		this.nodes = new ArrayList<AStarAlgorithm.Node>();
 		// TODO: Temporaire, à changer d'endroit
 		this.createNodes();
 	}
 
-	public void execute(Movable movable) {
-		Node target = getNode(1,1);
-		Node current = getNode(movable.getPosition().x, movable.getPosition().y);
-
-		for(Node n: nodes) {
-			n.parent = null;
+	private Character getNearestCharacter(Movable movable, String type) {
+		ArrayList<Character> characters = map.getCharactersOfType(type);
+		int nearestDistance = Integer.MAX_VALUE;
+		Character nearestCharacter = null;
+		for(Character c: characters) {
+			int distance = CollisionUtility.getManhattanDistance(movable.getPosition(), c.getPosition());
+			if(distance < nearestDistance) { 
+				nearestDistance = distance;
+				nearestCharacter = c;
+			}
 		}
-		AStarAlgorithm searchAlgo = new AStarAlgorithm();
-		if(target != null && current != null) {
-			searchAlgo.search(current, target);
-			List<AStarAlgorithm.Node> path = searchAlgo.getPath(target);
-			if(path.size() > 1) {
-				AStarAlgorithm.Node nextPosition = path.get(1);
-				movable.move(nextPosition.x, nextPosition.y);
+		return nearestCharacter;
+	}
+	
+	public void execute(Movable movable) {
+		Pacman player = (Pacman)getNearestCharacter(movable, "Player");
+		if(player != null) {
+			Node target = getNode(player.getPosition().x,player.getPosition().y);
+			Node current = getNode(movable.getPosition().x, movable.getPosition().y);
+	
+			for(Node n: nodes) {
+				n.parent = null;
+			}
+			AStarAlgorithm searchAlgo = new AStarAlgorithm();
+			if(target != null && current != null) {
+				searchAlgo.search(current, target);
+				List<AStarAlgorithm.Node> path = searchAlgo.getPath(target);
+				if(path.size() > 1) {
+					AStarAlgorithm.Node nextPosition = path.get(1);
+					movable.move(nextPosition.x, nextPosition.y);
+				}
 			}
 		}
 	}

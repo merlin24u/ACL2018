@@ -68,6 +68,12 @@ public class Pacman extends Character implements IDamager {
 	public void removeItem(Item item) {
 		items.remove(item);
 	}
+	public boolean isType(String type) {
+		if(type.equals("Player"))
+			return true;
+		else
+			return super.isType(type);
+	}
 
 	@Override
 	public void onCollision(Character character) {

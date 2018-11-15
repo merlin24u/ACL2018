@@ -16,6 +16,13 @@ public class Monster extends Character implements IDamager {
 		this.movableArtificialIntelligence = movableArtificialIntelligence;
 		this.damages = 1;
 	}
+	
+	public boolean isType(String type) {
+		if(type.equals("Monster"))
+			return true;
+		else
+			return super.isType(type);
+	}
 
 	@Override
 	public void update() {
@@ -27,7 +34,7 @@ public class Monster extends Character implements IDamager {
 
 	@Override
 	public void onCollision(Character character) {
-		if(character instanceof Pacman) {
+		if(character.isType("Player")) {
 			attack(character);
 		}
 	}

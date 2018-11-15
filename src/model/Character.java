@@ -67,6 +67,10 @@ public abstract class Character extends Movable implements IDestructible {
 		return effects.get(index);
 	}
 	
+	public boolean isType(String type) {
+		return type.equals("Character");
+	}
+	
 	@Override
 	public boolean isToDestroy() {
 		return toDestroy;

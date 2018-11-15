@@ -16,7 +16,7 @@ public class ItemRequiredOnMoveOver extends OnMoveOver {
 
 	@Override
 	protected boolean hasRequirements(Character character) {
-		if (character instanceof Pacman) {
+		if (character.isType("Player")) {
 			ArrayList<Item> playerItems = new ArrayList<Item>();
 			for (Item i : itemsRequired) {
 				Item itemFound = ((Pacman) character).getItem(i.getId());
