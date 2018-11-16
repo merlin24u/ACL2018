@@ -2,302 +2,333 @@ package test;
 
 import static org.junit.Assert.*;
 
-import java.io.File;
+import java.awt.*;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import model.*;
-import model.Character;
-import org.junit.Before;
 import org.junit.Test;
 import engine.Cmd;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 public class TestPacman {
 
-	PacmanGame game;
-	Pacman player;
+    PacmanGame test_game;
+    Pacman pacman;
+    Monster monster;
 
-	int startPosX;
-	int startPosY;
-	int finishPosX;
-	int finishPosY;
+    private Point startPoint;
 
-	public void initializeGame(String pathMap) throws ParserConfigurationException, IOException, SAXException {
+    public void initialize(String pathMap) {
 
-		game = new PacmanGame(pathMap);
-		player = game.getPlayer();
+        int currentHP = 5;
+        int maximumHP = 5;
+        int defensePoints = 1;
 
-		File stocks = new File(pathMap);
-		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-		Document doc = dBuilder.parse(stocks);
-		doc.getDocumentElement().normalize();
+        test_game = new PacmanGame(pathMap);
+        Map map = test_game.getMap();
+        pacman = new Pacman(map);
+        startPoint = new Point(pacman.getPosition());
 
-		NodeList startNodes = doc.getElementsByTagName("start");
-		Node startNode = startNodes.item(0);
+        GroundCollisionHandler groundCollisionHandler = new GroundCollisionHandler(map);
 
-		if (startNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element element = (Element) startNode;
-			startPosX = Integer.parseInt(getValue("posX", element));
-			startPosY = Integer.parseInt(getValue("posY", element));
-		}
+        int movingSpeedXMax = 1;
+        int movingSpeedYMax = 1;
 
-		NodeList finishNodes = doc.getElementsByTagName("finish");
-		Node finishNode = finishNodes.item(0);
+        Point position = new Point(5, 5);
 
-		if (finishNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element element = (Element) finishNode;
-			finishPosX = Integer.parseInt(getValue("posX", element));
-			finishPosY = Integer.parseInt(getValue("posY", element));
-		}
+        MovableArtificialIntelligence movableArtificialIntelligence = new RandomMovableArtificialIntelligence();
 
-	}
+        monster = new Monster(movableArtificialIntelligence, currentHP, maximumHP, defensePoints, groundCollisionHandler, movingSpeedXMax, movingSpeedYMax, position) {
+        };
+    }
 
-	static String getValue(String tag, Element element) {
-		NodeList nodes = element.getElementsByTagName(tag).item(0).getChildNodes();
-		Node node = (Node) nodes.item(0);
-		return node.getNodeValue();
-	}
+    @Test
+    public void testPlayerCollisionNoneWallRight() {
 
-	@Test
-	public void testPlayerCollisionNoneWallRight() throws IOException, SAXException, ParserConfigurationException {
+        initialize("src/test/res/test_map_1.xml");
+        test_game.evolve(Cmd.RIGHT);
+        assertEquals("mur", startPoint.x + 1, pacman.getPosition().x);
+    }
 
-		initializeGame("src/test/res/test_map_1.xml");
+    @Test
+    public void testPlayerCollisionNoneWallLeft() {
 
-		game.evolve(Cmd.RIGHT);
-		assertEquals("mur", startPosX + 1, player.getPosition().x);
-	}
+        initialize("src/test/res/test_map_1.xml");
+        test_game.evolve(Cmd.LEFT);
+        assertEquals("mur", startPoint.x - 1, pacman.getPosition().x);
+    }
 
-	@Test
-	public void testPlayerCollisionNoneWallLeft() throws IOException, SAXException, ParserConfigurationException {
+    @Test
+    public void testPlayerCollisionNoneWallUp() {
 
-		initializeGame("src/test/res/test_map_1.xml");
+        initialize("src/test/res/test_map_1.xml");
+        test_game.evolve(Cmd.UP);
+        assertEquals("mur", startPoint.y - 1, pacman.getPosition().y);
+    }
 
-		game.evolve(Cmd.LEFT);
-		assertEquals("mur", startPosX - 1, player.getPosition().x);
-	}
+    @Test
+    public void testPlayerCollisionNoneWallDown() {
 
-	@Test
-	public void testPlayerCollisionNoneWallUp() throws IOException, SAXException, ParserConfigurationException {
+        initialize("src/test/res/test_map_1.xml");
+        test_game.evolve(Cmd.DOWN);
+        assertEquals("mur", startPoint.y + 1, pacman.getPosition().y);
+    }
 
-		initializeGame("src/test/res/test_map_1.xml");
+    @Test
+    public void testPlayerCollisionWallRight() {
 
-		game.evolve(Cmd.UP);
-		assertEquals("mur", startPosY - 1, player.getPosition().y);
-	}
+        initialize("src/test/res/test_map_2.xml");
+        test_game.evolve(Cmd.RIGHT);
+        assertEquals("pas de mur", startPoint.x, pacman.getPosition().x);
+    }
 
-	@Test
-	public void testPlayerCollisionNoneWallDown() throws IOException, SAXException, ParserConfigurationException {
+    @Test
+    public void testPlayerCollisionWallLeft() {
 
-		initializeGame("src/test/res/test_map_1.xml");
+        initialize("src/test/res/test_map_2.xml");
+        test_game.evolve(Cmd.LEFT);
+        assertEquals("pas de mur", startPoint.x, pacman.getPosition().x);
 
-		game.evolve(Cmd.DOWN);
-		assertEquals("mur", startPosY + 1, player.getPosition().y);
-	}
+    }
 
-	@Test
-	public void testPlayerCollisionWallRight() throws IOException, SAXException, ParserConfigurationException {
+    @Test
+    public void testPlayerCollisionWallUp() {
 
-		initializeGame("src/test/res/test_map_2.xml");
+        initialize("src/test/res/test_map_2.xml");
+        test_game.evolve(Cmd.UP);
+        assertEquals("pas de mur", startPoint.y, pacman.getPosition().y);
+    }
 
-		game.evolve(Cmd.RIGHT);
-		assertEquals("pas de mur", startPosX, player.getPosition().x);
-	}
+    @Test
+    public void testPlayerCollisionWallDown() {
 
-	@Test
-	public void testPlayerCollisionWallLeft() throws IOException, SAXException, ParserConfigurationException {
+        initialize("src/test/res/test_map_2.xml");
+        test_game.evolve(Cmd.DOWN);
+        assertEquals("pas de mur", startPoint.y, pacman.getPosition().y);
+    }
 
-		initializeGame("src/test/res/test_map_2.xml");
+    @Test
+    public void testPlayerGetMoneyAmount() {
 
-		game.evolve(Cmd.LEFT);
-		assertEquals("pas de mur", startPosX, player.getPosition().x);
-	}
+        initialize("src/test/res/test_map_1.xml");
+        assertEquals(pacman.getMoneyAmount(), 0);
+    }
 
-	@Test
-	public void testPlayerCollisionWallUp() throws IOException, SAXException, ParserConfigurationException {
+    @Test
+    public void testPlayerIncreaseMoneyAmount() {
 
-		initializeGame("src/test/res/test_map_2.xml");
+        initialize("src/test/res/test_map_1.xml");
 
-		game.evolve(Cmd.UP);
-		assertEquals("pas de mur", startPosY, player.getPosition().y);
-	}
+        int beginMoney = 0;
+        int endMoney = 10;
 
-	@Test
-	public void testPlayerCollisionWallDown() throws IOException, SAXException, ParserConfigurationException {
+        assertEquals("Player have already money!", beginMoney, pacman.getMoneyAmount());
 
-		initializeGame("src/test/res/test_map_2.xml");
+        pacman.increaseMoneyAmount(endMoney);
 
-		game.evolve(Cmd.DOWN);
-		assertEquals("pas de mur", startPosY, player.getPosition().y);
-	}
+        assertEquals("The sum of money isn't equal!", endMoney, pacman.getMoneyAmount());
 
-	@Test
-	public void testPlayerGetMoneyAmount() throws IOException, SAXException, ParserConfigurationException {
-		initializeGame("src/test/res/test_map_1.xml");
+        pacman.increaseMoneyAmount(-endMoney);
 
-		assertEquals(player.getMoneyAmount(), 0);
-	}
+        assertEquals("Couldn't reset amount of money correctly!", beginMoney, pacman.getMoneyAmount());
+    }
 
-	@Test
-	public void testPlayerIncreaseMoneyAmount() throws IOException, SAXException, ParserConfigurationException {
+    @Test
+    public void testPlayerAddItemAddOneKey() {
 
-		int beginMoney = 0;
-		int endMoney = 10;
+        initialize("src/test/res/test_map_1.xml");
 
-		initializeGame("src/test/res/test_map_1.xml");
+        String keyId = "First key";
+        String keyName = "Powerful Key";
 
-		assertEquals(player.getMoneyAmount(), beginMoney);
+        Key key = new Key(keyId, keyName);
+        pacman.addItem(key);
+        assertEquals("le joueur n'a pas de clé", pacman.getItem(keyId).getName(), keyName);
+    }
 
-		player.increaseMoneyAmount(endMoney);
+    @Test
+    public void testPlayerAddItemAddSameKey() {
 
-		assertEquals(player.getMoneyAmount(), endMoney);
-	}
+        initialize("src/test/res/test_map_1.xml");
 
-	@Test
-	public void testPlayerAddItemAddOneKey() throws IOException, SAXException, ParserConfigurationException {
-		initializeGame("src/test/res/test_map_1.xml");
+        String keyId = "First key";
+        String keyName = "Powerful Key 1";
 
-		String keyId = "First key";
-		String keyName = "Powerful Key";
+        Key key = new Key(keyId, keyName);
+        pacman.addItem(key);
+        pacman.addItem(key);
 
-		Key key = new Key(keyId, keyName);
-		player.addItem(key);
-		assertEquals("le joueur n'a pas de clé", player.getItem(keyId).getName(), keyName);
-	}
+        assertEquals("le joueur n'a pas de clé 1", pacman.getItem(keyId).getName(), keyName);
+    }
 
-	@Test
-	public void testPlayerAddItemAddSameKey() throws IOException, SAXException, ParserConfigurationException {
-		initializeGame("src/test/res/test_map_1.xml");
+    @Test
+    public void testPlayerAddItemAddTwoKey() {
 
-		String keyId = "First key";
-		String keyName = "Powerful Key 1";
+        initialize("src/test/res/test_map_1.xml");
 
-		Key key = new Key(keyId, keyName);
-		player.addItem(key);
-		player.addItem(key);
+        String keyId_1 = "First key";
+        String keyName_1 = "Powerful Key 1";
 
-		assertEquals("le joueur n'a pas de clé 1", player.getItem(keyId).getName(), keyName);
-	}
+        String keyId_2 = "Second key";
+        String keyName_2 = "Powerful Key 2";
 
-	@Test
-	public void testPlayerAddItemAddTwoKey() throws IOException, SAXException, ParserConfigurationException {
-		initializeGame("src/test/res/test_map_1.xml");
+        Key key_1 = new Key(keyId_1, keyName_1);
+        Key key_2 = new Key(keyId_2, keyName_2);
+        pacman.addItem(key_1);
+        pacman.addItem(key_2);
 
-		String keyId_1 = "First key";
-		String keyName_1 = "Powerful Key 1";
+        assertEquals("le joueur n'a pas de clé 1", pacman.getItem(keyId_1).getName(), keyName_1);
+        assertEquals("le joueur n'a pas de clé 2", pacman.getItem(keyId_2).getName(), keyName_2);
+    }
 
-		String keyId_2 = "Second key";
-		String keyName_2 = "Powerful Key 2";
+    @Test
+    public void testPlayerAddItemAddTwoKeysWithSameName() {
 
-		Key key_1 = new Key(keyId_1, keyName_1);
-		Key key_2 = new Key(keyId_2, keyName_2);
-		player.addItem(key_1);
-		player.addItem(key_2);
+        initialize("src/test/res/test_map_1.xml");
 
-		assertEquals("le joueur n'a pas de clé 1", player.getItem(keyId_1).getName(), keyName_1);
-		assertEquals("le joueur n'a pas de clé 2", player.getItem(keyId_2).getName(), keyName_2);
-	}
+        String keyId_1 = "First key";
+        String keyName_1 = "Powerful Key 1";
 
-	@Test
-	public void testPlayerAddItemAddTwoKeysWithSameName()
-			throws IOException, SAXException, ParserConfigurationException {
-		initializeGame("src/test/res/test_map_1.xml");
+        String keyId_2 = "Second key";
+        String keyName_2 = "Powerful Key 1";
 
-		String keyId_1 = "First key";
-		String keyName_1 = "Powerful Key 1";
+        Key key_1 = new Key(keyId_1, keyName_1);
+        Key key_2 = new Key(keyId_2, keyName_2);
+        pacman.addItem(key_1);
+        pacman.addItem(key_2);
 
-		String keyId_2 = "Second key";
-		String keyName_2 = "Powerful Key 1";
+        assertEquals("le joueur n'a pas de clé 1", pacman.getItem(keyId_1).getName(), keyName_1);
+        assertEquals("le joueur n'a pas de clé 2", pacman.getItem(keyId_2).getName(), keyName_2);
+    }
 
-		Key key_1 = new Key(keyId_1, keyName_1);
-		Key key_2 = new Key(keyId_2, keyName_2);
-		player.addItem(key_1);
-		player.addItem(key_2);
+    @Test
+    public void testPlayerAddItemAddTwoKeysWithSameId() {
 
-		assertEquals("le joueur n'a pas de clé 1", player.getItem(keyId_1).getName(), keyName_1);
-		assertEquals("le joueur n'a pas de clé 2", player.getItem(keyId_2).getName(), keyName_2);
-	}
+        initialize("src/test/res/test_map_1.xml");
 
-	@Test
-	public void testPlayerAddItemAddTwoKeysWithSameId() throws IOException, SAXException, ParserConfigurationException {
-		initializeGame("src/test/res/test_map_1.xml");
+        String keyId_1 = "First key";
+        String keyName_1 = "Powerful Key 1";
 
-		String keyId_1 = "First key";
-		String keyName_1 = "Powerful Key 1";
+        String keyId_2 = "First key";
+        String keyName_2 = "Powerful Key 2";
 
-		String keyId_2 = "First key";
-		String keyName_2 = "Powerful Key 2";
+        Key key_1 = new Key(keyId_1, keyName_1);
+        Key key_2 = new Key(keyId_2, keyName_2);
+        pacman.addItem(key_1);
+        pacman.addItem(key_2);
 
-		Key key_1 = new Key(keyId_1, keyName_1);
-		Key key_2 = new Key(keyId_2, keyName_2);
-		player.addItem(key_1);
-		player.addItem(key_2);
+        assertEquals("le joueur n'a pas de clé 1", pacman.getItem(keyId_1).getName(), keyName_1);
+        assertNotEquals("le joueur n'a pas de clé 2", pacman.getItem(keyId_2).getName(), keyName_2);
+    }
 
-		assertEquals("le joueur n'a pas de clé 1", player.getItem(keyId_1).getName(), keyName_1);
-		assertNotEquals("le joueur n'a pas de clé 2", player.getItem(keyId_2).getName(), keyName_2);
-	}
+    @Test
+    public void testPlayerRemoveItem() {
 
-	@Test
-	public void testPlayerRemoveItem() throws IOException, SAXException, ParserConfigurationException {
-		initializeGame("src/test/res/test_map_1.xml");
+        initialize("src/test/res/test_map_1.xml");
 
-		String keyId = "First key";
-		String keyName = "Powerful Key 1";
+        String keyId = "First key";
+        String keyName = "Powerful Key 1";
 
-		Key key = new Key(keyId, keyName);
-		player.addItem(key);
-		assertEquals("le joueur n'a pas de clé", player.getItem(keyId).getName(), keyName);
+        Key key = new Key(keyId, keyName);
+        pacman.addItem(key);
+        assertEquals("le joueur n'a pas de clé", pacman.getItem(keyId).getName(), keyName);
 
-		player.removeItem(key);
-		assertNull("Le clé de joueur n'a pas été supprimer!", player.getItem(keyId));
-	}
+        pacman.removeItem(key);
+        assertNull("Le clé de joueur n'a pas été supprimer!", pacman.getItem(keyId));
+    }
 
-	@Test
-	public void testPlayerRemoveTwoItemsWithTheSameKey()
-			throws IOException, SAXException, ParserConfigurationException {
-		initializeGame("src/test/res/test_map_1.xml");
+    @Test
+    public void testPlayerRemoveTwoItemsWithTheSameKey() {
 
-		String keyId = "First key";
-		String keyName = "Powerful Key 1";
+        initialize("src/test/res/test_map_1.xml");
 
-		Key key = new Key(keyId, keyName);
-		player.addItem(key);
-		player.addItem(key);
-		assertEquals("le joueur n'a pas de clé", player.getItem(keyId).getName(), keyName);
+        String keyId = "First key";
+        String keyName = "Powerful Key 1";
 
-		player.removeItem(key);
-		assertNull("Seulement un clé a été supprimer!", player.getItem(keyId));
-	}
+        Key key = new Key(keyId, keyName);
+        pacman.addItem(key);
+        pacman.addItem(key);
+        assertEquals("le joueur n'a pas de clé", pacman.getItem(keyId).getName(), keyName);
 
-	@Test
-	public void testPlayerRemoveTwoItemsWithTheSameId() throws IOException, SAXException, ParserConfigurationException {
-		initializeGame("src/test/res/test_map_1.xml");
+        pacman.removeItem(key);
+        assertNull("Seulement un clé a été supprimer!", pacman.getItem(keyId));
+    }
 
-		String keyId_1 = "First key";
-		String keyName_1 = "Powerful Key 1";
+    @Test
+    public void testPlayerRemoveTwoItemsWithTheSameId() {
 
-		String keyId_2 = "First key";
-		String keyName_2 = "Powerful Key 1";
+        initialize("src/test/res/test_map_1.xml");
 
-		Key key_1 = new Key(keyId_1, keyName_1);
-		Key key_2 = new Key(keyId_2, keyName_2);
+        String keyId_1 = "First key";
+        String keyName_1 = "Powerful Key 1";
 
-		player.addItem(key_1);
-		player.addItem(key_2);
+        String keyId_2 = "First key";
+        String keyName_2 = "Powerful Key 1";
 
-		assertEquals("le joueur n'a pas de clé", player.getItem(keyId_1).getName(), keyName_1);
-		assertEquals("le joueur n'a pas de clé", player.getItem(keyId_2).getName(), keyName_2);
+        Key key_1 = new Key(keyId_1, keyName_1);
+        Key key_2 = new Key(keyId_2, keyName_2);
 
-		player.removeItem(key_1);
-		assertNull("Seulement un clé a été supprimer!", player.getItem(keyId_1));
-	}
+        pacman.addItem(key_1);
+        pacman.addItem(key_2);
+
+        assertEquals("le joueur n'a pas de clé", pacman.getItem(keyId_1).getName(), keyName_1);
+        assertEquals("le joueur n'a pas de clé", pacman.getItem(keyId_2).getName(), keyName_2);
+
+        pacman.removeItem(key_1);
+        assertNull("Seulement un clé a été supprimer!", pacman.getItem(keyId_1));
+    }
+
+    @Test
+    public void testTakeDamage() {
+
+        initialize("src/test/res/test_map_1.xml");
+
+        int beginHP = pacman.getCurrentHp();
+
+        assertEquals(beginHP, pacman.getCurrentHp());
+        monster.attack(pacman);
+        assertEquals(beginHP - 1, pacman.getCurrentHp());
+
+    }
+
+    @Test
+    public void testTakeDamageOnCollision() {
+
+        initialize("src/test/res/test_map_1.xml");
+
+        int beginHP = pacman.getCurrentHp();
+
+        assertEquals(beginHP, pacman.getCurrentHp());
+        monster.onCollision(pacman);
+        assertEquals("Le pacman n'a pas obtenu des dégâts", beginHP - 1, pacman.getCurrentHp());
+
+    }
+
+    @Test
+    public void testDestroyPacman() {
+
+        initialize("src/test/res/test_map_1.xml");
+
+        pacman.applyDamages(pacman.getCurrentHp());
+        pacman.update();
+
+        assertEquals("Le pacman n'est pas ete detruit!", true, pacman.isToDestroy());
+    }
+
+    @Test
+    public void testDestroyPacmanOnCollision() {
+
+        initialize("src/test/res/test_map_1.xml");
+
+        int beginHP = pacman.getCurrentHp();
+        for (int i = 0; i < beginHP; i++) {
+            monster.onCollision(pacman);
+            pacman.update();
+        }
+
+        assertEquals("Le pacman n'est pas ete detruit! Current life:" + pacman.getCurrentHp(), true, pacman.isToDestroy());
+    }
+
 }
