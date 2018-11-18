@@ -21,7 +21,7 @@ public class PacmanPainter implements GamePainter {
 	protected static int HEIGHT;
 	protected static int TILE_WIDTH = 50;
 	protected static int TILE_HEIGHT = 50;
-
+	private PacmanGame game;
 	private Map map;
 	private CollisionPainterResponsability collisionPainter;
 
@@ -31,8 +31,9 @@ public class PacmanPainter implements GamePainter {
 	 * @param game
 	 *            le jeutest a afficher
 	 */
-	public PacmanPainter(Map m) {
-		map = m;
+	public PacmanPainter(PacmanGame g) {
+		game = g;
+		map = g.getMap();
 		WIDTH = map.getWidth() * TILE_WIDTH;
 		HEIGHT = map.getHeigh() * TILE_HEIGHT;
 		collisionPainter = new WallCollisionPainterResponsability(ECollisionType.WALL);
@@ -93,6 +94,13 @@ public class PacmanPainter implements GamePainter {
 	@Override
 	public int getHeight() {
 		return HEIGHT;
+	}
+
+	@Override
+	public void setChangeMap() {
+		map = game.getMap();
+		WIDTH = map.getWidth() * TILE_WIDTH;
+		HEIGHT = map.getHeigh() * TILE_HEIGHT;
 	}
 
 }

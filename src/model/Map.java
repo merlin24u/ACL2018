@@ -5,8 +5,6 @@ import java.util.ArrayList;
 
 public class Map implements IUpdate {
 
-	public static int nbMap;
-	private int id;
 	private int[][] grid;
 	private Point start, finish;
 	private ArrayList<Character> characters;
@@ -42,8 +40,6 @@ public class Map implements IUpdate {
 	}
 
 	public Map(int[][] g, Point s, Point f) {
-		id = nbMap;
-		nbMap++;
 		grid = g;
 		start = s;
 		finish = f;
@@ -118,8 +114,6 @@ public class Map implements IUpdate {
 
 	@Override
 	public void update() {
-		boolean lost = false;
-
 		for (OnMoveOver omo : events) {
 			omo.update();
 			if (omo.isToDestroy())
@@ -146,7 +140,6 @@ public class Map implements IUpdate {
 		for (Character character : characters) {
 			if (character.isToDestroy()) {
 				if (character.isType("Player")) {
-					// TODO: TEMPORAIRE
 					System.out.println("You've lost !");
 					game.setFinished();
 				}

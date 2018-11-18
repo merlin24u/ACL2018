@@ -8,8 +8,7 @@ public class ExitEffect extends Effect {
 
 	@Override
 	protected void _apply() {
-		System.out.println("You've won !");
-		System.exit(1);
+		PacmanGame.updateMap();
 	}
 
 }

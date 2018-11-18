@@ -66,9 +66,12 @@ public class GameEngineGraphical {
 
 			// fait evoluer le game
 			tDeb = System.currentTimeMillis();
-			this.game.evolve(c);
+			game.evolve(c);
+			if (game.changeMap()) {
+				gui.setChangeMap();
+			}
 			// affiche le game
-			this.gui.paint();
+			gui.paint();
 			tFin = System.currentTimeMillis();
 
 			// met en attente
