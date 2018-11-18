@@ -31,7 +31,7 @@ public class TestItemRequiredOnMoveOver {
         PacmanGame pacmanGame = new PacmanGame("src/test/res/test_map_1.xml");
         map = pacmanGame.getMap();
 
-        point = new Point(2,2);
+        point = new Point(4,4);
         isVisible = true;
         isActivated = true;
         isPersistingAfterActivation = true;
