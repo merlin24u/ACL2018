@@ -49,8 +49,7 @@ public class PacmanPainter implements GamePainter {
 		Image img;
 
 		try {
-			texture = "ground";
-			img = TextureFactory.getInstance().get(texture);
+			img = TextureFactory.getInstance().get("ground");
 			crayon.drawImage(img, 0, 0, im.getWidth(), im.getHeight(), null);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -63,13 +62,15 @@ public class PacmanPainter implements GamePainter {
 		}
 
 		for (OnMoveOver m : map.getEvents()) {
-			try {
-				texture = m.getEffectFactory().getTexture();
-				img = TextureFactory.getInstance().get(texture);
-				crayon.drawImage(img, m.getPosition().x * TILE_WIDTH, m.getPosition().y * TILE_HEIGHT, TILE_WIDTH,
-						TILE_HEIGHT, null);
-			} catch (Exception e) {
-				e.printStackTrace();
+			for (EffectFactory ef : m.getEffectFactory()) {
+				try {
+					texture = ef.getTexture();
+					img = TextureFactory.getInstance().get(texture);
+					crayon.drawImage(img, m.getPosition().x * TILE_WIDTH, m.getPosition().y * TILE_HEIGHT, TILE_WIDTH,
+							TILE_HEIGHT, null);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		}
 
@@ -83,7 +84,6 @@ public class PacmanPainter implements GamePainter {
 				e.printStackTrace();
 			}
 		}
-
 	}
 
 	@Override
