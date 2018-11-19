@@ -9,6 +9,7 @@ public class Movable implements IUpdate, ICoordinate {
 	protected int currentSpeedX;
 	protected int currentSpeedY;
 	protected int movingTick;
+	protected EDirection direction;
 	protected Point position;
 
 	public Movable(GroundCollisionHandler groundCollisionHandler,
@@ -21,6 +22,7 @@ public class Movable implements IUpdate, ICoordinate {
 		this.currentSpeedY = 0;
 		this.movingTick = movingTick;
 		this.position = position;
+		this.direction = EDirection.SOUTH;
 	}
 	
 	public void move(int x, int y) {
@@ -70,9 +72,22 @@ public class Movable implements IUpdate, ICoordinate {
 	public boolean canMove() {
 		return movingTick == 0 || (Time.getInstance().getTick() % movingTick == 0);
 	}
-
+	
+	public void updateDirection() {
+		if(currentSpeedX > 0) {
+			direction = EDirection.EST;
+		}else if(currentSpeedX < 0) {
+			direction = EDirection.WEST;
+		}else if(currentSpeedY > 0) {
+			direction = EDirection.SOUTH;
+		}else if(currentSpeedY < 0) {
+			direction = EDirection.NORTH;
+		}
+	}
+	
 	@Override
 	public void update() {
+		updateDirection();
 		if(canMove())
 			groundCollisionHandler.handleMove(this);
 		resetCurrentSpeed();
