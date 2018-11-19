@@ -18,7 +18,7 @@ public class Pacman extends Character implements IDamager {
 		this.items = new ArrayList<Item>();
 		this.damageEffectFactory = new DamageEffectFactory(1, 1);
 		this.isAttacking = false;
-		this.map = map;
+		this.map = m;
 	}
 
 	public void evolve(Cmd commande) {
