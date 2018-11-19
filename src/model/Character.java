@@ -30,6 +30,11 @@ public abstract class Character extends Movable implements IDestructible {
 		return currentHP >= 0;
 	}
 
+	public void increaseHP(int healthAmount) {
+		currentHP += healthAmount;
+		if(currentHP>maximumHP)
+			currentHP = maximumHP;
+	}
 	public void applyDamages(int damages) {
 		this.currentHP -= damages;
 		if (currentHP <= 0) {
