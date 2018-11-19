@@ -22,7 +22,6 @@ public class Pacman extends Character implements IDamager {
 	}
 
 	public void evolve(Cmd commande) {
-		this.isAttacking = false;
 		switch (commande) {
 		case ATTACK:
 			this.isAttacking = true;
@@ -116,5 +115,6 @@ public class Pacman extends Character implements IDamager {
 				attack(c);
 			}
 		}
+		this.isAttacking = false;
 	}
 }
