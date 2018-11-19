@@ -1,11 +1,11 @@
 <map>
   <size>
-    <sizeX>5</sizeX>
+    <sizeX>10</sizeX>
     <sizeY>10</sizeY>
   </size>
   <start>
-    <posX>2</posX>
-    <posY>2</posY>
+    <posX>4</posX>
+    <posY>4</posY>
   </start>
   <finish>
     <posX>0</posX>
@@ -61,6 +61,66 @@
       <tab2D index="9">wallCollision</tab2D>
     </tab>
     <tab index="4">
+      <tab2D index="0">wallCollision</tab2D>
+      <tab2D index="1">noneCollision</tab2D>
+      <tab2D index="2">noneCollision</tab2D>
+      <tab2D index="3">noneCollision</tab2D>
+      <tab2D index="4">noneCollision</tab2D>
+      <tab2D index="5">noneCollision</tab2D>
+      <tab2D index="6">noneCollision</tab2D>
+      <tab2D index="7">noneCollision</tab2D>
+      <tab2D index="8">noneCollision</tab2D>
+      <tab2D index="9">wallCollision</tab2D>
+    </tab>
+    <tab index="5">
+      <tab2D index="0">wallCollision</tab2D>
+      <tab2D index="1">noneCollision</tab2D>
+      <tab2D index="2">noneCollision</tab2D>
+      <tab2D index="3">noneCollision</tab2D>
+      <tab2D index="4">noneCollision</tab2D>
+      <tab2D index="5">noneCollision</tab2D>
+      <tab2D index="6">noneCollision</tab2D>
+      <tab2D index="7">noneCollision</tab2D>
+      <tab2D index="8">noneCollision</tab2D>
+      <tab2D index="9">wallCollision</tab2D>
+    </tab>
+    <tab index="6">
+      <tab2D index="0">wallCollision</tab2D>
+      <tab2D index="1">noneCollision</tab2D>
+      <tab2D index="2">noneCollision</tab2D>
+      <tab2D index="3">noneCollision</tab2D>
+      <tab2D index="4">noneCollision</tab2D>
+      <tab2D index="5">noneCollision</tab2D>
+      <tab2D index="6">noneCollision</tab2D>
+      <tab2D index="7">noneCollision</tab2D>
+      <tab2D index="8">noneCollision</tab2D>
+      <tab2D index="9">wallCollision</tab2D>
+    </tab>
+    <tab index="7">
+      <tab2D index="0">wallCollision</tab2D>
+      <tab2D index="1">noneCollision</tab2D>
+      <tab2D index="2">noneCollision</tab2D>
+      <tab2D index="3">noneCollision</tab2D>
+      <tab2D index="4">noneCollision</tab2D>
+      <tab2D index="5">noneCollision</tab2D>
+      <tab2D index="6">noneCollision</tab2D>
+      <tab2D index="7">noneCollision</tab2D>
+      <tab2D index="8">noneCollision</tab2D>
+      <tab2D index="9">wallCollision</tab2D>
+    </tab>
+    <tab index="8">
+      <tab2D index="0">wallCollision</tab2D>
+      <tab2D index="1">noneCollision</tab2D>
+      <tab2D index="2">noneCollision</tab2D>
+      <tab2D index="3">noneCollision</tab2D>
+      <tab2D index="4">noneCollision</tab2D>
+      <tab2D index="5">noneCollision</tab2D>
+      <tab2D index="6">noneCollision</tab2D>
+      <tab2D index="7">noneCollision</tab2D>
+      <tab2D index="8">noneCollision</tab2D>
+      <tab2D index="9">wallCollision</tab2D>
+    </tab>
+    <tab index="9">
       <tab2D index="0">wallCollision</tab2D>
       <tab2D index="1">wallCollision</tab2D>
       <tab2D index="2">wallCollision</tab2D>

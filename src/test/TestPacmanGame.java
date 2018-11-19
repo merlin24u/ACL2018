@@ -50,7 +50,7 @@ public class TestPacmanGame {
 	@Test
 	public void checkSumOfEmptyFields() {
 
-		int numberOfEmptyFieldsInXML = 25;
+		int numberOfEmptyFieldsInXML = 65;
 		int numberOfEmptyFieldsInMap = 0;
 
 		for (int width = 0; width < game.getMap().getWidth(); width++) {
