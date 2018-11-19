@@ -21,7 +21,7 @@ public class PacmanPainter implements GamePainter {
 	protected static int HEIGHT;
 	protected static int TILE_WIDTH = 50;
 	protected static int TILE_HEIGHT = 50;
-
+	private PacmanGame game;
 	private Map map;
 	private CollisionPainterResponsability collisionPainter;
 
@@ -31,8 +31,9 @@ public class PacmanPainter implements GamePainter {
 	 * @param game
 	 *            le jeutest a afficher
 	 */
-	public PacmanPainter(Map m) {
-		map = m;
+	public PacmanPainter(PacmanGame g) {
+		game = g;
+		map = g.getMap();
 		WIDTH = map.getWidth() * TILE_WIDTH;
 		HEIGHT = map.getHeigh() * TILE_HEIGHT;
 		collisionPainter = new WallCollisionPainterResponsability(ECollisionType.WALL);
@@ -48,8 +49,7 @@ public class PacmanPainter implements GamePainter {
 		Image img;
 
 		try {
-			texture = "ground";
-			img = TextureFactory.getInstance().get(texture);
+			img = TextureFactory.getInstance().get("ground");
 			crayon.drawImage(img, 0, 0, im.getWidth(), im.getHeight(), null);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -62,13 +62,15 @@ public class PacmanPainter implements GamePainter {
 		}
 
 		for (OnMoveOver m : map.getEvents()) {
-			try {
-				texture = m.getEffectFactory().getTexture();
-				img = TextureFactory.getInstance().get(texture);
-				crayon.drawImage(img, m.getPosition().x * TILE_WIDTH, m.getPosition().y * TILE_HEIGHT, TILE_WIDTH,
-						TILE_HEIGHT, null);
-			} catch (Exception e) {
-				e.printStackTrace();
+			for (EffectFactory ef : m.getEffectFactory()) {
+				try {
+					texture = ef.getTexture();
+					img = TextureFactory.getInstance().get(texture);
+					crayon.drawImage(img, m.getPosition().x * TILE_WIDTH, m.getPosition().y * TILE_HEIGHT, TILE_WIDTH,
+							TILE_HEIGHT, null);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		}
 
@@ -82,7 +84,6 @@ public class PacmanPainter implements GamePainter {
 				e.printStackTrace();
 			}
 		}
-
 	}
 
 	@Override
@@ -93,6 +94,13 @@ public class PacmanPainter implements GamePainter {
 	@Override
 	public int getHeight() {
 		return HEIGHT;
+	}
+
+	@Override
+	public void setChangeMap() {
+		map = game.getMap();
+		WIDTH = map.getWidth() * TILE_WIDTH;
+		HEIGHT = map.getHeigh() * TILE_HEIGHT;
 	}
 
 }

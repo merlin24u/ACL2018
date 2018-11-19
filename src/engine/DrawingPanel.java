@@ -38,9 +38,9 @@ public class DrawingPanel extends JPanel {
 	private int width, height;
 
 	/**
-	 * constructeur Il construit les images pour doublebuffering ainsi que le
-	 * Panel associe. Les images stockent le painter et on demande au panel la
-	 * mise a jour quand le painter est fini
+	 * constructeur Il construit les images pour doublebuffering ainsi que le Panel
+	 * associe. Les images stockent le painter et on demande au panel la mise a jour
+	 * quand le painter est fini
 	 * 
 	 * @param width
 	 *            largeur de l'image
@@ -52,18 +52,16 @@ public class DrawingPanel extends JPanel {
 		this.width = painter.getWidth();
 		this.height = painter.getHeight();
 		this.setPreferredSize(new Dimension(this.width, this.height));
-		this.painter=painter;
+		this.painter = painter;
 
 		// cree l'image buffer et son graphics
-		this.nextImage = new BufferedImage(width, height,
-				BufferedImage.TYPE_INT_RGB);
-		this.currentImage = new BufferedImage(width, height,
-				BufferedImage.TYPE_INT_RGB);
+		this.nextImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+		this.currentImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 	}
 
 	/**
-	 * demande de mettre a jour le rendu de l'image sur le Panel. Creer une
-	 * nouvelle image vide sur laquelle dessiner
+	 * demande de mettre a jour le rendu de l'image sur le Panel. Creer une nouvelle
+	 * image vide sur laquelle dessiner
 	 */
 	public void drawGame() {
 		// generer la nouvelle image
@@ -75,8 +73,7 @@ public class DrawingPanel extends JPanel {
 		this.currentImage = this.nextImage;
 		// l'ancienne image est videe
 		this.nextImage = temp;
-		this.nextImage.getGraphics()
-				.fillRect(0, 0, this.width, this.height);
+		this.nextImage.getGraphics().fillRect(0, 0, this.width, this.height);
 		// met a jour l'image a afficher sur le panel
 		this.repaint();
 	}
@@ -89,8 +86,18 @@ public class DrawingPanel extends JPanel {
 	 */
 	public void paint(Graphics g) {
 		super.paint(g);
-		g.drawImage(this.currentImage, 0, 0, getWidth(), getHeight(), 0, 0,
-				getWidth(), getHeight(), null);
+		g.drawImage(this.currentImage, 0, 0, getWidth(), getHeight(), 0, 0, getWidth(), getHeight(), null);
+	}
+
+	public void setChangeMap() {
+		painter.setChangeMap();
+		width = painter.getWidth();
+		height = painter.getHeight();
+		this.setPreferredSize(new Dimension(width, height));
+
+		// met à jour l'image buffer et son graphics
+		nextImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+		currentImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 	}
 
 }

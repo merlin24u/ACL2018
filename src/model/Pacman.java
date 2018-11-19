@@ -1,9 +1,6 @@
 package model;
 
-import java.awt.Color;
-import java.awt.Point;
 import java.util.ArrayList;
-
 import engine.Cmd;
 
 public class Pacman extends Character implements IDamager {
@@ -12,7 +9,7 @@ public class Pacman extends Character implements IDamager {
 	private ArrayList<Item> items;
 
 	public Pacman(Map m) {
-		super(5, 5, 0, new GroundCollisionHandler(m), 1, 1, 3, m.getStart(), Color.blue);
+		super(5, 5, 0, new GroundCollisionHandler(m), 1, 1, 3, m.getStart());
 		this.items = new ArrayList<Item>();
 		this.damageEffectFactory = new DamageEffectFactory(1, 1);
 	}
@@ -68,8 +65,9 @@ public class Pacman extends Character implements IDamager {
 	public void removeItem(Item item) {
 		items.remove(item);
 	}
+
 	public boolean isType(String type) {
-		if(type.equals("Player"))
+		if (type.equals("Player"))
 			return true;
 		else
 			return super.isType(type);
@@ -84,7 +82,7 @@ public class Pacman extends Character implements IDamager {
 	public int getDamages() {
 		return damageEffectFactory.getDamages();
 	}
-	
+
 	@Override
 	public void attack(Character character) {
 		damageEffectFactory.applyTo(character);

@@ -49,7 +49,7 @@ public class ItemRequiredOnMoveOver extends OnMoveOver {
 		}
 
 		if (none) {
-			super.getEffectFactory().changeTexture();
+			super.getEffectFactory().get(0).changeTexture();
 		}
 	}
 

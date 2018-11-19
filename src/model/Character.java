@@ -1,6 +1,5 @@
 package model;
 
-import java.awt.Color;
 import java.awt.Point;
 import java.util.ArrayList;
 
@@ -14,7 +13,7 @@ public abstract class Character extends Movable implements IDestructible {
 	private boolean toDestroy;
 
 	public Character(int currentHP, int maximumHP, int defensePoints, GroundCollisionHandler groundCollisionHandler,
-			int movingSpeedXMax, int movingSpeedYMax, int movingTick, Point position, Color c) {
+			int movingSpeedXMax, int movingSpeedYMax, int movingTick, Point position) {
 		super(groundCollisionHandler, movingSpeedXMax, movingSpeedYMax, movingTick, position);
 		this.currentHP = currentHP;
 		this.maximumHP = maximumHP;

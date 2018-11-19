@@ -1,6 +1,5 @@
 package model;
 
-import java.awt.Color;
 import java.awt.Point;
 
 public class Monster extends Character implements IDamager {
@@ -11,7 +10,7 @@ public class Monster extends Character implements IDamager {
 			int currentHP, int maximumHP, int defensePoints, GroundCollisionHandler groundCollisionHandler,
 			int movingSpeedXMax, int movingSpeedYMax, int movingTick, Point position) {
 		super(currentHP, maximumHP, defensePoints, groundCollisionHandler, movingSpeedXMax, movingSpeedYMax, movingTick,
-				position, Color.red);
+				position);
 		this.movableArtificialIntelligence = movableArtificialIntelligence;
 		this.damageEffectFactory = damageEffectFactory;
 	}
