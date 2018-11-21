@@ -21,6 +21,7 @@ public class Key extends Item {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((super.getId() == null) ? 0 : super.getId().hashCode());
+		result = prime * result + ((super.getName() == null) ? 0 : super.getName().hashCode());
 		return result;
 	}
 
@@ -32,11 +33,16 @@ public class Key extends Item {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Key other = (Key) obj;
+		Item other = (Item) obj;
 		if (super.getId() == null) {
 			if (other.getId() != null)
 				return false;
 		} else if (!super.getId().equals(other.getId()))
+			return false;
+		if (super.getName() == null) {
+			if (other.getName() != null)
+				return false;
+		} else if (!super.getName().equals(other.getName()))
 			return false;
 		return true;
 	}

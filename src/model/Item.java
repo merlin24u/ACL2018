@@ -31,5 +31,4 @@ public abstract class Item {
 	public abstract String getTexture();
 
 	public abstract Item clone();
-
 }
