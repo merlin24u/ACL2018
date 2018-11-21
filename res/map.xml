@@ -73,4 +73,10 @@
       <tab2D index="9">wallCollision</tab2D>
     </tab>
   </data>
+  <item>
+    <key>
+      <posX>8</posX>
+      <posY>3</posY>
+    </key>
+  </item>
 </map>

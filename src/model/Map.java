@@ -2,6 +2,7 @@ package model;
 
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Map implements IUpdate {
 
@@ -39,7 +40,7 @@ public class Map implements IUpdate {
 
 	}
 
-	public Map(int[][] g, Point s, Point f) {
+	public Map(int[][] g, Point s, Point f, HashMap<String, Point> items) {
 		grid = g;
 		start = s;
 		finish = f;
@@ -48,7 +49,26 @@ public class Map implements IUpdate {
 		this.events = new ArrayList<OnMoveOver>();
 		toDestroy = new ArrayList<Object>();
 
-		TEMPORAIRE();
+		GroundCollisionHandler gch = new GroundCollisionHandler(this);
+		MovableArtificialIntelligence mai = new FollowMovableArtificialIntelligence(this, gch);
+		Monster m = new Monster(new DamageEffectFactory(1, 1), mai, 5, 5, 0, gch, 1, 1, 5, new Point(3, 3));
+		this.characters.add(m);
+
+		Point key = items.get("key");
+		Item item1 = new Key("K01", "Clef verte");
+		// Case qui donnera la clef
+		ItemEffectFactory ief = new ItemEffectFactory(item1);
+		OnMoveOver onMove1 = new SimpleOnMoveOver(this, key, true, false, false);
+		onMove1.addEffectFactory(ief);
+		this.events.add(onMove1);
+
+		// Sortie qui necessite la clef
+		ArrayList<Item> itemsRequired = new ArrayList<Item>();
+		itemsRequired.add(item1);
+		ExitEffectFactory ef = new ExitEffectFactory(1);
+		OnMoveOver onMove2 = new ItemRequiredOnMoveOver(this, finish, true, false, true, itemsRequired, true);
+		onMove2.addEffectFactory(ef);
+		this.events.add(onMove2);
 
 	}
 

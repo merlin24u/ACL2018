@@ -2,6 +2,8 @@ package dao;
 
 import java.awt.Point;
 import java.io.File;
+import java.util.HashMap;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -27,6 +29,7 @@ public class MapXmlDAO implements MapDAO {
 		int[][] grid = null;
 		int sizeX, sizeY;
 		Point start = null, finish = null;
+		HashMap<String, Point> items = new HashMap<>();
 
 		File file = new File(f);
 		DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -59,6 +62,16 @@ public class MapXmlDAO implements MapDAO {
 			grid = new int[sizeX][sizeY];
 		}
 
+		nList = doc.getElementsByTagName("item");
+		nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			Element eElement2 = (Element) eElement.getElementsByTagName("key").item(0);
+			int x = Integer.parseInt(eElement2.getElementsByTagName("posX").item(0).getTextContent());
+			int y = Integer.parseInt(eElement2.getElementsByTagName("posY").item(0).getTextContent());
+			items.put("key", new Point(x, y));
+		}
+
 		nList = doc.getElementsByTagName("data");
 		nNode = nList.item(0);
 		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
@@ -79,7 +92,7 @@ public class MapXmlDAO implements MapDAO {
 			}
 		}
 
-		return new Map(grid, start, finish);
+		return new Map(grid, start, finish, items);
 	}
 
 	@Override
