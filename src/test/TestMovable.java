@@ -29,7 +29,7 @@ public class TestMovable {
         movingSpeedYMax = 1;
         startPosition = new Point(map.getStart().x, map.getStart().y);
         Point position = new Point(map.getStart().x, map.getStart().y);
-        movable = new Movable(new GroundCollisionHandler(map), movingSpeedXMax, movingSpeedYMax, position);
+        movable = new Movable(new GroundCollisionHandler(map), movingSpeedXMax, movingSpeedYMax, 0, position);
 
     }
 

@@ -32,9 +32,9 @@ public class TestMonster {
 
         Point position = new Point(5, 5);
 
-        MovableArtificialIntelligence movableArtificialIntelligence = new RandomMovableArtificialIntelligence();
+        MovableArtificialIntelligence movableArtificialIntelligence = new RandomMovableArtificialIntelligence(map);
 
-        monster = new Monster(movableArtificialIntelligence, currentHP, maximumHP, defensePoints, groundCollisionHandler, movingSpeedXMax, movingSpeedYMax, position) {
+        monster = new Monster(null, movableArtificialIntelligence, currentHP, maximumHP, defensePoints, groundCollisionHandler, movingSpeedXMax, movingSpeedYMax, movingSpeedYMax, position) {
         };
     }
 
