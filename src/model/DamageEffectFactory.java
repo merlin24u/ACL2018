@@ -10,7 +10,7 @@ public class DamageEffectFactory extends EffectFactory {
 
 	@Override
 	public boolean applyTo(Character character) {
-		if (character instanceof Pacman) {
+		if (character.isType("Player")) {
 			character.addEffect(new DamageEffect(character, damages, tickDuration));
 			return true;
 		} else

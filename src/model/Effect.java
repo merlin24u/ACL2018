@@ -18,10 +18,12 @@ public abstract class Effect {
 		return tickDuration;
 	}
 
-	public final void apply() {
+	public final boolean apply() {
 		if (tickDuration-- > 0) {
 			_apply();
-		}
+			return true;
+		} else
+			return false;
 	};
 
 	protected abstract void _apply();

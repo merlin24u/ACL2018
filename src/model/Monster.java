@@ -5,6 +5,7 @@ import java.awt.Point;
 public class Monster extends Character implements IDamager {
 	private DamageEffectFactory damageEffectFactory;
 	private MovableArtificialIntelligence movableArtificialIntelligence;
+	private boolean alreadyOn;
 
 	public Monster(DamageEffectFactory damageEffectFactory, MovableArtificialIntelligence movableArtificialIntelligence,
 			int currentHP, int maximumHP, int defensePoints, GroundCollisionHandler groundCollisionHandler,
@@ -13,6 +14,7 @@ public class Monster extends Character implements IDamager {
 				position);
 		this.movableArtificialIntelligence = movableArtificialIntelligence;
 		this.damageEffectFactory = damageEffectFactory;
+		alreadyOn = false;
 	}
 
 	public boolean isType(String type) {
@@ -34,8 +36,9 @@ public class Monster extends Character implements IDamager {
 
 	@Override
 	public void onCollision(Character character) {
-		if (character.isType("Player")) {
+		if (!alreadyOn) {
 			attack(character);
+			alreadyOn = true;
 		}
 	}
 
@@ -47,6 +50,10 @@ public class Monster extends Character implements IDamager {
 	@Override
 	public void attack(Character character) {
 		damageEffectFactory.applyTo(character);
+	}
+
+	public void setAlreadyOn(boolean b) {
+		alreadyOn = b;
 	}
 
 	@Override

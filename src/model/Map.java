@@ -105,6 +105,15 @@ public class Map implements IUpdate {
 		return list;
 	}
 
+	public ArrayList<Monster> getMonsters() {
+		ArrayList<Monster> list = new ArrayList<>();
+		for (Character c : characters) {
+			if (c.isType("Monster"))
+				list.add((Monster) c);
+		}
+		return list;
+	}
+
 	public int getHeigh() {
 		return grid.length;
 	}
@@ -142,16 +151,13 @@ public class Map implements IUpdate {
 		}
 
 		// Gestion des collisions
-		for (int i = 0, l = characters.size(); i < l - 1; i++) {
-			Character character1 = characters.get(i);
-			for (int j = i + 1; j < l; j++) {
-				Character character2 = characters.get(j);
-				if (character1.getPosition().x == character2.getPosition().x
-						&& character1.getPosition().y == character2.getPosition().y) {
-					character1.onCollision(character2);
-					character2.onCollision(character1);
-				}
-			}
+		Pacman player = game.getPlayer();
+		for (Monster monster : getMonsters()) {
+			if (player.getPosition().x == monster.getPosition().x
+					&& player.getPosition().y == monster.getPosition().y) {
+				monster.onCollision(player);
+			} else
+				monster.setAlreadyOn(false);
 		}
 
 		for (Character character : characters) {
@@ -159,6 +165,8 @@ public class Map implements IUpdate {
 		}
 
 		for (Character character : characters) {
+			character.clearEffect();
+
 			if (character.isToDestroy()) {
 				if (character.isType("Player")) {
 					System.out.println("You've lost !");
@@ -171,7 +179,7 @@ public class Map implements IUpdate {
 		for (Object omo : toDestroy) {
 			if (events.contains(omo))
 				events.remove(omo);
-			else if (characters.remove(omo))
+			else if (characters.contains(omo))
 				characters.remove(omo);
 		}
 

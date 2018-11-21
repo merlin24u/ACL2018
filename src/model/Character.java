@@ -8,6 +8,7 @@ public abstract class Character extends Movable implements IDestructible {
 	private int maximumHP;
 	private int defensePoints;
 	private ArrayList<Effect> effects;
+	private ArrayList<Effect> toDestroyEffects;
 
 	// a detruire
 	private boolean toDestroy;
@@ -19,6 +20,7 @@ public abstract class Character extends Movable implements IDestructible {
 		this.maximumHP = maximumHP;
 		this.defensePoints = defensePoints;
 		this.effects = new ArrayList<Effect>();
+		toDestroyEffects = new ArrayList<>();
 	}
 
 	public int getCurrentHp() {
@@ -26,17 +28,18 @@ public abstract class Character extends Movable implements IDestructible {
 	}
 
 	public boolean isAlive() {
-		return currentHP >= 0;
+		return currentHP > 0;
 	}
 
 	public void increaseHP(int healthAmount) {
 		currentHP += healthAmount;
-		if(currentHP>maximumHP)
+		if (currentHP > maximumHP)
 			currentHP = maximumHP;
 	}
+
 	public void applyDamages(int damages) {
 		this.currentHP -= damages;
-		if (currentHP <= 0) {
+		if (!isAlive()) {
 			this.toDestroy = true;
 		}
 	}
@@ -53,7 +56,8 @@ public abstract class Character extends Movable implements IDestructible {
 
 	protected void applyEffects() {
 		for (Effect e : effects) {
-			e.apply();
+			if (!e.apply())
+				toDestroyEffects.add(e);
 		}
 	}
 
@@ -63,6 +67,15 @@ public abstract class Character extends Movable implements IDestructible {
 
 	public Effect getEffect(int index) {
 		return effects.get(index);
+	}
+
+	public void clearEffect() {
+		for (Effect e : toDestroyEffects) {
+			if (effects.contains(e))
+				effects.remove(e);
+		}
+
+		toDestroyEffects.clear();
 	}
 
 	public boolean isType(String type) {
