@@ -2,12 +2,12 @@ package model;
 
 public class DamageEffectFactory extends EffectFactory {
 	private int damages;
-	
+
 	public DamageEffectFactory(int damages, int tickDuration) {
 		super(tickDuration);
 		this.damages = damages;
 	}
-	
+
 	@Override
 	public boolean applyTo(Character character) {
 		if (character instanceof Pacman) {
@@ -23,7 +23,7 @@ public class DamageEffectFactory extends EffectFactory {
 
 	@Override
 	public String getTexture() {
-		return "trap";
+		return "damage";
 	}
 
 	@Override

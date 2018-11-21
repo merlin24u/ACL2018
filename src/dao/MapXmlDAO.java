@@ -2,6 +2,7 @@ package dao;
 
 import java.awt.Point;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -30,6 +31,7 @@ public class MapXmlDAO implements MapDAO {
 		int sizeX, sizeY;
 		Point start = null, finish = null;
 		HashMap<String, Point> items = new HashMap<>();
+		ArrayList<Point> monsters = new ArrayList<>();
 
 		File file = new File(f);
 		DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -62,16 +64,6 @@ public class MapXmlDAO implements MapDAO {
 			grid = new int[sizeX][sizeY];
 		}
 
-		nList = doc.getElementsByTagName("item");
-		nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-			Element eElement = (Element) nNode;
-			Element eElement2 = (Element) eElement.getElementsByTagName("key").item(0);
-			int x = Integer.parseInt(eElement2.getElementsByTagName("posX").item(0).getTextContent());
-			int y = Integer.parseInt(eElement2.getElementsByTagName("posY").item(0).getTextContent());
-			items.put("key", new Point(x, y));
-		}
-
 		nList = doc.getElementsByTagName("data");
 		nNode = nList.item(0);
 		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
@@ -92,7 +84,31 @@ public class MapXmlDAO implements MapDAO {
 			}
 		}
 
-		return new Map(grid, start, finish, items);
+		nList = doc.getElementsByTagName("item");
+		nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			Element eElement2 = (Element) eElement.getElementsByTagName("key").item(0);
+			int x = Integer.parseInt(eElement2.getElementsByTagName("posX").item(0).getTextContent());
+			int y = Integer.parseInt(eElement2.getElementsByTagName("posY").item(0).getTextContent());
+			items.put("key", new Point(x, y));
+		}
+
+		nList = doc.getElementsByTagName("monsters");
+		nNode = nList.item(0);
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			Element eElement2 = null;
+
+			for (int i = 0; i < eElement.getElementsByTagName("monster").getLength(); i++) {
+				eElement2 = (Element) eElement.getElementsByTagName("monster").item(i);
+				int x = Integer.parseInt(eElement2.getElementsByTagName("posX").item(0).getTextContent());
+				int y = Integer.parseInt(eElement2.getElementsByTagName("posY").item(0).getTextContent());
+				monsters.add(new Point(x, y));
+			}
+		}
+
+		return new Map(grid, start, finish, items, monsters);
 	}
 
 	@Override

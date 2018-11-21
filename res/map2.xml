@@ -139,4 +139,10 @@
       <posY>8</posY>
     </key>
   </item>
+   <monsters>
+    <monster>
+      <posX>5</posX>
+      <posY>7</posY>
+    </monster>
+  </monsters>
 </map>

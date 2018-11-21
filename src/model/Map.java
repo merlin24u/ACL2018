@@ -20,7 +20,7 @@ public class Map implements IUpdate {
 		this.events = new ArrayList<OnMoveOver>();
 		toDestroy = new ArrayList<Object>();
 
-		// Creation de la map en dur.
+		// Creation de la map statique
 		grid = new int[][] {
 				{ wallCollision, wallCollision, wallCollision, wallCollision, wallCollision, wallCollision,
 						wallCollision, wallCollision, wallCollision, wallCollision },
@@ -36,11 +36,11 @@ public class Map implements IUpdate {
 		start = new Point(1, 1);
 		finish = new Point(0, 1);
 
-		TEMPORAIRE();
+		generationStatique();
 
 	}
 
-	public Map(int[][] g, Point s, Point f, HashMap<String, Point> items) {
+	public Map(int[][] g, Point s, Point f, HashMap<String, Point> items, ArrayList<Point> monsters) {
 		grid = g;
 		start = s;
 		finish = f;
@@ -49,13 +49,15 @@ public class Map implements IUpdate {
 		this.events = new ArrayList<OnMoveOver>();
 		toDestroy = new ArrayList<Object>();
 
-		GroundCollisionHandler gch = new GroundCollisionHandler(this);
-		MovableArtificialIntelligence mai = new FollowMovableArtificialIntelligence(this, gch);
-		Monster m = new Monster(new DamageEffectFactory(1, 1), mai, 5, 5, 0, gch, 1, 1, 5, new Point(3, 3));
-		this.characters.add(m);
+		for (Point p : monsters) {
+			GroundCollisionHandler gch = new GroundCollisionHandler(this);
+			MovableArtificialIntelligence mai = new FollowMovableArtificialIntelligence(this, gch);
+			Monster m = new Monster(new DamageEffectFactory(1, 1), mai, 5, 5, 0, gch, 1, 1, 5, p);
+			this.characters.add(m);
+		}
 
 		Point key = items.get("key");
-		Item item1 = new Key("K01", "Clef verte");
+		Item item1 = new Key("K01", "Exit key");
 		// Case qui donnera la clef
 		ItemEffectFactory ief = new ItemEffectFactory(item1);
 		OnMoveOver onMove1 = new SimpleOnMoveOver(this, key, true, false, false);
@@ -72,14 +74,13 @@ public class Map implements IUpdate {
 
 	}
 
-	// TODO: A supprimer
-	private void TEMPORAIRE() {
+	private void generationStatique() {
 		GroundCollisionHandler gch = new GroundCollisionHandler(this);
 		MovableArtificialIntelligence mai = new FollowMovableArtificialIntelligence(this, gch);
 		Monster m = new Monster(new DamageEffectFactory(1, 1), mai, 5, 5, 0, gch, 1, 1, 5, new Point(3, 3));
 		this.characters.add(m);
 
-		Item item1 = new Key("K01", "Clef verte");
+		Item item1 = new Key("K01", "Exit key");
 		// Case qui donnera la clef
 		ItemEffectFactory ief = new ItemEffectFactory(item1);
 		OnMoveOver onMove1 = new SimpleOnMoveOver(this, new Point(1, 2), true, false, false);
