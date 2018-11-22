@@ -92,4 +92,8 @@ public class Pacman extends Character implements IDamager {
 	public String getTexture() {
 		return "character";
 	}
+
+	public void changeMap(Map m) {
+		super.groundCollisionHandler.changeMap(m);
+	}
 }

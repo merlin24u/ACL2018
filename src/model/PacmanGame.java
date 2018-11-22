@@ -35,6 +35,7 @@ public class PacmanGame implements Game {
 			e.printStackTrace();
 			map = new Map();
 		}
+
 		player = new Pacman(map);
 		map.setGame(this);
 		map.addCharacter(player);
@@ -88,7 +89,7 @@ public class PacmanGame implements Game {
 				finished = true;
 			} else {
 				map = listMap.get(currentMap);
-				player = new Pacman(map);
+				player.changeMap(map);
 				map.setGame(this);
 				map.addCharacter(player);
 			}

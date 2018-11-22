@@ -1,9 +1,5 @@
 package model;
 
-import java.awt.Point;
-
-import engine.Game;
-
 public class GroundCollisionHandler {
 	private Map map;
 
@@ -16,10 +12,8 @@ public class GroundCollisionHandler {
 	}
 
 	public boolean canMoveOn(int x, int y) {
-		if (x >= 0 && x < map.getWidth()
-				&& y >= 0 && y < map.getHeigh()) {
-			if (map.getValue(x, y) != ECollisionType.WALL
-					.getValue()) {
+		if (x >= 0 && x < map.getWidth() && y >= 0 && y < map.getHeigh()) {
+			if (map.getValue(x, y) != ECollisionType.WALL.getValue()) {
 				return true;
 			}
 		}
@@ -27,14 +21,14 @@ public class GroundCollisionHandler {
 	}
 
 	public void handleMove(Movable movable) {
-		int nextPositionX = (int) (movable.getPosition().getX() + movable
-				.getCurrentSpeedX());
-		int nextPositionY = (int) (movable.getPosition().getY() + movable
-				.getCurrentSpeedY());
-		if(canMoveOn(nextPositionX, nextPositionY))
-			movable.translate(movable.getCurrentSpeedX(),
-					movable.getCurrentSpeedY());
+		int nextPositionX = (int) (movable.getPosition().getX() + movable.getCurrentSpeedX());
+		int nextPositionY = (int) (movable.getPosition().getY() + movable.getCurrentSpeedY());
+		if (canMoveOn(nextPositionX, nextPositionY))
+			movable.translate(movable.getCurrentSpeedX(), movable.getCurrentSpeedY());
 
 	}
-}
 
+	public void changeMap(Map m) {
+		map = m;
+	}
+}
