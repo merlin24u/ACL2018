@@ -61,7 +61,7 @@ public class MapXmlDAO implements MapDAO {
 			Element eElement = (Element) nNode;
 			sizeX = Integer.parseInt(eElement.getElementsByTagName("sizeX").item(0).getTextContent());
 			sizeY = Integer.parseInt(eElement.getElementsByTagName("sizeY").item(0).getTextContent());
-			grid = new int[sizeX][sizeY];
+			grid = new int[sizeY][sizeX];
 		}
 
 		nList = doc.getElementsByTagName("data");
