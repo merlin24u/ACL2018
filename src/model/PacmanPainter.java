@@ -3,6 +3,8 @@ package model;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+
 import engine.GamePainter;
 import texture.TextureFactory;
 
@@ -46,7 +48,7 @@ public class PacmanPainter implements GamePainter {
 	public void draw(BufferedImage im) {
 		Graphics2D crayon = (Graphics2D) im.getGraphics();
 		String texture;
-		Image img;
+		BufferedImage img;
 
 		try {
 			img = TextureFactory.getInstance().get("ground");
@@ -81,6 +83,25 @@ public class PacmanPainter implements GamePainter {
 				crayon.drawImage(img, c.getPosition().x * TILE_WIDTH, c.getPosition().y * TILE_HEIGHT, TILE_WIDTH,
 						TILE_HEIGHT, null);
 			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		if(game.getGameState().equalsTo(GameState.State.GAMEOVER)) {
+			try {
+				img = TextureFactory.getInstance().get("gameover");
+				crayon.drawImage(img, (getWidth()-img.getWidth())/2, (getHeight()-img.getHeight())/2, img.getWidth(), img.getHeight(), null);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}else if(game.getGameState().equalsTo(GameState.State.WON)) {
+			try {
+				img = TextureFactory.getInstance().get("won");
+				crayon.drawImage(img, (getWidth()-img.getWidth())/2, (getHeight()-img.getHeight())/2, img.getWidth(), img.getHeight(), null);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

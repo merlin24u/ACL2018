@@ -169,8 +169,7 @@ public class Map implements IUpdate {
 
 			if (character.isToDestroy()) {
 				if (character.isType("Player")) {
-					System.out.println("You've lost !");
-					game.setFinished();
+					game.getGameState().setState(GameState.State.GAMEOVER);
 				}
 				toDestroy.add(character);
 			}

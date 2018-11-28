@@ -20,14 +20,14 @@ public class PacmanGame implements Game {
 	private Map map;
 	private int currentMap;
 	private ArrayList<Map> listMap;
-	private static boolean finished;
+	private GameState gameState;
 
 	/**
 	 * constructeur avec fichier source pour la map
 	 * 
 	 */
 	public PacmanGame(String source) {
-		finished = false;
+		gameState = new GameState();
 
 		try {
 			map = DAOFactory.getAbstractDAOFactory(DAOFactory.XML).getMapDAO().load(source);
@@ -35,7 +35,7 @@ public class PacmanGame implements Game {
 			e.printStackTrace();
 			map = new Map();
 		}
-
+		
 		player = new Pacman(map);
 		map.setGame(this);
 		map.addCharacter(player);
@@ -45,7 +45,7 @@ public class PacmanGame implements Game {
 	 * constructeur avec plusieurs niveaux
 	 */
 	public PacmanGame(String[] maps) {
-		finished = false;
+		gameState = new GameState();
 		changeMap = false;
 		listMap = new ArrayList<>();
 		Map m;
@@ -74,34 +74,36 @@ public class PacmanGame implements Game {
 	 */
 	@Override
 	public void evolve(Cmd commande) {
-		if (commande != Cmd.IDLE) {
-			player.evolve(commande);
-			System.out.println("Pacman(" + player.getPosition().x + "," + player.getPosition().y + ")");
-			System.out.println("Ecrire commande (Z,Q,S,D)");
-		}
-		map.update();
-		Time.getInstance().update();
-
-		if (changeMap) {
-			currentMap++;
-			if (currentMap == listMap.size()) {
-				System.out.println("You've won !");
-				finished = true;
-			} else {
-				map = listMap.get(currentMap);
-				player.changeMap(map);
-				map.setGame(this);
-				map.addCharacter(player);
+			if (commande != Cmd.IDLE) {
+				player.evolve(commande);
+				System.out.println("Pacman(" + player.getPosition().x + "," + player.getPosition().y + ")");
+				System.out.println("Ecrire commande (Z,Q,S,D)");
 			}
-		}
+			map.update();
+			Time.getInstance().update();
+	
+			if (changeMap) {
+				currentMap++;
+				if (currentMap == listMap.size()) {
+					gameState.setState(GameState.State.WON);
+				} else {
+					map = listMap.get(currentMap);
+					player.changeMap(map);
+					map.setGame(this);
+					map.addCharacter(player);
+				}
+			}
 	}
 
+	public GameState getGameState() {
+		return gameState;
+	}
 	/**
 	 * verifier si le jeu est fini
 	 */
 	@Override
 	public boolean isFinished() {
-		return finished;
+		return gameState.equalsTo(GameState.State.GAMEOVER) || gameState.equalsTo(GameState.State.WON);
 	}
 
 	@Override
@@ -111,10 +113,6 @@ public class PacmanGame implements Game {
 			return true;
 		} else
 			return false;
-	}
-
-	public void setFinished() {
-		finished = true;
 	}
 
 	public int getMaxH() {
