@@ -74,6 +74,7 @@ public class FollowMovableArtificialIntelligence extends MovableArtificialIntell
 
 	public void execute(Movable movable) {
 		Pacman player = (Pacman) getNearestCharacter(movable, "Player");
+		int orientation;
 		if (player != null) {
 			Node target = getNode(player.getPosition().x, player.getPosition().y);
 			Node current = getNode(movable.getPosition().x, movable.getPosition().y);
@@ -87,6 +88,18 @@ public class FollowMovableArtificialIntelligence extends MovableArtificialIntell
 				List<AStarAlgorithm.Node> path = searchAlgo.getPath(target);
 				if (path.size() > 1) {
 					AStarAlgorithm.Node nextPosition = path.get(1);
+					if (movable.getPosition().x< nextPosition.x) {
+						orientation = 3;
+					} else if (movable.getPosition().x > nextPosition.x) {
+						orientation = 2;
+					} else if (movable.getPosition().y < nextPosition.y) {
+						orientation = 0;
+					} else {
+						orientation = 1;
+					}
+					for (Monster m : map.getMonsters()) {
+						m.setOrientation(orientation);
+					}
 					movable.move(nextPosition.x, nextPosition.y);
 				}
 			}

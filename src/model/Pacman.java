@@ -18,18 +18,22 @@ public class Pacman extends Character implements IDamager {
 
 		switch (commande) {
 		case DOWN:
+			this.setOrientation(0);
 			this.moveDown();
 			System.out.println("D");
 			break;
 		case LEFT:
+			this.setOrientation(2);
 			this.moveLeft();
 			System.out.println("L");
 			break;
 		case RIGHT:
+			this.setOrientation(3);
 			this.moveRight();
 			System.out.println("R");
 			break;
 		case UP:
+			this.setOrientation(1);
 			this.moveUp();
 			System.out.println("U");
 			break;
@@ -90,7 +94,7 @@ public class Pacman extends Character implements IDamager {
 
 	@Override
 	public String getTexture() {
-		return "character";
+		return "character"+this.getOrientation();
 	}
 
 	public void changeMap(Map m) {

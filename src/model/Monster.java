@@ -41,7 +41,7 @@ public class Monster extends Character implements IDamager {
 			alreadyOn = true;
 		}
 	}
-
+	
 	@Override
 	public int getDamages() {
 		return damageEffectFactory.getDamages();
@@ -58,6 +58,6 @@ public class Monster extends Character implements IDamager {
 
 	@Override
 	public String getTexture() {
-		return "monster";
+		return "monster"+this.getOrientation();
 	}
 }

@@ -9,6 +9,7 @@ public abstract class Character extends Movable implements IDestructible {
 	private int defensePoints;
 	private ArrayList<Effect> effects;
 	private ArrayList<Effect> toDestroyEffects;
+	private int orientation = 0;
 
 	// a detruire
 	private boolean toDestroy;
@@ -23,6 +24,14 @@ public abstract class Character extends Movable implements IDestructible {
 		toDestroyEffects = new ArrayList<>();
 	}
 
+	public void setOrientation(int o) {
+		orientation = o;
+	}
+	
+	public int getOrientation() {
+		return orientation;
+	}
+	
 	public int getCurrentHp() {
 		return this.currentHP;
 	}
