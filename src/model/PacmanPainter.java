@@ -62,11 +62,25 @@ public class PacmanPainter implements GamePainter {
 		Map map = game.getMap();
 		Point playerPosition = game.getPlayer().getPosition();
 		Rectangle camera = new Rectangle(playerPosition.x - width/2, playerPosition.y - height/2, width, height);
+		if(camera.x <0){
+			camera.x = 0;
+		}
+		if(camera.y <0) {
+			camera.y = 0;
+		}
+		int diffMaxX = (int)camera.getMaxX() - map.getWidth();
+		if(diffMaxX >0) {
+			camera.x -= diffMaxX;
+		}
+		int diffMaxY = (int)camera.getMaxY() - map.getHeigh();
+		if(diffMaxY >0) {
+			camera.y -= diffMaxY;
+		}
 		
 		for (int y = 0; y < map.getHeigh(); y++) {
 			for (int x = 0; x < map.getWidth(); x++) {
 				if(camera.contains(x,y)) {
-					collisionPainter.drawCollision(crayon, x, y, TILE_WIDTH, TILE_HEIGHT, map.getValue(x, y));
+					collisionPainter.drawCollision(crayon, x-camera.x, y-camera.y, TILE_WIDTH, TILE_HEIGHT, map.getValue(x, y));
 				}
 				
 			}
@@ -78,7 +92,7 @@ public class PacmanPainter implements GamePainter {
 				try {
 					texture = m.getEffectFactory().getTexture();
 					img = TextureFactory.getInstance().get(texture);
-					crayon.drawImage(img,position.x * TILE_WIDTH, position.y * TILE_HEIGHT, TILE_WIDTH,
+					crayon.drawImage(img,(position.x-camera.x) * TILE_WIDTH, (position.y-camera.y) * TILE_HEIGHT, TILE_WIDTH,
 							TILE_HEIGHT, null);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -92,7 +106,7 @@ public class PacmanPainter implements GamePainter {
 				try {
 					texture = c.getTexture();
 					img = TextureFactory.getInstance().get(texture);
-					crayon.drawImage(img, position.x * TILE_WIDTH, position.y * TILE_HEIGHT, TILE_WIDTH,
+					crayon.drawImage(img, (position.x-camera.x) * TILE_WIDTH, (position.y-camera.y) * TILE_HEIGHT, TILE_WIDTH,
 							TILE_HEIGHT, null);
 				} catch (Exception e) {
 					e.printStackTrace();

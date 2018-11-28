@@ -14,7 +14,7 @@ public class Main {
 
 		// creation du jeu particulier et de son afficheur
 		PacmanGame game = new PacmanGame("res/map.xml");
-		PacmanPainter painter = new PacmanPainter(game, 10, 10);
+		PacmanPainter painter = new PacmanPainter(game, 11, 11);
 		PacmanController controller = new PacmanController();
 
 		// classe qui lance le moteur de jeu generique
