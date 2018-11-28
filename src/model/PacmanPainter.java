@@ -57,7 +57,7 @@ public class PacmanPainter implements GamePainter {
 		crayon.setColor(BAR_BACKGROUND_COLOR);
 		crayon.fillRect(0,0,getWidth(), BAR_HEIGHT);
 		crayon.setColor(BAR_COLOR);
-		int healthBarWidth = getWidth()/6;
+		int healthBarWidth = getWidth()/4;
 		int healthBarHeight = BAR_HEIGHT /2;
 		int nextMarginLeft = BAR_SPACING_WIDTH;
 		crayon.drawString("Money : "+player.getMoneyAmount(), nextMarginLeft, BAR_HEIGHT-(BAR_HEIGHT-BAR_FONT.getSize())/2);
@@ -84,10 +84,11 @@ public class PacmanPainter implements GamePainter {
 		
 		crayon.setColor(Color.BLACK);
 		int nextMarginRight = BAR_SPACING_WIDTH;
-		crayon.drawRect(healthBarWidth+2, healthBarHeight+2, getWidth() - nextMarginRight-1, (BAR_HEIGHT-healthBarHeight)/2-1);
+		crayon.drawRect( getWidth() - nextMarginRight-healthBarWidth-1,(BAR_HEIGHT-healthBarHeight)/2-1,healthBarWidth+1,  healthBarHeight+1);
 		crayon.setColor(Color.RED);
-		int healthBarFillWidth = healthBarWidth*(player.getCurrentHp()/player.getMaximumHP());
-		crayon.fillRect(healthBarFillWidth>0?healthBarWidth:0, healthBarHeight, getWidth() - nextMarginRight, (BAR_HEIGHT-healthBarHeight)/2);
+		float healthBarFillWidth = healthBarWidth*(player.getCurrentHp()/player.getMaximumHP());
+		System.out.println(player.getCurrentHp()/player.getMaximumHP());
+		crayon.fillRect( getWidth() -healthBarWidth- nextMarginRight,(BAR_HEIGHT-healthBarHeight)/2,healthBarFillWidth>0?healthBarWidth:0,  healthBarHeight);
 	}
 	
 	/**
