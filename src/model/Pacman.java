@@ -7,16 +7,22 @@ public class Pacman extends Character implements IDamager {
 	private DamageEffectFactory damageEffectFactory;
 	private int moneyAmount;
 	private ArrayList<Item> items;
+	private boolean isAttacking;
+	private Map map;
 
 	public Pacman(Map m) {
 		super(5, 5, 0, new GroundCollisionHandler(m), 1, 1, 3, m.getStart());
 		this.items = new ArrayList<Item>();
 		this.damageEffectFactory = new DamageEffectFactory(1, 1);
+		this.isAttacking = false;
+		this.map = m;
 	}
 
 	public void evolve(Cmd commande) {
-
 		switch (commande) {
+		case ATTACK:
+			this.isAttacking = true;
+			break;
 		case DOWN:
 			this.moveDown();
 			System.out.println("D");
@@ -96,8 +102,27 @@ public class Pacman extends Character implements IDamager {
 	public String getTexture() {
 		return "character";
 	}
+<<<<<<< HEAD
 
 	public void changeMap(Map m) {
 		super.groundCollisionHandler.changeMap(m);
+=======
+	
+	@Override
+	public void update() {
+		super.update();
+		if(isAttacking)
+			AttackDirection();
+	}
+	
+	private void AttackDirection() {
+		Point attackPosition = new Point(position.x+direction.getDirection().x, position.y+direction.getDirection().y);
+		for(Character c: map.getCharacters()) {
+			if(attackPosition.equals(c.getPosition())) {
+				attack(c);
+			}
+		}
+		this.isAttacking = false;
+>>>>>>> origin/AjoutAttaque
 	}
 }

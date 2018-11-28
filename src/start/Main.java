@@ -2,6 +2,7 @@ package start;
 
 import model.PacmanPainter;
 import engine.GameEngineGraphical;
+import model.EDirection;
 import model.PacmanController;
 import model.PacmanGame;
 
