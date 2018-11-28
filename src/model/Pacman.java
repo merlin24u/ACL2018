@@ -1,5 +1,6 @@
 package model;
 
+import java.awt.Point;
 import java.util.ArrayList;
 import engine.Cmd;
 
@@ -102,11 +103,10 @@ public class Pacman extends Character implements IDamager {
 	public String getTexture() {
 		return "character";
 	}
-<<<<<<< HEAD
-
+	
 	public void changeMap(Map m) {
 		super.groundCollisionHandler.changeMap(m);
-=======
+	}
 	
 	@Override
 	public void update() {
@@ -123,6 +123,5 @@ public class Pacman extends Character implements IDamager {
 			}
 		}
 		this.isAttacking = false;
->>>>>>> origin/AjoutAttaque
 	}
 }

@@ -1,5 +1,6 @@
 package model;
 
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
@@ -8,6 +9,7 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+
 
 import engine.Game;
 import engine.GamePainter;
@@ -100,7 +102,7 @@ public class PacmanPainter implements GamePainter {
 	public void draw(BufferedImage im) {
 		Graphics2D crayon = (Graphics2D) im.getGraphics();
 		String texture;
-		Image img;
+		BufferedImage img;
 
 		Map map = game.getMap();
 		Point playerPosition = game.getPlayer().getPosition();
@@ -158,6 +160,30 @@ public class PacmanPainter implements GamePainter {
 		}
 
 		drawBar(im);
+		
+		if(game.getGameState().equalsTo(GameState.State.GAMEOVER)) {
+			try {
+				img = TextureFactory.getInstance().get("gameover");
+				crayon.drawImage(img, (getWidth()-img.getWidth())/2, (getHeight()-img.getHeight())/2, img.getWidth(), img.getHeight(), null);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}else if(game.getGameState().equalsTo(GameState.State.WON)) {
+			try {
+				img = TextureFactory.getInstance().get("won");
+				crayon.drawImage(img, (getWidth()-img.getWidth())/2, (getHeight()-img.getHeight())/2, img.getWidth(), img.getHeight(), null);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else if(game.getGameState().equalsTo(GameState.State.STARTING)) {
+			Font font = new Font("Verdana", Font.BOLD, 48 - Time.getInstance().getTick()%10*2);
+			crayon.setFont(font);
+			crayon.setColor(Color.RED);
+			crayon.drawString(String.valueOf(3-Time.getInstance().getTick()/10), getWidth()/2, getHeight()/2);
+		}
 	}
 
 	@Override

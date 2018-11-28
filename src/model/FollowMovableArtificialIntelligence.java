@@ -87,7 +87,7 @@ public class FollowMovableArtificialIntelligence extends MovableArtificialIntell
 				List<AStarAlgorithm.Node> path = searchAlgo.getPath(target);
 				if (path.size() > 1) {
 					AStarAlgorithm.Node nextPosition = path.get(1);
-					//movable.move(nextPosition.x, nextPosition.y);
+					movable.move(nextPosition.x, nextPosition.y);
 				}
 			}
 		}
