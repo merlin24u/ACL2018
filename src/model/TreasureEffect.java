@@ -3,8 +3,8 @@ package model;
 public class TreasureEffect extends Effect {
 	private int moneyAmount;
 
-	public TreasureEffect(Character character, int moneyAmount, int tickDuration) {
-		super(character, tickDuration);
+	public TreasureEffect(Character character, String texture, int moneyAmount, int tickDuration) {
+		super(character, texture, tickDuration);
 		this.moneyAmount = moneyAmount;
 	}
 

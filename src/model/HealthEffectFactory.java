@@ -11,7 +11,7 @@ public class HealthEffectFactory extends EffectFactory {
 	@Override
 	public boolean applyTo(Character character) {
 		if (character.isType("Player")) {
-			character.addEffect(new HealthEffect(character, healthAmount, tickDuration));
+			character.addEffect(new HealthEffect(character, getEffectTexture(), healthAmount, tickDuration));
 			return true;
 		} else
 			return false;
@@ -29,5 +29,10 @@ public class HealthEffectFactory extends EffectFactory {
 	@Override
 	public void changeTexture() {
 		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public String getEffectTexture() {
+		return "healthEffect";
 	}
 }

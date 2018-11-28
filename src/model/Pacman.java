@@ -9,7 +9,7 @@ public class Pacman extends Character implements IDamager {
 	private ArrayList<Item> items;
 
 	public Pacman(Map m) {
-		super(5, 5, 0, new GroundCollisionHandler(m), 1, 1, 3, m.getStart());
+		super(50, 50, 0, new GroundCollisionHandler(m), 1, 1, 3, m.getStart());
 		this.items = new ArrayList<Item>();
 		this.damageEffectFactory = new DamageEffectFactory(1, 1);
 	}

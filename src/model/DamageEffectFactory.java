@@ -5,13 +5,15 @@ public class DamageEffectFactory extends EffectFactory {
 
 	public DamageEffectFactory(int damages, int tickDuration) {
 		super(tickDuration);
+		System.out.println(tickDuration);
+		System.out.println(damages);
 		this.damages = damages;
 	}
 
 	@Override
 	public boolean applyTo(Character character) {
 		if (character.isType("Player")) {
-			character.addEffect(new DamageEffect(character, damages, tickDuration));
+			character.addEffect(new DamageEffect(character, getEffectTexture(), damages, tickDuration));
 			return true;
 		} else
 			return false;
@@ -29,5 +31,10 @@ public class DamageEffectFactory extends EffectFactory {
 	@Override
 	public void changeTexture() {
 		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public String getEffectTexture() {
+		return "damageEffect";
 	}
 }

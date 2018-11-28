@@ -5,8 +5,8 @@ import java.awt.Point;
 public class TeleportationEffect extends Effect {
 	private Point targetPosition;
 
-	public TeleportationEffect(Character character, Point targetPosition, int tickDuration) {
-		super(character, tickDuration);
+	public TeleportationEffect(Character character, String texture, Point targetPosition, int tickDuration) {
+		super(character, texture, tickDuration);
 		this.targetPosition = targetPosition;
 	}
 	

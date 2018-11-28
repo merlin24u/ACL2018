@@ -52,7 +52,7 @@ public class Map implements IUpdate {
 		for (Point p : monsters) {
 			GroundCollisionHandler gch = new GroundCollisionHandler(this);
 			MovableArtificialIntelligence mai = new FollowMovableArtificialIntelligence(this, gch);
-			Monster m = new Monster(new DamageEffectFactory(1, 1), mai, 5, 5, 0, gch, 1, 1, 5, p);
+			Monster m = new Monster(new DamageEffectFactory(1, 10), mai, 5, 5, 0, gch, 1, 1, 5, p);
 			this.characters.add(m);
 		}
 
@@ -77,7 +77,7 @@ public class Map implements IUpdate {
 	private void generationStatique() {
 		GroundCollisionHandler gch = new GroundCollisionHandler(this);
 		MovableArtificialIntelligence mai = new FollowMovableArtificialIntelligence(this, gch);
-		Monster m = new Monster(new DamageEffectFactory(1, 1), mai, 5, 5, 0, gch, 1, 1, 5, new Point(3, 3));
+		Monster m = new Monster(new DamageEffectFactory(1, 10), mai, 5, 5, 0, gch, 1, 1, 5, new Point(3, 3));
 		this.characters.add(m);
 
 		Item item1 = new Key("K01", "Exit key");

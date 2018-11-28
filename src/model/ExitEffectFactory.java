@@ -12,7 +12,7 @@ public class ExitEffectFactory extends EffectFactory {
 	@Override
 	public boolean applyTo(Character character) {
 		if (character.isType("Player")) {
-			character.addEffect(new ExitEffect(character, tickDuration));
+			character.addEffect(new ExitEffect(character, getEffectTexture(), tickDuration));
 			return true;
 		} else
 			return false;
@@ -26,5 +26,11 @@ public class ExitEffectFactory extends EffectFactory {
 	public void changeTexture() {
 		texture = "door";
 
+	}
+
+	@Override
+	public String getEffectTexture() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

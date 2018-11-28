@@ -2,8 +2,8 @@ package model;
 
 public class ExitEffect extends Effect {
 
-	public ExitEffect(Character character, int tickDuration) {
-		super(character, tickDuration);
+	public ExitEffect(Character character, String texture, int tickDuration) {
+		super(character, texture, tickDuration);
 	}
 
 	@Override

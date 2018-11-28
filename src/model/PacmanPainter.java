@@ -80,6 +80,18 @@ public class PacmanPainter implements GamePainter {
 				img = TextureFactory.getInstance().get(texture);
 				crayon.drawImage(img, c.getPosition().x * TILE_WIDTH, c.getPosition().y * TILE_HEIGHT, TILE_WIDTH,
 						TILE_HEIGHT, null);
+				int effectX = c.getPosition().x * TILE_WIDTH;
+				int effectY = c.getPosition().y * TILE_HEIGHT;
+				int effectWidth = TILE_WIDTH/4;
+				int effectHeight = TILE_HEIGHT/4;
+				for(int i =0; i< c.getEffectsSize();i++) {
+					texture = c.getEffect(i).getTexture();
+					if(texture != null) {
+						img = TextureFactory.getInstance().get(texture);
+						crayon.drawImage(img, effectX, effectY, effectWidth, effectHeight, null);
+						effectX+=effectWidth;
+					}
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
