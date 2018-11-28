@@ -1,5 +1,6 @@
 package model;
 
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -104,6 +105,10 @@ public class PacmanPainter implements GamePainter {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}else if(game.getGameState().equalsTo(GameState.State.STARTING)) {
+			Font font = new Font("Verdana", Font.BOLD, 48 - Time.getInstance().getTick()%10*2);
+			crayon.setFont(font);
+			crayon.drawString(String.valueOf(3-Time.getInstance().getTick()/10), getWidth()/2, getHeight()/2);
 		}
 	}
 

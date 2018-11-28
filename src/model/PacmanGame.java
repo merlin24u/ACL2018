@@ -74,25 +74,31 @@ public class PacmanGame implements Game {
 	 */
 	@Override
 	public void evolve(Cmd commande) {
-			if (commande != Cmd.IDLE) {
-				player.evolve(commande);
-				System.out.println("Pacman(" + player.getPosition().x + "," + player.getPosition().y + ")");
-				System.out.println("Ecrire commande (Z,Q,S,D)");
-			}
-			map.update();
-			Time.getInstance().update();
-	
-			if (changeMap) {
-				currentMap++;
-				if (currentMap == listMap.size()) {
-					gameState.setState(GameState.State.WON);
-				} else {
-					map = listMap.get(currentMap);
-					player.changeMap(map);
-					map.setGame(this);
-					map.addCharacter(player);
+			if(gameState.equalsTo(GameState.State.RUNNING)) {
+				if (commande != Cmd.IDLE) {
+					player.evolve(commande);
+					System.out.println("Pacman(" + player.getPosition().x + "," + player.getPosition().y + ")");
+					System.out.println("Ecrire commande (Z,Q,S,D)");
+				}
+				map.update();
+		
+				if (changeMap) {
+					currentMap++;
+					if (currentMap == listMap.size()) {
+						gameState.setState(GameState.State.WON);
+					} else {
+						map = listMap.get(currentMap);
+						player.changeMap(map);
+						map.setGame(this);
+						map.addCharacter(player);
+					}
+				}
+			}else if(gameState.equalsTo(GameState.State.STARTING)) {
+				if(Time.getInstance().getTick() > 35) {
+					gameState.setState(GameState.State.RUNNING);
 				}
 			}
+			Time.getInstance().update();
 	}
 
 	public GameState getGameState() {
