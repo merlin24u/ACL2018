@@ -25,6 +25,10 @@ public abstract class Character extends Movable implements IDestructible {
 	public int getCurrentHp() {
 		return this.currentHP;
 	}
+	
+	public int getMaximumHP() {
+		return this.maximumHP;
+	}
 
 	public boolean isAlive() {
 		return currentHP >= 0;

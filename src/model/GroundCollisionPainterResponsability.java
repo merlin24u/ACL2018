@@ -13,12 +13,14 @@ super(collisionType);
 }
 
 @Override
-public void drawCollision(Graphics2D crayon, int x, int y, int tileWidth,
-	int tileHeight, int collisionValue) {
+public void drawCollision(Graphics2D crayon, int x, int y, 
+	int drawOffsetX, int drawOffsetY,
+	int tileWidth, int tileHeight,
+	int collisionValue) {
 if (this.isResponsible(collisionValue)) {
 	try {
 		Image img = TextureFactory.getInstance().get("ground");
-		crayon.drawImage(img, x * tileWidth, y * tileHeight, tileWidth,
+		crayon.drawImage(img, drawOffsetX+x * tileWidth, drawOffsetY+y * tileHeight, tileWidth,
 				tileHeight, null);
 	} catch (Exception e) {
 		e.printStackTrace();

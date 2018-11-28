@@ -64,6 +64,10 @@ public class Pacman extends Character implements IDamager {
 		}
 		return null;
 	}
+	
+	public ArrayList<Item> getItems(){
+		return items;
+	}
 
 	public void removeItem(Item item) {
 		items.remove(item);

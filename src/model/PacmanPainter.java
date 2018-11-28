@@ -1,10 +1,13 @@
 package model;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 import engine.Game;
 import engine.GamePainter;
@@ -25,7 +28,11 @@ public class PacmanPainter implements GamePainter {
 	protected int height;
 	protected static int TILE_WIDTH = 50;
 	protected static int TILE_HEIGHT = 50;
-
+	protected static Color BAR_COLOR =Color.BLACK;
+	protected static int BAR_HEIGHT =30;
+	protected static int BAR_SPACING_WIDTH = 18;
+	protected static Color BAR_BACKGROUND_COLOR = Color.GREEN;
+	protected static Font BAR_FONT = new Font("Verdana",Font.PLAIN,18);
 	private PacmanGame game;
 	private CollisionPainterResponsability collisionPainter;
 
@@ -43,6 +50,46 @@ public class PacmanPainter implements GamePainter {
 		GroundCollisionPainterResponsability groundCollisionPainter = new GroundCollisionPainterResponsability(ECollisionType.WALL);
 	}
 
+	private void drawBar(BufferedImage im) { 
+		Pacman player = game.getPlayer();
+		Graphics2D crayon = (Graphics2D) im.getGraphics();
+		crayon.setFont(BAR_FONT);
+		crayon.setColor(BAR_BACKGROUND_COLOR);
+		crayon.fillRect(0,0,getWidth(), BAR_HEIGHT);
+		crayon.setColor(BAR_COLOR);
+		int healthBarWidth = getWidth()/6;
+		int healthBarHeight = BAR_HEIGHT /2;
+		int nextMarginLeft = BAR_SPACING_WIDTH;
+		crayon.drawString("Money : "+player.getMoneyAmount(), nextMarginLeft, BAR_HEIGHT-(BAR_HEIGHT-BAR_FONT.getSize())/2);
+		nextMarginLeft += crayon.getFontMetrics().stringWidth("Money : "+player.getMoneyAmount()) + BAR_SPACING_WIDTH;
+		crayon.drawString("Inventory : ", nextMarginLeft, BAR_HEIGHT-(BAR_HEIGHT-BAR_FONT.getSize())/2);
+		nextMarginLeft += crayon.getFontMetrics().stringWidth("Inventory : ");
+		for(Item i : player.getItems()) {
+			if(i.getTexture()!=null) {
+				try {
+					BufferedImage img = (BufferedImage) TextureFactory.getInstance().get(i.getTexture());
+					int itemHeight = (int)(BAR_HEIGHT*0.75);
+					int itemMarginTop = (BAR_HEIGHT - itemHeight)/2;
+					int itemScale = img.getHeight()/itemHeight;
+					int itemWidth = img.getWidth()/itemScale;
+					crayon.drawImage(img, nextMarginLeft, itemMarginTop, itemWidth, itemHeight, null);
+					nextMarginLeft += itemWidth+BAR_SPACING_WIDTH;
+					
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		crayon.setColor(Color.BLACK);
+		int nextMarginRight = BAR_SPACING_WIDTH;
+		crayon.drawRect(healthBarWidth+2, healthBarHeight+2, getWidth() - nextMarginRight-1, (BAR_HEIGHT-healthBarHeight)/2-1);
+		crayon.setColor(Color.RED);
+		int healthBarFillWidth = healthBarWidth*(player.getCurrentHp()/player.getMaximumHP());
+		crayon.fillRect(healthBarFillWidth>0?healthBarWidth:0, healthBarHeight, getWidth() - nextMarginRight, (BAR_HEIGHT-healthBarHeight)/2);
+	}
+	
 	/**
 	 * methode redefinie de Afficheur retourne une image du jeu
 	 */
@@ -80,7 +127,7 @@ public class PacmanPainter implements GamePainter {
 		for (int y = 0; y < map.getHeigh(); y++) {
 			for (int x = 0; x < map.getWidth(); x++) {
 				if(camera.contains(x,y)) {
-					collisionPainter.drawCollision(crayon, x-camera.x, y-camera.y, TILE_WIDTH, TILE_HEIGHT, map.getValue(x, y));
+					collisionPainter.drawCollision(crayon, x-camera.x, y-camera.y,0,BAR_HEIGHT, TILE_WIDTH, TILE_HEIGHT, map.getValue(x, y));
 				}
 				
 			}
@@ -92,7 +139,7 @@ public class PacmanPainter implements GamePainter {
 				try {
 					texture = m.getEffectFactory().getTexture();
 					img = TextureFactory.getInstance().get(texture);
-					crayon.drawImage(img,(position.x-camera.x) * TILE_WIDTH, (position.y-camera.y) * TILE_HEIGHT, TILE_WIDTH,
+					crayon.drawImage(img,(position.x-camera.x) * TILE_WIDTH, (position.y-camera.y) * TILE_HEIGHT+BAR_HEIGHT, TILE_WIDTH,
 							TILE_HEIGHT, null);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -106,14 +153,14 @@ public class PacmanPainter implements GamePainter {
 				try {
 					texture = c.getTexture();
 					img = TextureFactory.getInstance().get(texture);
-					crayon.drawImage(img, (position.x-camera.x) * TILE_WIDTH, (position.y-camera.y) * TILE_HEIGHT, TILE_WIDTH,
+					crayon.drawImage(img, (position.x-camera.x) * TILE_WIDTH, (position.y-camera.y) * TILE_HEIGHT+BAR_HEIGHT, TILE_WIDTH,
 							TILE_HEIGHT, null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		}
-
+		drawBar(im);
 	}
 
 	@Override
@@ -123,7 +170,7 @@ public class PacmanPainter implements GamePainter {
 
 	@Override
 	public int getHeight() {
-		return height * TILE_HEIGHT;
+		return height * TILE_HEIGHT+BAR_HEIGHT;
 	}
 
 }
