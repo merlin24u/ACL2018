@@ -3,8 +3,8 @@ package model;
 public class DamageEffect extends Effect implements IDamager{
 	private int damages;
 	
-	public DamageEffect(Character character, int damages, int tickDuration) {
-		super(character, tickDuration);
+	public DamageEffect(Character character, String texture, int damages, int tickDuration) {
+		super(character, texture, tickDuration);
 		this.damages = damages;
 	}
 

@@ -16,7 +16,7 @@ public class TeleportationEffectFactory extends EffectFactory {
 	@Override
 	public boolean applyTo(Character character) {
 		if (character instanceof Pacman) {
-			character.addEffect(new TeleportationEffect(character, targetPosition, tickDuration));
+			character.addEffect(new TeleportationEffect(character, getEffectTexture(), targetPosition, tickDuration));
 			return true;
 		} else
 			return false;
@@ -30,5 +30,10 @@ public class TeleportationEffectFactory extends EffectFactory {
 	@Override
 	public void changeTexture() {
 		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public String getEffectTexture() {
+		return "teleportationEffect";
 	}
 }

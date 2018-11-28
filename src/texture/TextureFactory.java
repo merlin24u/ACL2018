@@ -8,7 +8,8 @@ import javax.imageio.ImageIO;
 
 public class TextureFactory {
 
-	private BufferedImage wall, door, door_closed, key, treasure, character, monster, ground, won, gameover;
+	private BufferedImage wall, door, door_closed, key, treasure, character, monster, ground, damageEffect, healthEffect, treasureEffect, teleportationEffect, won, gameover;
+
 	private static TextureFactory instance;
 
 	private TextureFactory() throws IOException {
@@ -22,6 +23,10 @@ public class TextureFactory {
 		ground = ImageIO.read(new File("res/ground.png"));
 		won = ImageIO.read(new File("res/bravo.png"));
 		gameover = ImageIO.read(new File("res/perdu.png"));
+		damageEffect = ImageIO.read(new File("res/damageEffect.png"));
+		healthEffect = ImageIO.read(new File("res/healthEffect.png"));
+		treasureEffect = ImageIO.read(new File("res/treasureEffect.png"));
+		teleportationEffect = ImageIO.read(new File("res/teleportationEffect.png"));
 	}
 
 	public static TextureFactory getInstance() throws IOException {
@@ -53,6 +58,14 @@ public class TextureFactory {
 			return won;
 		case "gameover":
 			return gameover;
+		case "damageEffect":
+			return damageEffect;
+		case "healthEffect":
+			return healthEffect;
+		case "treasureEffect":
+			return treasureEffect;
+		case "teleportationEffect":
+			return teleportationEffect;
 		default:
 			throw new Exception("texture non implementee");
 		}

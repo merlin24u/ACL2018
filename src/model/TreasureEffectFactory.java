@@ -11,7 +11,7 @@ public class TreasureEffectFactory extends EffectFactory {
 	@Override
 	public boolean applyTo(Character character) {
 		if (character.isType("Player")) {
-			character.addEffect(new TreasureEffect(character, moneyAmount, tickDuration));
+			character.addEffect(new TreasureEffect(character, getEffectTexture(), moneyAmount, tickDuration));
 			return true;
 		} else
 			return false;
@@ -29,5 +29,10 @@ public class TreasureEffectFactory extends EffectFactory {
 	@Override
 	public void changeTexture() {
 		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public String getEffectTexture() {
+		return "treasureEffect";
 	}
 }

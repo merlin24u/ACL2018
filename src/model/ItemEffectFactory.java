@@ -31,4 +31,10 @@ public class ItemEffectFactory extends EffectFactory {
 	public void changeTexture() {
 		// TODO Auto-generated method stub	
 	}
+
+	@Override
+	public String getEffectTexture() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

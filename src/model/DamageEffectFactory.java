@@ -10,7 +10,7 @@ public class DamageEffectFactory extends EffectFactory {
 
 	@Override
 	public boolean applyTo(Character character) {
-		character.addEffect(new DamageEffect(character, damages, tickDuration));
+		character.addEffect(new DamageEffect(character, getEffectTexture(), damages, tickDuration));
 		return true;
 	}
 
@@ -26,5 +26,10 @@ public class DamageEffectFactory extends EffectFactory {
 	@Override
 	public void changeTexture() {
 		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public String getEffectTexture() {
+		return "damageEffect";
 	}
 }

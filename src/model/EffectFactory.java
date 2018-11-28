@@ -3,6 +3,7 @@ package model;
 public abstract class EffectFactory {
 	protected int tickDuration;
 	protected String Texture;
+	protected String EffectTexture;
 
 	public EffectFactory(int tickDuration) {
 		super();
@@ -16,6 +17,8 @@ public abstract class EffectFactory {
 	public abstract boolean applyTo(Character character);
 
 	public abstract String getTexture();
+	
+	public abstract String getEffectTexture();
 
 	public abstract void changeTexture();
 }

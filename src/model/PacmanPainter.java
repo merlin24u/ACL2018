@@ -91,7 +91,6 @@ public class PacmanPainter implements GamePainter {
 		crayon.drawRect( getWidth() - nextMarginRight-healthBarWidth-1,(BAR_HEIGHT-healthBarHeight)/2-1,healthBarWidth+1,  healthBarHeight+1);
 		crayon.setColor(Color.RED);
 		float healthBarFillWidth = healthBarWidth*(player.getCurrentHp()/player.getMaximumHP());
-		System.out.println(player.getCurrentHp()/player.getMaximumHP());
 		crayon.fillRect( getWidth() -healthBarWidth- nextMarginRight,(BAR_HEIGHT-healthBarHeight)/2,healthBarFillWidth>0?healthBarWidth:0,  healthBarHeight);
 	}
 	
@@ -151,8 +150,23 @@ public class PacmanPainter implements GamePainter {
 				try {
 					texture = c.getTexture();
 					img = TextureFactory.getInstance().get(texture);
-					crayon.drawImage(img, (position.x-camera.x) * TILE_WIDTH, (position.y-camera.y) * TILE_HEIGHT+BAR_HEIGHT, TILE_WIDTH,
-							TILE_HEIGHT, null);
+					int cPositionX = (position.x-camera.x) * TILE_WIDTH;
+					int cPositionY = (position.y-camera.y) * TILE_HEIGHT+BAR_HEIGHT;
+					crayon.drawImage(img, cPositionX, cPositionY, 
+							TILE_WIDTH, TILE_HEIGHT, null);
+					
+					int effectX = cPositionX;
+					int effectY = cPositionY;
+					int effectWidth = TILE_WIDTH/4;
+					int effectHeight = TILE_HEIGHT/4;
+					for(int i =0; i< c.getEffectsSize();i++) {
+						texture = c.getEffect(i).getTexture();
+						if(texture != null) {
+							img = TextureFactory.getInstance().get(texture);
+							crayon.drawImage(img, effectX, effectY, effectWidth, effectHeight, null);
+							effectX+=effectWidth;
+						}
+					}
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
