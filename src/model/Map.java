@@ -50,9 +50,8 @@ public class Map implements IUpdate {
 		toDestroy = new ArrayList<Object>();
 
 		for (Point p : monsters) {
-			GroundCollisionHandler gch = new GroundCollisionHandler(this);
-			MovableArtificialIntelligence mai = new FollowMovableArtificialIntelligence(this, gch);
-			Monster m = new Monster(new DamageEffectFactory(1, 10), mai, 5, 5, 0, gch, 1, 1, 5, p);
+			Monster m = MonsterFactory.getInstance().createMonster("warrior", this);
+			m.setPosition(p.x, p.y);
 			this.characters.add(m);
 		}
 
@@ -75,9 +74,8 @@ public class Map implements IUpdate {
 	}
 
 	private void generationStatique() {
-		GroundCollisionHandler gch = new GroundCollisionHandler(this);
-		MovableArtificialIntelligence mai = new FollowMovableArtificialIntelligence(this, gch);
-		Monster m = new Monster(new DamageEffectFactory(1, 10), mai, 5, 5, 0, gch, 1, 1, 5, new Point(3, 3));
+		Monster m = MonsterFactory.getInstance().createMonster("warrior", this);
+		m.setPosition(2, 2);
 		this.characters.add(m);
 
 		Item item1 = new Key("K01", "Exit key");

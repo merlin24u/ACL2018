@@ -8,7 +8,7 @@ import java.util.HashSet;
 
 public class GroundCollisionHandlerFactory {
 		private ArrayList<GroundCollisionHandler> groundCollisionHandlers;
-		private static GroundCollisionHandlerFactory instance;
+		private static GroundCollisionHandlerFactory instance= null;
 
 		public GroundCollisionHandlerFactory() {
 			groundCollisionHandlers = new ArrayList<GroundCollisionHandler>();
