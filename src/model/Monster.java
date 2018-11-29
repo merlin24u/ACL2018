@@ -6,15 +6,17 @@ public class Monster extends Character implements IDamager {
 	private DamageEffectFactory damageEffectFactory;
 	private MovableArtificialIntelligence movableArtificialIntelligence;
 	private boolean alreadyOn;
+	private String texture;
 
 	public Monster(DamageEffectFactory damageEffectFactory, MovableArtificialIntelligence movableArtificialIntelligence,
 			int currentHP, int maximumHP, int defensePoints, GroundCollisionHandler groundCollisionHandler,
-			int movingSpeedXMax, int movingSpeedYMax, int movingTick, Point position) {
+			int movingSpeedXMax, int movingSpeedYMax, int movingTick, Point position, String texture) {
 		super(currentHP, maximumHP, defensePoints, groundCollisionHandler, movingSpeedXMax, movingSpeedYMax, movingTick,
 				position);
 		this.movableArtificialIntelligence = movableArtificialIntelligence;
 		this.damageEffectFactory = damageEffectFactory;
 		alreadyOn = false;
+		this.texture = texture;
 	}
 
 	public boolean isType(String type) {
@@ -31,6 +33,7 @@ public class Monster extends Character implements IDamager {
 			movableArtificialIntelligence.execute(this);
 		}
 		groundCollisionHandler.handleMove(this);
+		updateDirection();
 		resetCurrentSpeed();
 	}
 
@@ -58,6 +61,6 @@ public class Monster extends Character implements IDamager {
 
 	@Override
 	public String getTexture() {
-		return "monster";
+		return texture;
 	}
 }
