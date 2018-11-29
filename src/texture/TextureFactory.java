@@ -22,28 +22,28 @@ public class TextureFactory {
 				ImageIO.read(new File("res/CharSouth.png")),
 				ImageIO.read(new File("res/CharEst.png")),
 				ImageIO.read(new File("res/CharWest.png")),
-				ImageIO.read(new File("res/CharNorth.png")),
-				ImageIO.read(new File("res/CharSouth.png")),
-				ImageIO.read(new File("res/CharEst.png")),
-				ImageIO.read(new File("res/CharWest.png"))
+				ImageIO.read(new File("res/AttackNorth.png")),
+				ImageIO.read(new File("res/AttackSouth.png")),
+				ImageIO.read(new File("res/AttackEast.png")),
+				ImageIO.read(new File("res/AttackWest.png"))
 		};
 		monster = new BufferedImage[] {ImageIO.read(new File("res/monsterNorth.png")),
 				ImageIO.read(new File("res/monsterSouth.png")),
 				ImageIO.read(new File("res/monsterEst.png")),
 				ImageIO.read(new File("res/monsterWest.png")),
-				ImageIO.read(new File("res/monsterNorth.png")),
-				ImageIO.read(new File("res/monsterSouth.png")),
-				ImageIO.read(new File("res/monsterEst.png")),
-				ImageIO.read(new File("res/monsterWest.png"))
+				ImageIO.read(new File("res/MAttackNorth.png")),
+				ImageIO.read(new File("res/MAttackSouth.png")),
+				ImageIO.read(new File("res/MAttackEast.png")),
+				ImageIO.read(new File("res/MAttackWest.png"))
 		};
 		ghost = new BufferedImage[] {ImageIO.read(new File("res/squeletonNorth.png")),
 				ImageIO.read(new File("res/squeletonSouth.png")),
 				ImageIO.read(new File("res/squeletonEst.png")),
 				ImageIO.read(new File("res/squeletonWest.png")),
-				ImageIO.read(new File("res/squeletonNorth.png")),
-				ImageIO.read(new File("res/squeletonSouth.png")),
-				ImageIO.read(new File("res/squeletonEst.png")),
-				ImageIO.read(new File("res/squeletonWest.png"))
+				ImageIO.read(new File("res/SAttackNorth.png")),
+				ImageIO.read(new File("res/SAttackSouth.png")),
+				ImageIO.read(new File("res/SAttackEast.png")),
+				ImageIO.read(new File("res/SAttackWest.png"))
 		};
 		ground = ImageIO.read(new File("res/ground.png"));
 		won = ImageIO.read(new File("res/bravo.png"));
@@ -64,6 +64,8 @@ public class TextureFactory {
 	public BufferedImage get(String texture, int state) {
 		switch(texture) {
 			case "character":
+				if(state>=4)
+				System.out.println(state);
 				return character[state];
 			case "monster":
 				return monster[state];

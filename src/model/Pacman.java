@@ -9,6 +9,7 @@ public class Pacman extends Character implements IDamager {
 	private int moneyAmount;
 	private ArrayList<Item> items;
 	private boolean isAttacking;
+	private boolean willAttack;
 	private Map map;
 
 	public Pacman(Map m) {
@@ -22,7 +23,7 @@ public class Pacman extends Character implements IDamager {
 	public void evolve(Cmd commande) {
 		switch (commande) {
 		case ATTACK:
-			this.isAttacking = true;
+			this.willAttack = true;
 			break;
 		case DOWN:
 			this.moveDown();
@@ -111,8 +112,10 @@ public class Pacman extends Character implements IDamager {
 	@Override
 	public void update() {
 		super.update();
-		if(isAttacking)
+		isAttacking = false;
+		if(willAttack)
 			AttackDirection();
+		willAttack = false;
 	}
 	
 	public boolean isAttacking() {
@@ -126,6 +129,6 @@ public class Pacman extends Character implements IDamager {
 				attack(c);
 			}
 		}
-		this.isAttacking = false;
+		this.isAttacking = true;
 	}
 }
