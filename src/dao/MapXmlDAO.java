@@ -4,21 +4,42 @@ import java.awt.Point;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import model.ECollisionType;
 import model.Map;
+
 import org.w3c.dom.Element;
 
 public class MapXmlDAO implements MapDAO {
 
 	private static MapXmlDAO instance = null;
+
+	public class TempMonster {
+		private int x, y;
+		private String type;
+
+		public TempMonster(int x, int y, String t) {
+			this.x = x;
+			this.y = y;
+			type = t;
+		}
+
+		public int getX() {
+			return x;
+		}
+
+		public int getY() {
+			return y;
+		}
+
+		public String getType() {
+			return type;
+		}
+	}
 
 	private MapXmlDAO() {
 	}
@@ -31,18 +52,21 @@ public class MapXmlDAO implements MapDAO {
 		int sizeX, sizeY;
 		Point start = null, finish = null;
 		HashMap<String, Point> items = new HashMap<>();
-		ArrayList<Point> monsters = new ArrayList<>();
+		ArrayList<TempMonster> monsters = new ArrayList<>();
 
 		File file = new File(f);
-		DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+		DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance()
+				.newDocumentBuilder();
 		Document doc = dBuilder.parse(file);
 
 		NodeList nList = doc.getElementsByTagName("start");
 		Node nNode = nList.item(0);
 		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 			Element eElement = (Element) nNode;
-			int x = Integer.parseInt(eElement.getElementsByTagName("posX").item(0).getTextContent());
-			int y = Integer.parseInt(eElement.getElementsByTagName("posY").item(0).getTextContent());
+			int x = Integer.parseInt(eElement.getElementsByTagName("posX")
+					.item(0).getTextContent());
+			int y = Integer.parseInt(eElement.getElementsByTagName("posY")
+					.item(0).getTextContent());
 			start = new Point(x, y);
 		}
 
@@ -50,8 +74,10 @@ public class MapXmlDAO implements MapDAO {
 		nNode = nList.item(0);
 		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 			Element eElement = (Element) nNode;
-			int x = Integer.parseInt(eElement.getElementsByTagName("posX").item(0).getTextContent());
-			int y = Integer.parseInt(eElement.getElementsByTagName("posY").item(0).getTextContent());
+			int x = Integer.parseInt(eElement.getElementsByTagName("posX")
+					.item(0).getTextContent());
+			int y = Integer.parseInt(eElement.getElementsByTagName("posY")
+					.item(0).getTextContent());
 			finish = new Point(x, y);
 		}
 
@@ -59,8 +85,10 @@ public class MapXmlDAO implements MapDAO {
 		nNode = nList.item(0);
 		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 			Element eElement = (Element) nNode;
-			sizeX = Integer.parseInt(eElement.getElementsByTagName("sizeX").item(0).getTextContent());
-			sizeY = Integer.parseInt(eElement.getElementsByTagName("sizeY").item(0).getTextContent());
+			sizeX = Integer.parseInt(eElement.getElementsByTagName("sizeX")
+					.item(0).getTextContent());
+			sizeY = Integer.parseInt(eElement.getElementsByTagName("sizeY")
+					.item(0).getTextContent());
 			grid = new int[sizeY][sizeX];
 		}
 
@@ -69,10 +97,14 @@ public class MapXmlDAO implements MapDAO {
 		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 			Element eElement = (Element) nNode;
 			Element eElement2 = null;
-			for (int i = 0; i < eElement.getElementsByTagName("tab").getLength(); i++) {
-				eElement2 = (Element) eElement.getElementsByTagName("tab").item(i);
-				for (int j = 0; j < eElement2.getElementsByTagName("tab2D").getLength(); j++) {
-					switch (eElement2.getElementsByTagName("tab2D").item(j).getTextContent()) {
+			for (int i = 0; i < eElement.getElementsByTagName("tab")
+					.getLength(); i++) {
+				eElement2 = (Element) eElement.getElementsByTagName("tab")
+						.item(i);
+				for (int j = 0; j < eElement2.getElementsByTagName("tab2D")
+						.getLength(); j++) {
+					switch (eElement2.getElementsByTagName("tab2D").item(j)
+							.getTextContent()) {
 					case "wallCollision":
 						grid[i][j] = wallCollision;
 						break;
@@ -88,9 +120,12 @@ public class MapXmlDAO implements MapDAO {
 		nNode = nList.item(0);
 		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 			Element eElement = (Element) nNode;
-			Element eElement2 = (Element) eElement.getElementsByTagName("key").item(0);
-			int x = Integer.parseInt(eElement2.getElementsByTagName("posX").item(0).getTextContent());
-			int y = Integer.parseInt(eElement2.getElementsByTagName("posY").item(0).getTextContent());
+			Element eElement2 = (Element) eElement.getElementsByTagName("key")
+					.item(0);
+			int x = Integer.parseInt(eElement2.getElementsByTagName("posX")
+					.item(0).getTextContent());
+			int y = Integer.parseInt(eElement2.getElementsByTagName("posY")
+					.item(0).getTextContent());
 			items.put("key", new Point(x, y));
 		}
 
@@ -100,11 +135,17 @@ public class MapXmlDAO implements MapDAO {
 			Element eElement = (Element) nNode;
 			Element eElement2 = null;
 
-			for (int i = 0; i < eElement.getElementsByTagName("monster").getLength(); i++) {
-				eElement2 = (Element) eElement.getElementsByTagName("monster").item(i);
-				int x = Integer.parseInt(eElement2.getElementsByTagName("posX").item(0).getTextContent());
-				int y = Integer.parseInt(eElement2.getElementsByTagName("posY").item(0).getTextContent());
-				monsters.add(new Point(x, y));
+			for (int i = 0; i < eElement.getElementsByTagName("monster")
+					.getLength(); i++) {
+				eElement2 = (Element) eElement.getElementsByTagName("monster")
+						.item(i);
+				int x = Integer.parseInt(eElement2.getElementsByTagName("posX")
+						.item(0).getTextContent());
+				int y = Integer.parseInt(eElement2.getElementsByTagName("posY")
+						.item(0).getTextContent());
+				String type = eElement2.getElementsByTagName("type").item(0)
+						.getTextContent();
+				monsters.add(new TempMonster(x, y, type));
 			}
 		}
 
