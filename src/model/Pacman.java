@@ -115,6 +115,10 @@ public class Pacman extends Character implements IDamager {
 			AttackDirection();
 	}
 	
+	public boolean isAttacking() {
+		return isAttacking;
+	}
+	
 	private void AttackDirection() {
 		Point attackPosition = new Point(position.x+direction.getDirection().x, position.y+direction.getDirection().y);
 		for(Character c: map.getCharacters()) {

@@ -7,6 +7,7 @@ public class Monster extends Character implements IDamager {
 	private MovableArtificialIntelligence movableArtificialIntelligence;
 	private boolean alreadyOn;
 	private String texture;
+	private boolean isAttacking;
 
 	public Monster(DamageEffectFactory damageEffectFactory, MovableArtificialIntelligence movableArtificialIntelligence,
 			int currentHP, int maximumHP, int defensePoints, GroundCollisionHandler groundCollisionHandler,
@@ -15,8 +16,9 @@ public class Monster extends Character implements IDamager {
 				position);
 		this.movableArtificialIntelligence = movableArtificialIntelligence;
 		this.damageEffectFactory = damageEffectFactory;
-		alreadyOn = false;
+		this.alreadyOn = false;
 		this.texture = texture;
+		this.isAttacking = false;
 	}
 
 	public boolean isType(String type) {
@@ -52,11 +54,17 @@ public class Monster extends Character implements IDamager {
 
 	@Override
 	public void attack(Character character) {
+		isAttacking = true;
 		damageEffectFactory.applyTo(character);
 	}
 
 	public void setAlreadyOn(boolean b) {
 		alreadyOn = b;
+		isAttacking = false;
+	}
+	
+	public boolean isAttacking() {
+		return isAttacking;
 	}
 
 	@Override

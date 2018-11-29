@@ -21,14 +21,26 @@ public class TextureFactory {
 		character =  new BufferedImage[] {ImageIO.read(new File("res/CharNorth.png")),
 				ImageIO.read(new File("res/CharSouth.png")),
 				ImageIO.read(new File("res/CharEst.png")),
+				ImageIO.read(new File("res/CharWest.png")),
+				ImageIO.read(new File("res/CharNorth.png")),
+				ImageIO.read(new File("res/CharSouth.png")),
+				ImageIO.read(new File("res/CharEst.png")),
 				ImageIO.read(new File("res/CharWest.png"))
 		};
 		monster = new BufferedImage[] {ImageIO.read(new File("res/monsterNorth.png")),
 				ImageIO.read(new File("res/monsterSouth.png")),
 				ImageIO.read(new File("res/monsterEst.png")),
+				ImageIO.read(new File("res/monsterWest.png")),
+				ImageIO.read(new File("res/monsterNorth.png")),
+				ImageIO.read(new File("res/monsterSouth.png")),
+				ImageIO.read(new File("res/monsterEst.png")),
 				ImageIO.read(new File("res/monsterWest.png"))
 		};
 		ghost = new BufferedImage[] {ImageIO.read(new File("res/squeletonNorth.png")),
+				ImageIO.read(new File("res/squeletonSouth.png")),
+				ImageIO.read(new File("res/squeletonEst.png")),
+				ImageIO.read(new File("res/squeletonWest.png")),
+				ImageIO.read(new File("res/squeletonNorth.png")),
 				ImageIO.read(new File("res/squeletonSouth.png")),
 				ImageIO.read(new File("res/squeletonEst.png")),
 				ImageIO.read(new File("res/squeletonWest.png"))
