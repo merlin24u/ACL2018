@@ -11,6 +11,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import model.ECollisionType;
 import model.Map;
+import texture.ResourceLoader;
 
 import org.w3c.dom.Element;
 
@@ -55,19 +56,15 @@ public class MapXmlDAO implements MapDAO {
 		ArrayList<TmpType> monsters = new ArrayList<>();
 		ArrayList<TmpType> effects = new ArrayList<>();
 
-		File file = new File(f);
-		DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance()
-				.newDocumentBuilder();
-		Document doc = dBuilder.parse(file);
+		DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+		Document doc = dBuilder.parse(ResourceLoader.load(f));
 
 		NodeList nList = doc.getElementsByTagName("start");
 		Node nNode = nList.item(0);
 		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 			Element eElement = (Element) nNode;
-			int x = Integer.parseInt(eElement.getElementsByTagName("posX")
-					.item(0).getTextContent());
-			int y = Integer.parseInt(eElement.getElementsByTagName("posY")
-					.item(0).getTextContent());
+			int x = Integer.parseInt(eElement.getElementsByTagName("posX").item(0).getTextContent());
+			int y = Integer.parseInt(eElement.getElementsByTagName("posY").item(0).getTextContent());
 			start = new Point(x, y);
 		}
 
@@ -75,10 +72,8 @@ public class MapXmlDAO implements MapDAO {
 		nNode = nList.item(0);
 		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 			Element eElement = (Element) nNode;
-			int x = Integer.parseInt(eElement.getElementsByTagName("posX")
-					.item(0).getTextContent());
-			int y = Integer.parseInt(eElement.getElementsByTagName("posY")
-					.item(0).getTextContent());
+			int x = Integer.parseInt(eElement.getElementsByTagName("posX").item(0).getTextContent());
+			int y = Integer.parseInt(eElement.getElementsByTagName("posY").item(0).getTextContent());
 			finish = new Point(x, y);
 		}
 
@@ -86,10 +81,8 @@ public class MapXmlDAO implements MapDAO {
 		nNode = nList.item(0);
 		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 			Element eElement = (Element) nNode;
-			sizeX = Integer.parseInt(eElement.getElementsByTagName("sizeX")
-					.item(0).getTextContent());
-			sizeY = Integer.parseInt(eElement.getElementsByTagName("sizeY")
-					.item(0).getTextContent());
+			sizeX = Integer.parseInt(eElement.getElementsByTagName("sizeX").item(0).getTextContent());
+			sizeY = Integer.parseInt(eElement.getElementsByTagName("sizeY").item(0).getTextContent());
 			grid = new int[sizeY][sizeX];
 		}
 
@@ -98,14 +91,10 @@ public class MapXmlDAO implements MapDAO {
 		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 			Element eElement = (Element) nNode;
 			Element eElement2 = null;
-			for (int i = 0; i < eElement.getElementsByTagName("tab")
-					.getLength(); i++) {
-				eElement2 = (Element) eElement.getElementsByTagName("tab")
-						.item(i);
-				for (int j = 0; j < eElement2.getElementsByTagName("tab2D")
-						.getLength(); j++) {
-					switch (eElement2.getElementsByTagName("tab2D").item(j)
-							.getTextContent()) {
+			for (int i = 0; i < eElement.getElementsByTagName("tab").getLength(); i++) {
+				eElement2 = (Element) eElement.getElementsByTagName("tab").item(i);
+				for (int j = 0; j < eElement2.getElementsByTagName("tab2D").getLength(); j++) {
+					switch (eElement2.getElementsByTagName("tab2D").item(j).getTextContent()) {
 					case "wallCollision":
 						grid[i][j] = wallCollision;
 						break;
@@ -123,16 +112,11 @@ public class MapXmlDAO implements MapDAO {
 			Element eElement = (Element) nNode;
 			Element eElement2 = null;
 
-			for (int i = 0; i < eElement.getElementsByTagName("item")
-					.getLength(); i++) {
-				eElement2 = (Element) eElement.getElementsByTagName("item")
-						.item(i);
-				int x = Integer.parseInt(eElement2.getElementsByTagName("posX")
-						.item(0).getTextContent());
-				int y = Integer.parseInt(eElement2.getElementsByTagName("posY")
-						.item(0).getTextContent());
-				String type = eElement2.getElementsByTagName("type").item(0)
-						.getTextContent();
+			for (int i = 0; i < eElement.getElementsByTagName("item").getLength(); i++) {
+				eElement2 = (Element) eElement.getElementsByTagName("item").item(i);
+				int x = Integer.parseInt(eElement2.getElementsByTagName("posX").item(0).getTextContent());
+				int y = Integer.parseInt(eElement2.getElementsByTagName("posY").item(0).getTextContent());
+				String type = eElement2.getElementsByTagName("type").item(0).getTextContent();
 				items.add(new TmpType(x, y, type));
 			}
 		}
@@ -143,16 +127,11 @@ public class MapXmlDAO implements MapDAO {
 			Element eElement = (Element) nNode;
 			Element eElement2 = null;
 
-			for (int i = 0; i < eElement.getElementsByTagName("effect")
-					.getLength(); i++) {
-				eElement2 = (Element) eElement.getElementsByTagName("effect")
-						.item(i);
-				int x = Integer.parseInt(eElement2.getElementsByTagName("posX")
-						.item(0).getTextContent());
-				int y = Integer.parseInt(eElement2.getElementsByTagName("posY")
-						.item(0).getTextContent());
-				String type = eElement2.getElementsByTagName("type").item(0)
-						.getTextContent();
+			for (int i = 0; i < eElement.getElementsByTagName("effect").getLength(); i++) {
+				eElement2 = (Element) eElement.getElementsByTagName("effect").item(i);
+				int x = Integer.parseInt(eElement2.getElementsByTagName("posX").item(0).getTextContent());
+				int y = Integer.parseInt(eElement2.getElementsByTagName("posY").item(0).getTextContent());
+				String type = eElement2.getElementsByTagName("type").item(0).getTextContent();
 				effects.add(new TmpType(x, y, type));
 			}
 		}
@@ -163,16 +142,11 @@ public class MapXmlDAO implements MapDAO {
 			Element eElement = (Element) nNode;
 			Element eElement2 = null;
 
-			for (int i = 0; i < eElement.getElementsByTagName("monster")
-					.getLength(); i++) {
-				eElement2 = (Element) eElement.getElementsByTagName("monster")
-						.item(i);
-				int x = Integer.parseInt(eElement2.getElementsByTagName("posX")
-						.item(0).getTextContent());
-				int y = Integer.parseInt(eElement2.getElementsByTagName("posY")
-						.item(0).getTextContent());
-				String type = eElement2.getElementsByTagName("type").item(0)
-						.getTextContent();
+			for (int i = 0; i < eElement.getElementsByTagName("monster").getLength(); i++) {
+				eElement2 = (Element) eElement.getElementsByTagName("monster").item(i);
+				int x = Integer.parseInt(eElement2.getElementsByTagName("posX").item(0).getTextContent());
+				int y = Integer.parseInt(eElement2.getElementsByTagName("posY").item(0).getTextContent());
+				String type = eElement2.getElementsByTagName("type").item(0).getTextContent();
 				monsters.add(new TmpType(x, y, type));
 			}
 		}
