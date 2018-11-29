@@ -2,20 +2,30 @@ package model;
 
 public class GroundCollisionHandler {
 	private Map map;
+	private ECollisionType[] collisions;
 
-	public GroundCollisionHandler(Map map) {
+	public GroundCollisionHandler(Map map, ECollisionType[] collisions) {
 		this.map = map;
+		this.collisions = collisions;
 	}
 
 	public Map getMap() {
 		return map;
 	}
+	
+	public ECollisionType[] getCollisions() {
+		return collisions;
+	}
 
 	public boolean canMoveOn(int x, int y) {
 		if (x >= 0 && x < map.getWidth() && y >= 0 && y < map.getHeigh()) {
-			if (map.getValue(x, y) != ECollisionType.WALL.getValue()) {
-				return true;
+			for(ECollisionType ect: collisions) {
+				int collision = map.getValue(x, y);
+				if(collision == ect.getValue()) {
+					return false;
+				}
 			}
+			return true;
 		}
 		return false;
 	}
