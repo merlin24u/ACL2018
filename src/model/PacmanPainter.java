@@ -149,7 +149,13 @@ public class PacmanPainter implements GamePainter {
 			if(camera.contains(position.x,position.y)) {
 				try {
 					texture = c.getTexture();
-					img = TextureFactory.getInstance().get(texture, c.direction.getValue());
+					
+					int imgFrame = c.direction.getValue();
+					if(c.isType("Monster") && ((Monster)c).isAttacking())
+						imgFrame +=4;
+					if(c.isType("Player") && ((Pacman)c).isAttacking())
+						imgFrame +=4;
+					img = TextureFactory.getInstance().get(texture, imgFrame);
 					int cPositionX = (position.x-camera.x) * TILE_WIDTH;
 					int cPositionY = (position.y-camera.y) * TILE_HEIGHT+BAR_HEIGHT;
 					crayon.drawImage(img, cPositionX, cPositionY, 
