@@ -85,13 +85,13 @@ public class PacmanPainter implements GamePainter {
 				}
 			}
 		}
-		
+
 		crayon.setColor(Color.BLACK);
 		int nextMarginRight = BAR_SPACING_WIDTH;
 		crayon.drawRect( getWidth() - nextMarginRight-healthBarWidth-1,(BAR_HEIGHT-healthBarHeight)/2-1,healthBarWidth+1,  healthBarHeight+1);
 		crayon.setColor(Color.RED);
-		float healthBarFillWidth = healthBarWidth*(player.getCurrentHp()/player.getMaximumHP());
-		crayon.fillRect( getWidth() -healthBarWidth- nextMarginRight,(BAR_HEIGHT-healthBarHeight)/2,healthBarFillWidth>0?healthBarWidth:0,  healthBarHeight);
+		float healthBarFillWidth = healthBarWidth*(Float.valueOf(player.getCurrentHp())/Float.valueOf(player.getMaximumHP()));
+		crayon.fillRect( getWidth() -healthBarWidth- nextMarginRight,(BAR_HEIGHT-healthBarHeight)/2,healthBarFillWidth>0?(int)healthBarFillWidth:0,  healthBarHeight);
 	}
 	
 	/**
