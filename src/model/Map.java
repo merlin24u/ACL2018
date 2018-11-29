@@ -68,6 +68,8 @@ public class Map implements IUpdate {
 		Item key = new Key("K01", "Exit key");
 		ItemEffectFactory ief;
 		TreasureEffectFactory iefT;
+		HealthEffectFactory iefH;
+		DamageEffectFactory iefD;
 		OnMoveOver onMove;
 
 		try {
@@ -91,17 +93,30 @@ public class Map implements IUpdate {
 					break;
 				}
 			}
+
+			for (MapXmlDAO.TmpType tmpM : effects) {
+				switch (tmpM.getType()) {
+				case "health":
+					Point posHealth = new Point(tmpM.getX(), tmpM.getY());
+					iefH = new HealthEffectFactory(1, 10);
+					onMove = new SimpleOnMoveOver(this, posHealth, true, false,
+							false);
+					onMove.addEffectFactory(iefH);
+					this.events.add(onMove.getClone());
+					break;
+				case "damage":
+					Point posDamage = new Point(tmpM.getX(), tmpM.getY());
+					iefD = new DamageEffectFactory(1, 10);
+					onMove = new SimpleOnMoveOver(this, posDamage, true, false,
+							false);
+					onMove.addEffectFactory(iefD);
+					this.events.add(onMove.getClone());
+					break;
+				}
+			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-
-		for (MapXmlDAO.TmpType tmpM : effects) {
-			switch (tmpM.getType()) {
-			case "health":
-				break;
-			case "damage":
-				break;
-			}
 		}
 
 		// Sortie

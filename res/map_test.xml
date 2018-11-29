@@ -155,8 +155,13 @@
   <effects>
     <effect>
       <type>health</type>
-      <posX>5</posX>
-      <posY>8</posY>
+      <posX>3</posX>
+      <posY>7</posY>
+    </effect>
+     <effect>
+      <type>damage</type>
+      <posX>2</posX>
+      <posY>7</posY>
     </effect>
   </effects>
 </map>

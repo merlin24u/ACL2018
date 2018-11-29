@@ -20,7 +20,7 @@ public class DamageEffectFactory extends EffectFactory {
 
 	@Override
 	public String getTexture() {
-		return "damage";
+		return "damageEffect";
 	}
 
 	@Override
