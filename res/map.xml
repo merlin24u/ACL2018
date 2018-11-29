@@ -133,12 +133,18 @@
       <tab2D index="9">wallCollision</tab2D>
     </tab>
   </data>
-  <item>
-    <key>
+  <items>
+    <item>
+      <type>key</type>
       <posX>8</posX>
       <posY>3</posY>
-    </key>
-  </item>
+    </item>
+     <item>
+      <type>treasure</type>
+      <posX>6</posX>
+      <posY>3</posY>
+    </item>
+  </items>
   <monsters>
     <monster>
       <type>warrior</type>
@@ -146,4 +152,16 @@
       <posY>7</posY>
     </monster>
   </monsters>
+  <effects>
+    <effect>
+      <type>health</type>
+      <posX>3</posX>
+      <posY>7</posY>
+    </effect>
+     <effect>
+      <type>damage</type>
+      <posX>8</posX>
+      <posY>6</posY>
+    </effect>
+  </effects>
 </map>

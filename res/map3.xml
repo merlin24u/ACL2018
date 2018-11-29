@@ -453,12 +453,13 @@
       <tab2D index="19">wallCollision</tab2D>
     </tab>
   </data>
-  <item>
-    <key>
+  <items>
+    <item>
+      <type>key</type>
       <posX>16</posX>
       <posY>14</posY>
-    </key>
-  </item>
+    </item>
+  </items>
    <monsters>
     <monster>
       <type>warrior</type>
