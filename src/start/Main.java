@@ -15,7 +15,7 @@ public class Main {
 
 		// creation du jeu particulier et de son afficheur
 
-		PacmanGame game = new PacmanGame(new String[] { "res/map.xml", "res/map2.xml" });
+		PacmanGame game = new PacmanGame(new String[] { "res/map.xml", "res/map2.xml", "res/map3.xml" });
 		PacmanPainter painter = new PacmanPainter(game, 11, 11);
 
 		PacmanController controller = new PacmanController();
