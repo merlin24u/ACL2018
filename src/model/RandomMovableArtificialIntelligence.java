@@ -26,7 +26,7 @@ public class RandomMovableArtificialIntelligence extends MovableArtificialIntell
 		case UP:
 			movable.moveUp();
 			break;
-		case DOWN:
+		case DOWN:		
 			movable.moveDown();
 			break;
 		case LEFT:

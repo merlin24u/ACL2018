@@ -23,7 +23,7 @@ public class HealthEffectFactory extends EffectFactory {
 
 	@Override
 	public String getTexture() {
-		return "health";
+		return "healthEffect";
 	}
 
 	@Override

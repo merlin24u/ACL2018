@@ -8,8 +8,8 @@ import javax.imageio.ImageIO;
 
 public class TextureFactory {
 
-	private BufferedImage wall, door, door_closed, key, treasure, character, monster, ground, damageEffect, healthEffect, treasureEffect, teleportationEffect, won, gameover;
-
+	private BufferedImage wall, door, door_closed, key, treasure, ground, damageEffect, healthEffect, treasureEffect, teleportationEffect, won, gameover;
+	private BufferedImage[] character, monster, ghost;
 	private static TextureFactory instance;
 
 	private TextureFactory() throws IOException {
@@ -18,8 +18,33 @@ public class TextureFactory {
 		door_closed = ImageIO.read(new File("res/door_closed.png"));
 		key = ImageIO.read(new File("res/key.png"));
 		treasure = ImageIO.read(new File("res/treasure.png"));
-		character = ImageIO.read(new File("res/character.png"));
-		monster = ImageIO.read(new File("res/monster.png"));
+		character =  new BufferedImage[] {ImageIO.read(new File("res/CharNorth.png")),
+				ImageIO.read(new File("res/CharSouth.png")),
+				ImageIO.read(new File("res/CharEst.png")),
+				ImageIO.read(new File("res/CharWest.png")),
+				ImageIO.read(new File("res/AttackNorth.png")),
+				ImageIO.read(new File("res/AttackSouth.png")),
+				ImageIO.read(new File("res/AttackEast.png")),
+				ImageIO.read(new File("res/AttackWest.png"))
+		};
+		monster = new BufferedImage[] {ImageIO.read(new File("res/monsterNorth.png")),
+				ImageIO.read(new File("res/monsterSouth.png")),
+				ImageIO.read(new File("res/monsterEst.png")),
+				ImageIO.read(new File("res/monsterWest.png")),
+				ImageIO.read(new File("res/MAttackNorth.png")),
+				ImageIO.read(new File("res/MAttackSouth.png")),
+				ImageIO.read(new File("res/MAttackEast.png")),
+				ImageIO.read(new File("res/MAttackWest.png"))
+		};
+		ghost = new BufferedImage[] {ImageIO.read(new File("res/squeletonNorth.png")),
+				ImageIO.read(new File("res/squeletonSouth.png")),
+				ImageIO.read(new File("res/squeletonEst.png")),
+				ImageIO.read(new File("res/squeletonWest.png")),
+				ImageIO.read(new File("res/SAttackNorth.png")),
+				ImageIO.read(new File("res/SAttackSouth.png")),
+				ImageIO.read(new File("res/SAttackEast.png")),
+				ImageIO.read(new File("res/SAttackWest.png"))
+		};
 		ground = ImageIO.read(new File("res/ground.png"));
 		won = ImageIO.read(new File("res/bravo.png"));
 		gameover = ImageIO.read(new File("res/perdu.png"));
@@ -36,6 +61,19 @@ public class TextureFactory {
 		return instance;
 	}
 
+	public BufferedImage get(String texture, int state) {
+		switch(texture) {
+			case "character":
+				if(state>=4)
+				System.out.println(state);
+				return character[state];
+			case "monster":
+				return monster[state];
+			case "ghost":
+				return ghost[state];
+		}
+		return null;
+	}
 	public BufferedImage get(String texture) throws Exception {
 		switch (texture) {
 		case "door":
@@ -44,14 +82,10 @@ public class TextureFactory {
 			return key;
 		case "treasure":
 			return treasure;
-		case "character":
-			return character;
 		case "ground":
 			return ground;
 		case "wall":
 			return wall;
-		case "monster":
-			return monster;
 		case "door_closed":
 			return door_closed;
 		case "won":

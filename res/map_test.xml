@@ -160,8 +160,8 @@
     </effect>
      <effect>
       <type>damage</type>
-      <posX>8</posX>
-      <posY>6</posY>
+      <posX>2</posX>
+      <posY>7</posY>
     </effect>
   </effects>
 </map>

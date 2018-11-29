@@ -133,14 +133,16 @@
       <tab2D index="9">wallCollision</tab2D>
     </tab>
   </data>
-  <item>
-    <key>
+  <items>
+    <item>
+      <type>key</type>
       <posX>7</posX>
       <posY>8</posY>
-    </key>
-  </item>
+    </item>
+  </items>
    <monsters>
     <monster>
+      <type>ghost</type>
       <posX>5</posX>
       <posY>7</posY>
     </monster>
