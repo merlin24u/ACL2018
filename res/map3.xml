@@ -461,10 +461,12 @@
   </item>
    <monsters>
     <monster>
+      <type>warrior</type>
       <posX>15</posX>
       <posY>1</posY>
     </monster>
     <monster>
+      <type>warrior</type>
       <posX>2</posX>
       <posY>18</posY>
     </monster>

@@ -141,7 +141,7 @@
   </item>
    <monsters>
     <monster>
-      <type>warrior</type>
+      <type>ghost</type>
       <posX>5</posX>
       <posY>7</posY>
     </monster>
