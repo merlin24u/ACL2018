@@ -131,7 +131,7 @@ public class MapXmlDAO implements MapDAO {
 
 		nList = doc.getElementsByTagName("monsters");
 		nNode = nList.item(0);
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+		if (nNode != null && nNode.getNodeType() == Node.ELEMENT_NODE) {
 			Element eElement = (Element) nNode;
 			Element eElement2 = null;
 
