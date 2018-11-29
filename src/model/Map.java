@@ -47,8 +47,9 @@ public class Map implements IUpdate {
 
 	}
 
-	public Map(int[][] g, Point s, Point f, HashMap<String, Point> items,
-			ArrayList<MapXmlDAO.TempMonster> monsters) {
+	public Map(int[][] g, Point s, Point f, ArrayList<MapXmlDAO.TmpType> items,
+			ArrayList<MapXmlDAO.TmpType> effects,
+			ArrayList<MapXmlDAO.TmpType> monsters) {
 		grid = g;
 		start = s;
 		finish = f;
@@ -57,30 +58,60 @@ public class Map implements IUpdate {
 		this.events = new ArrayList<OnMoveOver>();
 		toDestroy = new ArrayList<Object>();
 
-		for (MapXmlDAO.TempMonster tmpM : monsters) {
+		for (MapXmlDAO.TmpType tmpM : monsters) {
 			Monster m = MonsterFactory.getInstance().createMonster(
 					tmpM.getType(), this);
 			m.setPosition(tmpM.getX(), tmpM.getY());
 			this.characters.add(m);
 		}
 
-		Point key = items.get("key");
-		Item item1 = new Key("K01", "Exit key");
-		// Case qui donnera la clef
-		ItemEffectFactory ief = new ItemEffectFactory(item1);
-		OnMoveOver onMove1 = new SimpleOnMoveOver(this, key, true, false, false);
-		onMove1.addEffectFactory(ief);
-		this.events.add(onMove1);
+		Item key = new Key("K01", "Exit key");
+		ItemEffectFactory ief;
+		TreasureEffectFactory iefT;
+		OnMoveOver onMove;
 
-		// Sortie qui necessite la clef
+		try {
+			for (MapXmlDAO.TmpType tmpM : items) {
+				switch (tmpM.getType()) {
+				case "key":
+					Point posKey = new Point(tmpM.getX(), tmpM.getY());
+					ief = new ItemEffectFactory(key);
+					onMove = new SimpleOnMoveOver(this, posKey, true, false,
+							false);
+					onMove.addEffectFactory(ief);
+					this.events.add(onMove);
+					break;
+				case "treasure":
+					Point posTreasure = new Point(tmpM.getX(), tmpM.getY());
+					iefT = new TreasureEffectFactory(1, 10);
+					onMove = new SimpleOnMoveOver(this, posTreasure, true,
+							false, false);
+					onMove.addEffectFactory(iefT);
+					this.events.add(onMove.getClone());
+					break;
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		for (MapXmlDAO.TmpType tmpM : effects) {
+			switch (tmpM.getType()) {
+			case "health":
+				break;
+			case "damage":
+				break;
+			}
+		}
+
+		// Sortie
 		ArrayList<Item> itemsRequired = new ArrayList<Item>();
-		itemsRequired.add(item1);
+		itemsRequired.add(key);
 		ExitEffectFactory ef = new ExitEffectFactory(1);
 		OnMoveOver onMove2 = new ItemRequiredOnMoveOver(this, finish, true,
 				false, true, itemsRequired, true);
 		onMove2.addEffectFactory(ef);
 		this.events.add(onMove2);
-
 	}
 
 	private void generationStatique() {

@@ -18,11 +18,11 @@ public class MapXmlDAO implements MapDAO {
 
 	private static MapXmlDAO instance = null;
 
-	public class TempMonster {
+	public class TmpType {
 		private int x, y;
 		private String type;
 
-		public TempMonster(int x, int y, String t) {
+		public TmpType(int x, int y, String t) {
 			this.x = x;
 			this.y = y;
 			type = t;
@@ -51,8 +51,9 @@ public class MapXmlDAO implements MapDAO {
 		int[][] grid = null;
 		int sizeX, sizeY;
 		Point start = null, finish = null;
-		HashMap<String, Point> items = new HashMap<>();
-		ArrayList<TempMonster> monsters = new ArrayList<>();
+		ArrayList<TmpType> items = new ArrayList<>();
+		ArrayList<TmpType> monsters = new ArrayList<>();
+		ArrayList<TmpType> effects = new ArrayList<>();
 
 		File file = new File(f);
 		DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance()
@@ -116,17 +117,44 @@ public class MapXmlDAO implements MapDAO {
 			}
 		}
 
-		nList = doc.getElementsByTagName("item");
+		nList = doc.getElementsByTagName("items");
 		nNode = nList.item(0);
 		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 			Element eElement = (Element) nNode;
-			Element eElement2 = (Element) eElement.getElementsByTagName("key")
-					.item(0);
-			int x = Integer.parseInt(eElement2.getElementsByTagName("posX")
-					.item(0).getTextContent());
-			int y = Integer.parseInt(eElement2.getElementsByTagName("posY")
-					.item(0).getTextContent());
-			items.put("key", new Point(x, y));
+			Element eElement2 = null;
+
+			for (int i = 0; i < eElement.getElementsByTagName("item")
+					.getLength(); i++) {
+				eElement2 = (Element) eElement.getElementsByTagName("item")
+						.item(i);
+				int x = Integer.parseInt(eElement2.getElementsByTagName("posX")
+						.item(0).getTextContent());
+				int y = Integer.parseInt(eElement2.getElementsByTagName("posY")
+						.item(0).getTextContent());
+				String type = eElement2.getElementsByTagName("type").item(0)
+						.getTextContent();
+				items.add(new TmpType(x, y, type));
+			}
+		}
+
+		nList = doc.getElementsByTagName("effects");
+		nNode = nList.item(0);
+		if (nNode != null && nNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element eElement = (Element) nNode;
+			Element eElement2 = null;
+
+			for (int i = 0; i < eElement.getElementsByTagName("effect")
+					.getLength(); i++) {
+				eElement2 = (Element) eElement.getElementsByTagName("effect")
+						.item(i);
+				int x = Integer.parseInt(eElement2.getElementsByTagName("posX")
+						.item(0).getTextContent());
+				int y = Integer.parseInt(eElement2.getElementsByTagName("posY")
+						.item(0).getTextContent());
+				String type = eElement2.getElementsByTagName("type").item(0)
+						.getTextContent();
+				effects.add(new TmpType(x, y, type));
+			}
 		}
 
 		nList = doc.getElementsByTagName("monsters");
@@ -145,11 +173,11 @@ public class MapXmlDAO implements MapDAO {
 						.item(0).getTextContent());
 				String type = eElement2.getElementsByTagName("type").item(0)
 						.getTextContent();
-				monsters.add(new TempMonster(x, y, type));
+				monsters.add(new TmpType(x, y, type));
 			}
 		}
 
-		return new Map(grid, start, finish, items, monsters);
+		return new Map(grid, start, finish, items, effects, monsters);
 	}
 
 	@Override
