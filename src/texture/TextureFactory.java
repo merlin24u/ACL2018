@@ -9,7 +9,7 @@ import javax.imageio.ImageIO;
 public class TextureFactory {
 
 	private BufferedImage wall, door, door_closed, key, treasure, ground, damageEffect, healthEffect, treasureEffect, teleportationEffect, won, gameover;
-	private BufferedImage[] character, monster;
+	private BufferedImage[] character, monster, ghost;
 	private static TextureFactory instance;
 
 	private TextureFactory() throws IOException {
@@ -27,6 +27,11 @@ public class TextureFactory {
 				ImageIO.read(new File("res/monsterSouth.png")),
 				ImageIO.read(new File("res/monsterEst.png")),
 				ImageIO.read(new File("res/monsterWest.png"))
+		};
+		ghost = new BufferedImage[] {ImageIO.read(new File("res/squeletonNorth.png")),
+				ImageIO.read(new File("res/squeletonSouth.png")),
+				ImageIO.read(new File("res/squeletonEst.png")),
+				ImageIO.read(new File("res/squeletonWest.png"))
 		};
 		ground = ImageIO.read(new File("res/ground.png"));
 		won = ImageIO.read(new File("res/bravo.png"));
@@ -50,6 +55,8 @@ public class TextureFactory {
 				return character[state];
 			case "monster":
 				return monster[state];
+			case "ghost":
+				return ghost[state];
 		}
 		return null;
 	}
