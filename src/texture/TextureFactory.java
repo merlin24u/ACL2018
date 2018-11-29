@@ -8,8 +8,8 @@ import javax.imageio.ImageIO;
 
 public class TextureFactory {
 
-	private BufferedImage wall, door, door_closed, key, treasure, character, monster, ground, damageEffect, healthEffect, treasureEffect, teleportationEffect, won, gameover;
-
+	private BufferedImage wall, door, door_closed, key, treasure, ground, damageEffect, healthEffect, treasureEffect, teleportationEffect, won, gameover;
+	private BufferedImage[] character, monster;
 	private static TextureFactory instance;
 
 	private TextureFactory() throws IOException {
@@ -18,8 +18,16 @@ public class TextureFactory {
 		door_closed = ImageIO.read(new File("res/door_closed.png"));
 		key = ImageIO.read(new File("res/key.png"));
 		treasure = ImageIO.read(new File("res/treasure.png"));
-		character = ImageIO.read(new File("res/character.png"));
-		monster = ImageIO.read(new File("res/monster.png"));
+		character =  new BufferedImage[] {ImageIO.read(new File("res/CharNorth.png")),
+				ImageIO.read(new File("res/CharSouth.png")),
+				ImageIO.read(new File("res/CharEst.png")),
+				ImageIO.read(new File("res/CharWest.png"))
+		};
+		monster = new BufferedImage[] {ImageIO.read(new File("res/monsterNorth.png")),
+				ImageIO.read(new File("res/monsterSouth.png")),
+				ImageIO.read(new File("res/monsterEst.png")),
+				ImageIO.read(new File("res/monsterWest.png"))
+		};
 		ground = ImageIO.read(new File("res/ground.png"));
 		won = ImageIO.read(new File("res/bravo.png"));
 		gameover = ImageIO.read(new File("res/perdu.png"));
@@ -36,6 +44,15 @@ public class TextureFactory {
 		return instance;
 	}
 
+	public BufferedImage get(String texture, int state) {
+		switch(texture) {
+			case "character":
+				return character[state];
+			case "monster":
+				return monster[state];
+		}
+		return null;
+	}
 	public BufferedImage get(String texture) throws Exception {
 		switch (texture) {
 		case "door":
@@ -44,14 +61,10 @@ public class TextureFactory {
 			return key;
 		case "treasure":
 			return treasure;
-		case "character":
-			return character;
 		case "ground":
 			return ground;
 		case "wall":
 			return wall;
-		case "monster":
-			return monster;
 		case "door_closed":
 			return door_closed;
 		case "won":

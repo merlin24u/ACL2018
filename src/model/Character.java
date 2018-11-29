@@ -22,7 +22,7 @@ public abstract class Character extends Movable implements IDestructible {
 		this.effects = new ArrayList<Effect>();
 		toDestroyEffects = new ArrayList<>();
 	}
-
+	
 	public int getCurrentHp() {
 		return this.currentHP;
 	}

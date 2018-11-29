@@ -41,7 +41,7 @@ public class Monster extends Character implements IDamager {
 			alreadyOn = true;
 		}
 	}
-
+	
 	@Override
 	public int getDamages() {
 		return damageEffectFactory.getDamages();
