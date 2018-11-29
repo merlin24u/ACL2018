@@ -24,7 +24,7 @@ public class TestTreasureEffect {
 		game = new PacmanGame("");
 		player = game.getPlayer();
 		startMoneyAmount = player.getMoneyAmount();
-		te = new TreasureEffect(player, 10, 2);
+		te = new TreasureEffect(player, null, 10, 2);
 
 	}
 

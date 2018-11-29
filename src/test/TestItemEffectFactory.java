@@ -22,7 +22,7 @@ public class TestItemEffectFactory {
     public void initialize(){
 
         pacman = new Pacman(new Map());
-        monster = new Monster(null, null, 0,0,0,null,0,0,0,null);
+        monster = new Monster(null, null, 0,0,0,null,0,0,0,null, null);
 
         keyId = "KeyId";
         keyName = "KeyName";

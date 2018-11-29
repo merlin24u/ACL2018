@@ -1,6 +1,5 @@
 package texture;
 
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -27,19 +26,19 @@ public class TextureFactory {
 				ImageIO.read(new File("res/AttackEast.png")),
 				ImageIO.read(new File("res/AttackWest.png"))
 		};
-		monster = new BufferedImage[] {ImageIO.read(new File("res/monsterNorth.png")),
-				ImageIO.read(new File("res/monsterSouth.png")),
-				ImageIO.read(new File("res/monsterEst.png")),
-				ImageIO.read(new File("res/monsterWest.png")),
+		monster = new BufferedImage[] {ImageIO.read(new File("res/MonsterNorth.png")),
+				ImageIO.read(new File("res/MonsterSouth.png")),
+				ImageIO.read(new File("res/MonsterEst.png")),
+				ImageIO.read(new File("res/MonsterWest.png")),
 				ImageIO.read(new File("res/MAttackNorth.png")),
 				ImageIO.read(new File("res/MAttackSouth.png")),
 				ImageIO.read(new File("res/MAttackEast.png")),
 				ImageIO.read(new File("res/MAttackWest.png"))
 		};
-		ghost = new BufferedImage[] {ImageIO.read(new File("res/squeletonNorth.png")),
-				ImageIO.read(new File("res/squeletonSouth.png")),
-				ImageIO.read(new File("res/squeletonEst.png")),
-				ImageIO.read(new File("res/squeletonWest.png")),
+		ghost = new BufferedImage[] {ImageIO.read(new File("res/SqueletonNorth.png")),
+				ImageIO.read(new File("res/SqueletonSouth.png")),
+				ImageIO.read(new File("res/SqueletonEst.png")),
+				ImageIO.read(new File("res/SqueletonWest.png")),
 				ImageIO.read(new File("res/SAttackNorth.png")),
 				ImageIO.read(new File("res/SAttackSouth.png")),
 				ImageIO.read(new File("res/SAttackEast.png")),
