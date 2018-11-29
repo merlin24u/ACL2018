@@ -56,9 +56,18 @@ public class TestPacmanController {
     }
 
     @Test
-    public void keyReleasedTest() {
+    public void keyPressedAttackTest() {
 
         KeyEvent keyEvent = new KeyEvent(new Button(), KeyEvent.KEY_RELEASED, System.currentTimeMillis(), 0, KeyEvent.VK_UNDEFINED, ' ');
+        pacmanController.keyPressed(keyEvent);
+
+        assertEquals("La touche a été enfoncée - ATTACK", Cmd.ATTACK, pacmanController.getCommand());
+    }
+
+    @Test
+    public void keyReleasedTest() {
+
+        KeyEvent keyEvent = new KeyEvent(new Button(), KeyEvent.KEY_RELEASED, System.currentTimeMillis(), 0, KeyEvent.VK_UNDEFINED, '.');
         pacmanController.keyPressed(keyEvent);
 
         assertEquals("La touche a été enfoncée - IDLE", Cmd.IDLE, pacmanController.getCommand());

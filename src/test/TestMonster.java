@@ -25,7 +25,11 @@ public class TestMonster {
         pacman = new Pacman(map);
         startPoint = new Point(pacman.getPosition());
 
-        GroundCollisionHandler groundCollisionHandler = new GroundCollisionHandler(map);
+        ECollisionType[] collisions = new ECollisionType[] {
+                //ECollisionType.WALL
+        };
+
+        GroundCollisionHandler groundCollisionHandler = new GroundCollisionHandler(map, collisions);
 
         int movingSpeedXMax = 1;
         int movingSpeedYMax = 1;

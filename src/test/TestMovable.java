@@ -1,9 +1,6 @@
 package test;
 
-import model.GroundCollisionHandler;
-import model.Map;
-import model.Movable;
-import model.PacmanGame;
+import model.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -29,7 +26,11 @@ public class TestMovable {
         movingSpeedYMax = 1;
         startPosition = new Point(map.getStart().x, map.getStart().y);
         Point position = new Point(map.getStart().x, map.getStart().y);
-        movable = new Movable(new GroundCollisionHandler(map), movingSpeedXMax, movingSpeedYMax, 0, position);
+
+        ECollisionType[] collisions = new ECollisionType[] {
+                //ECollisionType.WALL
+        };
+        movable = new Movable(new GroundCollisionHandler(map,collisions), movingSpeedXMax, movingSpeedYMax, 0, position);
 
     }
 

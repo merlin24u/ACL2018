@@ -17,31 +17,18 @@ public class TestPacman {
     PacmanGame test_game;
     Pacman pacman;
     Monster monster;
+    Map map;
 
     private Point startPoint;
 
     public void initialize(String pathMap) {
 
-        int currentHP = 5;
-        int maximumHP = 5;
-        int defensePoints = 1;
-
         test_game = new PacmanGame(pathMap);
-        Map map = test_game.getMap();
+        map = test_game.getMap();
         pacman = new Pacman(map);
         startPoint = new Point(pacman.getPosition());
-
-        GroundCollisionHandler groundCollisionHandler = new GroundCollisionHandler(map);
-
-        int movingSpeedXMax = 1;
-        int movingSpeedYMax = 1;
-
-        Point position = new Point(5, 5);
-
-        MovableArtificialIntelligence movableArtificialIntelligence = new RandomMovableArtificialIntelligence(map);
-
-		monster = new Monster(null, movableArtificialIntelligence, currentHP, maximumHP, defensePoints, groundCollisionHandler, movingSpeedXMax, movingSpeedYMax, movingSpeedYMax, position) {
-        };
+        test_game.getGameState().setState(GameState.State.RUNNING);
+        monster = MonsterFactory.getInstance().createMonster("warrior", map);
     }
 
     @Test
