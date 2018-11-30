@@ -1,8 +1,10 @@
 package test;
 
-import model.Key;
+
 import org.junit.Before;
 import org.junit.Test;
+
+import model.item.Key;
 
 import static org.junit.Assert.assertEquals;
 

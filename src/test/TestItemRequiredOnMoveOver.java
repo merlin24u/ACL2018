@@ -1,7 +1,12 @@
 package test;
 
 import model.*;
-import model.Character;
+import model.movable.character.Character;
+import model.movable.character.Pacman;
+import model.onmoveover.ItemRequiredOnMoveOver;
+import model.item.Item;
+import model.item.Key;
+
 import org.junit.Before;
 import org.junit.Test;
 

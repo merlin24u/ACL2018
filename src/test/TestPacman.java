@@ -6,6 +6,12 @@ import java.awt.*;
 import java.io.IOException;
 
 import model.*;
+import model.movable.ai.MovableArtificialIntelligence;
+import model.movable.ai.RandomMovableArtificialIntelligence;
+import model.movable.character.Pacman;
+import model.movable.character.monster.Monster;
+import model.movable.collision.GroundCollisionHandler;
+
 import org.junit.Test;
 import engine.Cmd;
 import org.xml.sax.SAXException;

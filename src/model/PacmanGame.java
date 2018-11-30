@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import dao.DAOFactory;
 import engine.Cmd;
 import engine.Game;
+import model.movable.character.Pacman;
+import model.Map;
 
 /**
  * @author Horatiu Cirstea, Vincent Thomas

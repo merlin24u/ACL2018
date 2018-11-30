@@ -5,6 +5,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import dao.MapXmlDAO;
+import model.effect.factory.DamageEffectFactory;
+import model.effect.factory.ExitEffectFactory;
+import model.effect.factory.HealthEffectFactory;
+import model.effect.factory.ItemEffectFactory;
+import model.effect.factory.TreasureEffectFactory;
+import model.item.Item;
+import model.item.Key;
+import model.movable.character.Character;
+import model.movable.character.Pacman;
+import model.movable.character.monster.Monster;
+import model.movable.character.monster.MonsterFactory;
+import model.movable.collision.ECollisionType;
+import model.onmoveover.ItemRequiredOnMoveOver;
+import model.onmoveover.OnMoveOver;
+import model.onmoveover.SimpleOnMoveOver;
 
 public class Map implements IUpdate {
 
@@ -85,7 +100,7 @@ public class Map implements IUpdate {
 					break;
 				case "treasure":
 					Point posTreasure = new Point(tmpM.getX(), tmpM.getY());
-					iefT = new TreasureEffectFactory(1, 10);
+					iefT = new TreasureEffectFactory(1, 30);
 					onMove = new SimpleOnMoveOver(this, posTreasure, true,
 							false, false);
 					onMove.addEffectFactory(iefT);
@@ -98,7 +113,7 @@ public class Map implements IUpdate {
 				switch (tmpM.getType()) {
 				case "health":
 					Point posHealth = new Point(tmpM.getX(), tmpM.getY());
-					iefH = new HealthEffectFactory(1, 10);
+					iefH = new HealthEffectFactory(2, 75);
 					onMove = new SimpleOnMoveOver(this, posHealth, true, false,
 							false);
 					onMove.addEffectFactory(iefH);
@@ -106,7 +121,7 @@ public class Map implements IUpdate {
 					break;
 				case "damage":
 					Point posDamage = new Point(tmpM.getX(), tmpM.getY());
-					iefD = new DamageEffectFactory(1, 10);
+					iefD = new DamageEffectFactory(2, 10);
 					onMove = new SimpleOnMoveOver(this, posDamage, true, false,
 							false);
 					onMove.addEffectFactory(iefD);

@@ -1,9 +1,11 @@
 package test;
 
-import model.GroundCollisionHandler;
+
 import model.Map;
-import model.Movable;
 import model.PacmanGame;
+import model.movable.Movable;
+import model.movable.collision.GroundCollisionHandler;
+
 import org.junit.Before;
 import org.junit.Test;
 

@@ -1,7 +1,8 @@
 package test;
 
 import engine.Cmd;
-import model.PacmanController;
+import model.controller.PacmanController;
+
 import org.junit.Before;
 import org.junit.Test;
 

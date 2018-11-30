@@ -9,7 +9,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import model.ECollisionType;
+import model.movable.collision.ECollisionType;
 import model.Map;
 
 import org.w3c.dom.Element;

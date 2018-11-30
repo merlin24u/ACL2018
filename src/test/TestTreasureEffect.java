@@ -2,12 +2,12 @@ package test;
 
 import static org.junit.Assert.*;
 import java.util.ArrayList;
-import model.Monster;
-import model.Pacman;
+
 import model.PacmanGame;
-import model.TreasureEffect;
-import model.TreasureEffectFactory;
-import model.Character;
+import model.effect.TreasureEffect;
+import model.movable.character.Character;
+import model.movable.character.Pacman;
+
 import org.junit.Before;
 import org.junit.Test;
 import engine.Cmd;
