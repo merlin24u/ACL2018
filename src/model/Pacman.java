@@ -107,6 +107,7 @@ public class Pacman extends Character implements IDamager {
 	
 	public void changeMap(Map m) {
 		super.groundCollisionHandler.changeMap(m);
+		this.map = m;
 	}
 	
 	@Override
