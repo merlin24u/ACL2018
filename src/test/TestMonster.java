@@ -2,87 +2,92 @@ package test;
 
 import model.*;
 import org.junit.Test;
-
 import java.awt.*;
-
 import model.movable.ai.MovableArtificialIntelligence;
 import model.movable.ai.RandomMovableArtificialIntelligence;
 import model.movable.character.Pacman;
 import model.movable.character.monster.Monster;
+import model.movable.collision.ECollisionType;
 import model.movable.collision.GroundCollisionHandler;
 
 import static org.junit.Assert.assertEquals;
 
 public class TestMonster {
 
-    PacmanGame test_game;
-    Pacman pacman;
-    Monster monster;
+	PacmanGame test_game;
+	Pacman pacman;
+	Monster monster;
 
-    private Point startPoint;
-    public void initialize(String pathMap) {
+	private Point startPoint;
 
-        int currentHP = 5;
-        int maximumHP = 5;
-        int defensePoints = 1;
+	public void initialize(String pathMap) {
 
-        test_game = new PacmanGame(pathMap);
-        Map map = test_game.getMap();
-        pacman = new Pacman(map);
-        startPoint = new Point(pacman.getPosition());
+		int currentHP = 5;
+		int maximumHP = 5;
+		int defensePoints = 1;
 
-        GroundCollisionHandler groundCollisionHandler = new GroundCollisionHandler(map, null);
+		test_game = new PacmanGame(pathMap);
+		Map map = test_game.getMap();
+		pacman = new Pacman(map);
+		startPoint = new Point(pacman.getPosition());
 
-        int movingSpeedXMax = 1;
-        int movingSpeedYMax = 1;
+		ECollisionType[] collisions = new ECollisionType[] {
+				// ECollisionType.WALL
+		};
 
-        Point position = new Point(5, 5);
+		GroundCollisionHandler groundCollisionHandler = new GroundCollisionHandler(map, collisions);
 
-        MovableArtificialIntelligence movableArtificialIntelligence = new RandomMovableArtificialIntelligence(map);
+		int movingSpeedXMax = 1;
+		int movingSpeedYMax = 1;
 
-        monster = new Monster(null, movableArtificialIntelligence, currentHP, maximumHP, defensePoints, groundCollisionHandler, movingSpeedXMax, movingSpeedYMax, movingSpeedYMax, position, null) {
-        };
-    }
+		Point position = new Point(5, 5);
 
-    @Test
-    public void testTakeDamage() {
+		MovableArtificialIntelligence movableArtificialIntelligence = new RandomMovableArtificialIntelligence(map);
 
-        initialize("src/test/res/test_map_1.xml");
+		monster = new Monster(null, movableArtificialIntelligence, currentHP, maximumHP, defensePoints,
+				groundCollisionHandler, movingSpeedXMax, movingSpeedYMax, movingSpeedYMax, position, null) {
+		};
+	}
 
-        int beginHP = monster.getCurrentHp();
+	@Test
+	public void testTakeDamage() {
 
-        assertEquals(beginHP, monster.getCurrentHp());
-        pacman.attack(monster);
-        assertEquals(beginHP - 1, monster.getCurrentHp());
+		initialize("test_map.xml");
 
-    }
+		int beginHP = monster.getCurrentHp();
 
-    @Test
-    public void testTakeDamageOnCollision() {
+		assertEquals(beginHP, monster.getCurrentHp());
+		pacman.attack(monster);
+		assertEquals(beginHP - 1, monster.getCurrentHp());
 
-        initialize("src/test/res/test_map_1.xml");
+	}
 
-        int beginHP = monster.getCurrentHp();
+	@Test
+	public void testTakeDamageOnCollision() {
 
-        assertEquals(beginHP, monster.getCurrentHp());
-        pacman.onCollision(monster);
-        monster.update();
-        assertEquals("Le monstre n'a pas obtenu des dégâts", beginHP - 1, monster.getCurrentHp());
+		initialize("test_map.xml");
 
-    }
+		int beginHP = monster.getCurrentHp();
 
+		assertEquals(beginHP, monster.getCurrentHp());
+		pacman.onCollision(monster);
+		monster.update();
+		assertEquals("Le monstre n'a pas obtenu des dégâts", beginHP - 1, monster.getCurrentHp());
 
-    @Test
-    public void testDestroyMonster() {
+	}
 
-        initialize("src/test/res/test_map_1.xml");
+	@Test
+	public void testDestroyMonster() {
 
-        int beginHP = monster.getCurrentHp();
-        for (int i = 0; i < beginHP; i++) {
-            pacman.onCollision(monster);
-            monster.update();
-        }
+		initialize("test_map.xml");
 
-        assertEquals("Le monstre n'est pas ete detruit! Current life:" + monster.getCurrentHp(), true, monster.isToDestroy());
-    }
+		int beginHP = monster.getCurrentHp();
+		for (int i = 0; i < beginHP; i++) {
+			pacman.onCollision(monster);
+			monster.update();
+		}
+
+		assertEquals("Le monstre n'est pas ete detruit! Current life:" + monster.getCurrentHp(), true,
+				monster.isToDestroy());
+	}
 }

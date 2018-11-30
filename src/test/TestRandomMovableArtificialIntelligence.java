@@ -1,16 +1,11 @@
 package test;
 
 import static org.junit.Assert.*;
-import java.util.ArrayList;
-
 import model.PacmanGame;
 import model.movable.ai.RandomMovableArtificialIntelligence;
-import model.movable.character.Character;
 import model.movable.character.Pacman;
-
 import org.junit.Before;
 import org.junit.Test;
-import engine.Cmd;
 
 public class TestRandomMovableArtificialIntelligence {
 
@@ -20,7 +15,7 @@ public class TestRandomMovableArtificialIntelligence {
 
 	@Before
 	public void initialise() {
-		game = new PacmanGame("");
+		game = new PacmanGame("test_map.xml");
 		player = game.getPlayer();
 		rmai = new RandomMovableArtificialIntelligence(game.getMap(), 14);
 	}

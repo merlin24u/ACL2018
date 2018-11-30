@@ -1,210 +1,223 @@
 package test;
 
-
 import model.Map;
 import model.PacmanGame;
 import model.movable.Movable;
+import model.movable.collision.ECollisionType;
 import model.movable.collision.GroundCollisionHandler;
-
 import org.junit.Before;
 import org.junit.Test;
-
 import java.awt.*;
 
 import static org.junit.Assert.assertEquals;
 
 public class TestMovable {
 
-    PacmanGame pacmanGame;
-    Map map;
-    int movingSpeedXMax;
-    int movingSpeedYMax;
-    Point startPosition;
-    Movable movable;
+	PacmanGame pacmanGame;
+	Map map;
+	int movingSpeedXMax;
+	int movingSpeedYMax;
+	Point startPosition;
+	Movable movable;
 
-    @Before
-    public void initialize(){
+	@Before
+	public void initialize() {
 
-        pacmanGame = new PacmanGame("src/test/res/test_map_1.xml");
-        map = pacmanGame.getMap();
-        movingSpeedXMax = 1;
-        movingSpeedYMax = 1;
-        startPosition = new Point(map.getStart().x, map.getStart().y);
-        Point position = new Point(map.getStart().x, map.getStart().y);
-        movable = new Movable(new GroundCollisionHandler(map, null), movingSpeedXMax, movingSpeedYMax, 0, position);
+		pacmanGame = new PacmanGame("test_map.xml");
+		map = pacmanGame.getMap();
+		movingSpeedXMax = 1;
+		movingSpeedYMax = 1;
+		startPosition = new Point(map.getStart().x, map.getStart().y);
+		Point position = new Point(map.getStart().x, map.getStart().y);
 
-    }
+		ECollisionType[] collisions = new ECollisionType[] {
+				// ECollisionType.WALL
+		};
+		movable = new Movable(new GroundCollisionHandler(map, collisions), movingSpeedXMax, movingSpeedYMax, 0,
+				position);
 
-    @Test
-    public void testMoveUpOnce(){
-        movable.moveUp();
-        movable.update();
+	}
 
-        assertEquals("Movable est alle plus que " + movingSpeedYMax + " point", startPosition.y - 1, movable.getPosition().y);
-    }
+	@Test
+	public void testMoveUpOnce() {
+		movable.moveUp();
+		movable.update();
 
-    @Test
-    public void testMoveUpTwice(){
+		assertEquals("Movable est alle plus que " + movingSpeedYMax + " point", startPosition.y - 1,
+				movable.getPosition().y);
+	}
 
-        movable.moveUp();
-        movable.moveUp();
-        movable.update();
+	@Test
+	public void testMoveUpTwice() {
 
-        assertEquals("Movable est alle plus que " + movingSpeedYMax + " point", startPosition.y - 2, movable.getPosition().y);
-    }
+		movable.moveUp();
+		movable.moveUp();
+		movable.update();
 
-    @Test
-    public void testMoveDownOnce(){
-        movable.moveDown();
-        movable.update();
+		assertEquals("Movable est alle plus que " + movingSpeedYMax + " point", startPosition.y - 2,
+				movable.getPosition().y);
+	}
 
-        assertEquals("Movable est alle plus que " + movingSpeedYMax + " point", startPosition.y + 1, movable.getPosition().y);
-    }
+	@Test
+	public void testMoveDownOnce() {
+		movable.moveDown();
+		movable.update();
 
-    @Test
-    public void testMoveDownTwice(){
+		assertEquals("Movable est alle plus que " + movingSpeedYMax + " point", startPosition.y + 1,
+				movable.getPosition().y);
+	}
 
-        movable.moveDown();
-        movable.moveDown();
-        movable.update();
+	@Test
+	public void testMoveDownTwice() {
 
-        assertEquals("Movable est alle plus que " + movingSpeedYMax + " point", startPosition.y + 2, movable.getPosition().y);
-    }
+		movable.moveDown();
+		movable.moveDown();
+		movable.update();
 
-    @Test
-    public void testMoveRightOnce(){
-        movable.moveRight();
-        movable.update();
+		assertEquals("Movable est alle plus que " + movingSpeedYMax + " point", startPosition.y + 2,
+				movable.getPosition().y);
+	}
 
-        assertEquals("Movable est alle plus que " + movingSpeedXMax + " point", startPosition.x + 1, movable.getPosition().x);
-    }
+	@Test
+	public void testMoveRightOnce() {
+		movable.moveRight();
+		movable.update();
 
-    @Test
-    public void testMoveRightTwice(){
+		assertEquals("Movable est alle plus que " + movingSpeedXMax + " point", startPosition.x + 1,
+				movable.getPosition().x);
+	}
 
-        movable.moveRight();
-        movable.moveRight();
-        movable.update();
+	@Test
+	public void testMoveRightTwice() {
 
-        assertEquals("Movable est alle plus que " + movingSpeedXMax + " point", startPosition.x + 2, movable.getPosition().x);
-    }
+		movable.moveRight();
+		movable.moveRight();
+		movable.update();
 
-    @Test
-    public void testMoveLeftOnce(){
-        movable.moveLeft();
-        movable.update();
+		assertEquals("Movable est alle plus que " + movingSpeedXMax + " point", startPosition.x + 2,
+				movable.getPosition().x);
+	}
 
-        assertEquals("Movable est alle plus que " + movingSpeedXMax + " point", startPosition.x - 1, movable.getPosition().x);
-    }
+	@Test
+	public void testMoveLeftOnce() {
+		movable.moveLeft();
+		movable.update();
 
-    @Test
-    public void testMoveLeftTwice(){
+		assertEquals("Movable est alle plus que " + movingSpeedXMax + " point", startPosition.x - 1,
+				movable.getPosition().x);
+	}
 
-        movable.moveLeft();
-        movable.moveLeft();
-        movable.update();
+	@Test
+	public void testMoveLeftTwice() {
 
-        assertEquals("Movable est alle plus que " + movingSpeedXMax + " point", startPosition.x - 2, movable.getPosition().x);
-    }
+		movable.moveLeft();
+		movable.moveLeft();
+		movable.update();
 
-    @Test
-    public void testResetCurrentSpeed(){
+		assertEquals("Movable est alle plus que " + movingSpeedXMax + " point", startPosition.x - 2,
+				movable.getPosition().x);
+	}
 
-        movable.moveLeft();
-        movable.moveLeft();
+	@Test
+	public void testResetCurrentSpeed() {
 
-        assertEquals("CurrestSpeed n'est pas meme!", -2, movable.getCurrentSpeedX());
+		movable.moveLeft();
+		movable.moveLeft();
 
-        movable.resetCurrentSpeed();
-        assertEquals("CurrestSpeedX n'est pas ete resete!", 0, movable.getCurrentSpeedX());
-        assertEquals("CurrestSpeedY n'est pas ete resete!", 0, movable.getCurrentSpeedY());
+		assertEquals("CurrestSpeed n'est pas meme!", -2, movable.getCurrentSpeedX());
 
-        movable.moveRight();
-        movable.moveRight();
+		movable.resetCurrentSpeed();
+		assertEquals("CurrestSpeedX n'est pas ete resete!", 0, movable.getCurrentSpeedX());
+		assertEquals("CurrestSpeedY n'est pas ete resete!", 0, movable.getCurrentSpeedY());
 
-        assertEquals("CurrestSpeed n'est pas meme!", 2, movable.getCurrentSpeedX());
+		movable.moveRight();
+		movable.moveRight();
 
-        movable.resetCurrentSpeed();
-        assertEquals("CurrestSpeedX n'est pas ete resete!", 0, movable.getCurrentSpeedX());
-        assertEquals("CurrestSpeedY n'est pas ete resete!", 0, movable.getCurrentSpeedY());
+		assertEquals("CurrestSpeed n'est pas meme!", 2, movable.getCurrentSpeedX());
 
-        movable.moveUp();
-        movable.moveUp();
+		movable.resetCurrentSpeed();
+		assertEquals("CurrestSpeedX n'est pas ete resete!", 0, movable.getCurrentSpeedX());
+		assertEquals("CurrestSpeedY n'est pas ete resete!", 0, movable.getCurrentSpeedY());
 
-        assertEquals("CurrestSpeed n'est pas meme!", -2, movable.getCurrentSpeedY());
+		movable.moveUp();
+		movable.moveUp();
 
-        movable.resetCurrentSpeed();
-        assertEquals("CurrestSpeedX n'est pas ete resete!", 0, movable.getCurrentSpeedX());
-        assertEquals("CurrestSpeedY n'est pas ete resete!", 0, movable.getCurrentSpeedY());
+		assertEquals("CurrestSpeed n'est pas meme!", -2, movable.getCurrentSpeedY());
 
-        movable.moveDown();
-        movable.moveDown();
+		movable.resetCurrentSpeed();
+		assertEquals("CurrestSpeedX n'est pas ete resete!", 0, movable.getCurrentSpeedX());
+		assertEquals("CurrestSpeedY n'est pas ete resete!", 0, movable.getCurrentSpeedY());
 
-        assertEquals("CurrestSpeed n'est pas meme!", 2, movable.getCurrentSpeedY());
+		movable.moveDown();
+		movable.moveDown();
 
-        movable.resetCurrentSpeed();
-        assertEquals("CurrestSpeedX n'est pas ete resete!", 0, movable.getCurrentSpeedX());
-        assertEquals("CurrestSpeedY n'est pas ete resete!", 0, movable.getCurrentSpeedY());
+		assertEquals("CurrestSpeed n'est pas meme!", 2, movable.getCurrentSpeedY());
 
-        movable.moveDown();
-        movable.moveDown();
-        movable.moveRight();
-        movable.moveRight();
+		movable.resetCurrentSpeed();
+		assertEquals("CurrestSpeedX n'est pas ete resete!", 0, movable.getCurrentSpeedX());
+		assertEquals("CurrestSpeedY n'est pas ete resete!", 0, movable.getCurrentSpeedY());
 
-        assertEquals("CurrestSpeedX n'est pas meme!", 2, movable.getCurrentSpeedX());
-        assertEquals("CurrestSpeedY n'est pas meme!", 2, movable.getCurrentSpeedY());
+		movable.moveDown();
+		movable.moveDown();
+		movable.moveRight();
+		movable.moveRight();
 
-        movable.resetCurrentSpeed();
-        assertEquals("CurrestSpeedX n'est pas ete resete!", 0, movable.getCurrentSpeedX());
-        assertEquals("CurrestSpeedY n'est pas ete resete!", 0, movable.getCurrentSpeedY());
+		assertEquals("CurrestSpeedX n'est pas meme!", 2, movable.getCurrentSpeedX());
+		assertEquals("CurrestSpeedY n'est pas meme!", 2, movable.getCurrentSpeedY());
 
-        movable.moveUp();
-        movable.moveUp();
-        movable.moveLeft();
-        movable.moveLeft();
+		movable.resetCurrentSpeed();
+		assertEquals("CurrestSpeedX n'est pas ete resete!", 0, movable.getCurrentSpeedX());
+		assertEquals("CurrestSpeedY n'est pas ete resete!", 0, movable.getCurrentSpeedY());
 
-        assertEquals("CurrestSpeedX n'est pas meme!", -2, movable.getCurrentSpeedX());
-        assertEquals("CurrestSpeedY n'est pas meme!", -2, movable.getCurrentSpeedY());
+		movable.moveUp();
+		movable.moveUp();
+		movable.moveLeft();
+		movable.moveLeft();
 
-        movable.resetCurrentSpeed();
-        assertEquals("CurrestSpeedX n'est pas ete resete!", 0, movable.getCurrentSpeedX());
-        assertEquals("CurrestSpeedY n'est pas ete resete!", 0, movable.getCurrentSpeedY());
-    }
+		assertEquals("CurrestSpeedX n'est pas meme!", -2, movable.getCurrentSpeedX());
+		assertEquals("CurrestSpeedY n'est pas meme!", -2, movable.getCurrentSpeedY());
 
-    @Test
-    public void testTranslatePlus(){
+		movable.resetCurrentSpeed();
+		assertEquals("CurrestSpeedX n'est pas ete resete!", 0, movable.getCurrentSpeedX());
+		assertEquals("CurrestSpeedY n'est pas ete resete!", 0, movable.getCurrentSpeedY());
+	}
 
-        Point startPoint = new Point(movable.getPosition());
-        int translateX = 5;
-        int translateY = 5;
-        movable.translate(translateX,translateY);
+	@Test
+	public void testTranslatePlus() {
 
-        assertEquals("TranslateX n'a pas ete bien execute!", startPoint.x + translateX, movable.getPosition().x);
-        assertEquals("TranslateY n'a pas ete bien execute!", startPoint.y + translateY, movable.getPosition().y);
-    }
+		Point startPoint = new Point(movable.getPosition());
+		int translateX = 5;
+		int translateY = 5;
+		movable.translate(translateX, translateY);
 
-    @Test
-    public void testTranslateMinus(){
+		assertEquals("TranslateX n'a pas ete bien execute!", startPoint.x + translateX, movable.getPosition().x);
+		assertEquals("TranslateY n'a pas ete bien execute!", startPoint.y + translateY, movable.getPosition().y);
+	}
 
-        Point startPoint = new Point(movable.getPosition());
-        int translateX = -5;
-        int translateY = -5;
-        movable.translate(translateX,translateY);
+	@Test
+	public void testTranslateMinus() {
 
-        assertEquals("TranslateX n'a pas ete bien execute!", startPoint.x + translateX, movable.getPosition().x);
-        assertEquals("TranslateY n'a pas ete bien execute!", startPoint.y + translateY, movable.getPosition().y);
-    }
+		Point startPoint = new Point(movable.getPosition());
+		int translateX = -5;
+		int translateY = -5;
+		movable.translate(translateX, translateY);
 
-    @Test
-    public void testUpdate(){
-        movable.moveUp();
-        movable.moveRight();
-        movable.update();
+		assertEquals("TranslateX n'a pas ete bien execute!", startPoint.x + translateX, movable.getPosition().x);
+		assertEquals("TranslateY n'a pas ete bien execute!", startPoint.y + translateY, movable.getPosition().y);
+	}
 
-        assertEquals("Movable est alle plus que " + movingSpeedYMax + " point", startPosition.y - 1, movable.getPosition().y);
-        assertEquals("Movable est alle plus que " + movingSpeedXMax + " point", startPosition.x + 1, movable.getPosition().x);
+	@Test
+	public void testUpdate() {
+		movable.moveUp();
+		movable.moveRight();
+		movable.update();
 
-        assertEquals("Movable CurrentSpeet X n'a pas ete resete", 0, movable.getCurrentSpeedX());
-        assertEquals("Movable CurrentSpeet X n'a pas ete resete", 0, movable.getCurrentSpeedY());
-    }
+		assertEquals("Movable est alle plus que " + movingSpeedYMax + " point", startPosition.y - 1,
+				movable.getPosition().y);
+		assertEquals("Movable est alle plus que " + movingSpeedXMax + " point", startPosition.x + 1,
+				movable.getPosition().x);
+
+		assertEquals("Movable CurrentSpeet X n'a pas ete resete", 0, movable.getCurrentSpeedX());
+		assertEquals("Movable CurrentSpeet X n'a pas ete resete", 0, movable.getCurrentSpeedY());
+	}
 }

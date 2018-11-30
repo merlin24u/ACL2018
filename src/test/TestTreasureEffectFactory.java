@@ -17,7 +17,7 @@ public class TestTreasureEffectFactory {
 
 	@Before
 	public void initialise() {
-		game = new PacmanGame("");
+		game = new PacmanGame("test_map.xml");
 		player = game.getPlayer();
 		startMoneyAmount = player.getMoneyAmount();
 		tef = new TreasureEffectFactory(10, 5);

@@ -5,11 +5,9 @@ import java.awt.*;
 import model.Map;
 import model.PacmanGame;
 import model.item.Key;
-import model.movable.ai.MovableArtificialIntelligence;
-import model.movable.ai.RandomMovableArtificialIntelligence;
 import model.movable.character.Pacman;
 import model.movable.character.monster.Monster;
-import model.movable.collision.GroundCollisionHandler;
+import model.movable.character.monster.MonsterFactory;
 import org.junit.Test;
 import engine.Cmd;
 
@@ -18,38 +16,24 @@ public class TestPacman {
 	PacmanGame test_game;
 	Pacman pacman;
 	Monster monster;
+	Map map;
 
 	private Point startPoint;
 
 	public void initialize(String pathMap) {
 
-		int currentHP = 5;
-		int maximumHP = 5;
-		int defensePoints = 1;
-
 		test_game = new PacmanGame(pathMap);
-		Map map = test_game.getMap();
+		map = test_game.getMap();
 		pacman = new Pacman(map);
 		startPoint = new Point(pacman.getPosition());
-
-		GroundCollisionHandler groundCollisionHandler = new GroundCollisionHandler(map, null);
-
-		int movingSpeedXMax = 1;
-		int movingSpeedYMax = 1;
-
-		Point position = new Point(5, 5);
-
-		MovableArtificialIntelligence movableArtificialIntelligence = new RandomMovableArtificialIntelligence(map);
-
-		monster = new Monster(null, movableArtificialIntelligence, currentHP, maximumHP, defensePoints,
-				groundCollisionHandler, movingSpeedXMax, movingSpeedYMax, movingSpeedYMax, position, null) {
-		};
+		test_game.getGameState().setState(model.GameState.State.RUNNING);
+		monster = MonsterFactory.getInstance().createMonster("warrior", map);
 	}
 
 	@Test
 	public void testPlayerCollisionNoneWallRight() {
 
-		initialize("src/test/res/test_map_1.xml");
+		initialize("test_map.xml");
 		test_game.evolve(Cmd.RIGHT);
 		assertEquals("mur", startPoint.x + 1, pacman.getPosition().x);
 	}
@@ -57,7 +41,7 @@ public class TestPacman {
 	@Test
 	public void testPlayerCollisionNoneWallLeft() {
 
-		initialize("src/test/res/test_map_1.xml");
+		initialize("test_map.xml");
 		test_game.evolve(Cmd.LEFT);
 		assertEquals("mur", startPoint.x - 1, pacman.getPosition().x);
 	}
@@ -65,7 +49,7 @@ public class TestPacman {
 	@Test
 	public void testPlayerCollisionNoneWallUp() {
 
-		initialize("src/test/res/test_map_1.xml");
+		initialize("test_map.xml");
 		test_game.evolve(Cmd.UP);
 		assertEquals("mur", startPoint.y - 1, pacman.getPosition().y);
 	}
@@ -73,7 +57,7 @@ public class TestPacman {
 	@Test
 	public void testPlayerCollisionNoneWallDown() {
 
-		initialize("src/test/res/test_map_1.xml");
+		initialize("test_map.xml");
 		test_game.evolve(Cmd.DOWN);
 		assertEquals("mur", startPoint.y + 1, pacman.getPosition().y);
 	}
@@ -81,7 +65,7 @@ public class TestPacman {
 	@Test
 	public void testPlayerCollisionWallRight() {
 
-		initialize("src/test/res/test_map_2.xml");
+		initialize("test_map_2.xml");
 		test_game.evolve(Cmd.RIGHT);
 		assertEquals("pas de mur", startPoint.x, pacman.getPosition().x);
 	}
@@ -89,7 +73,7 @@ public class TestPacman {
 	@Test
 	public void testPlayerCollisionWallLeft() {
 
-		initialize("src/test/res/test_map_2.xml");
+		initialize("test_map_2.xml");
 		test_game.evolve(Cmd.LEFT);
 		assertEquals("pas de mur", startPoint.x, pacman.getPosition().x);
 
@@ -98,7 +82,7 @@ public class TestPacman {
 	@Test
 	public void testPlayerCollisionWallUp() {
 
-		initialize("src/test/res/test_map_2.xml");
+		initialize("test_map_2.xml");
 		test_game.evolve(Cmd.UP);
 		assertEquals("pas de mur", startPoint.y, pacman.getPosition().y);
 	}
@@ -106,7 +90,7 @@ public class TestPacman {
 	@Test
 	public void testPlayerCollisionWallDown() {
 
-		initialize("src/test/res/test_map_2.xml");
+		initialize("test_map_2.xml");
 		test_game.evolve(Cmd.DOWN);
 		assertEquals("pas de mur", startPoint.y, pacman.getPosition().y);
 	}
@@ -114,14 +98,14 @@ public class TestPacman {
 	@Test
 	public void testPlayerGetMoneyAmount() {
 
-		initialize("src/test/res/test_map_1.xml");
+		initialize("test_map.xml");
 		assertEquals(pacman.getMoneyAmount(), 0);
 	}
 
 	@Test
 	public void testPlayerIncreaseMoneyAmount() {
 
-		initialize("src/test/res/test_map_1.xml");
+		initialize("test_map.xml");
 
 		int beginMoney = 0;
 		int endMoney = 10;
@@ -140,7 +124,7 @@ public class TestPacman {
 	@Test
 	public void testPlayerAddItemAddOneKey() {
 
-		initialize("src/test/res/test_map_1.xml");
+		initialize("test_map.xml");
 
 		String keyId = "First key";
 		String keyName = "Powerful Key";
@@ -153,7 +137,7 @@ public class TestPacman {
 	@Test
 	public void testPlayerAddItemAddSameKey() {
 
-		initialize("src/test/res/test_map_1.xml");
+		initialize("test_map.xml");
 
 		String keyId = "First key";
 		String keyName = "Powerful Key 1";
@@ -168,7 +152,7 @@ public class TestPacman {
 	@Test
 	public void testPlayerAddItemAddTwoKey() {
 
-		initialize("src/test/res/test_map_1.xml");
+		initialize("test_map.xml");
 
 		String keyId_1 = "First key";
 		String keyName_1 = "Powerful Key 1";
@@ -188,7 +172,7 @@ public class TestPacman {
 	@Test
 	public void testPlayerAddItemAddTwoKeysWithSameName() {
 
-		initialize("src/test/res/test_map_1.xml");
+		initialize("test_map.xml");
 
 		String keyId_1 = "First key";
 		String keyName_1 = "Powerful Key 1";
@@ -208,7 +192,7 @@ public class TestPacman {
 	@Test
 	public void testPlayerAddItemAddTwoKeysWithSameId() {
 
-		initialize("src/test/res/test_map_1.xml");
+		initialize("test_map.xml");
 
 		String keyId_1 = "First key";
 		String keyName_1 = "Powerful Key 1";
@@ -228,7 +212,7 @@ public class TestPacman {
 	@Test
 	public void testPlayerRemoveItem() {
 
-		initialize("src/test/res/test_map_1.xml");
+		initialize("test_map.xml");
 
 		String keyId = "First key";
 		String keyName = "Powerful Key 1";
@@ -244,7 +228,7 @@ public class TestPacman {
 	@Test
 	public void testPlayerRemoveTwoItemsWithTheSameKey() {
 
-		initialize("src/test/res/test_map_1.xml");
+		initialize("test_map.xml");
 
 		String keyId = "First key";
 		String keyName = "Powerful Key 1";
@@ -261,7 +245,7 @@ public class TestPacman {
 	@Test
 	public void testPlayerRemoveTwoItemsWithTheSameId() {
 
-		initialize("src/test/res/test_map_1.xml");
+		initialize("test_map.xml");
 
 		String keyId_1 = "First key";
 		String keyName_1 = "Powerful Key 1";
@@ -285,7 +269,7 @@ public class TestPacman {
 	@Test
 	public void testTakeDamage() {
 
-		initialize("src/test/res/test_map_1.xml");
+		initialize("test_map.xml");
 
 		int beginHP = pacman.getCurrentHp();
 
@@ -298,7 +282,7 @@ public class TestPacman {
 	@Test
 	public void testTakeDamageOnCollision() {
 
-		initialize("src/test/res/test_map_1.xml");
+		initialize("test_map.xml");
 
 		int beginHP = pacman.getCurrentHp();
 
@@ -311,7 +295,7 @@ public class TestPacman {
 	@Test
 	public void testDestroyPacman() {
 
-		initialize("src/test/res/test_map_1.xml");
+		initialize("test_map.xml");
 
 		pacman.applyDamages(pacman.getCurrentHp());
 		pacman.update();
@@ -322,7 +306,7 @@ public class TestPacman {
 	@Test
 	public void testDestroyPacmanOnCollision() {
 
-		initialize("src/test/res/test_map_1.xml");
+		initialize("test_map.xml");
 
 		int beginHP = pacman.getCurrentHp();
 		for (int i = 0; i < beginHP; i++) {

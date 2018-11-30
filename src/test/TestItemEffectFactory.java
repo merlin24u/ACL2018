@@ -4,7 +4,6 @@ import model.*;
 import model.effect.factory.ItemEffectFactory;
 import model.item.Item;
 import model.item.Key;
-import model.movable.character.Character;
 import model.movable.character.Pacman;
 import model.movable.character.monster.Monster;
 import org.junit.Before;
@@ -14,48 +13,47 @@ import static org.junit.Assert.assertEquals;
 
 public class TestItemEffectFactory {
 
-    private Pacman pacman;
-    private Monster monster;
+	private Pacman pacman;
+	private Monster monster;
 
-    private Item item;
-    private ItemEffectFactory itemEffectFactory;
+	private Item item;
+	private ItemEffectFactory itemEffectFactory;
 
-    private String keyId;
-    private String keyName;
+	private String keyId;
+	private String keyName;
 
-    @Before
-    public void initialize(){
+	@Before
+	public void initialize() {
 
-        pacman = new Pacman(new Map());
-        monster = new Monster(null, null, 0,0,0,null,0,0,0,null, null);
+		pacman = new Pacman(new Map());
+		monster = new Monster(null, null, 0, 0, 0, null, 0, 0, 0, null, null);
 
-        keyId = "KeyId";
-        keyName = "KeyName";
+		keyId = "KeyId";
+		keyName = "KeyName";
 
-        item = new Key(keyId,keyName);
-        itemEffectFactory = new ItemEffectFactory(item);
-    }
+		item = new Key(keyId, keyName);
+		itemEffectFactory = new ItemEffectFactory(item);
+	}
 
-    @Test
-    public void testApplyToPacman(){
-        boolean result = itemEffectFactory.applyTo(pacman);
-        assertEquals("ItemEffectFactory n'a pas Pacman instance", true, result);
-    }
+	@Test
+	public void testApplyToPacman() {
+		boolean result = itemEffectFactory.applyTo(pacman);
+		assertEquals("ItemEffectFactory n'a pas Pacman instance", true, result);
+	}
 
-    @Test
-    public void testApplyToMonster(){
-        boolean result = itemEffectFactory.applyTo(monster);
-        assertEquals("ItemEffectFactory a Monster instance", false, result);
-    }
+	@Test
+	public void testApplyToMonster() {
+		boolean result = itemEffectFactory.applyTo(monster);
+		assertEquals("ItemEffectFactory a Monster instance", false, result);
+	}
 
-    @Test
-    public void testGetItem(){
-        boolean result = itemEffectFactory.applyTo(pacman);
-        assertEquals("ItemEffectFactory n'a pas Pacman instance", true, result);
+	@Test
+	public void testGetItem() {
+		boolean result = itemEffectFactory.applyTo(pacman);
+		assertEquals("ItemEffectFactory n'a pas Pacman instance", true, result);
 
-        Key key = new Key(keyId, keyName);
-        assertEquals("Pacman n'a pas item!", key, pacman.getItem(keyId));
+		Key key = new Key(keyId, keyName);
+		assertEquals("Pacman n'a pas item!", key, pacman.getItem(keyId));
 
-
-    }
+	}
 }

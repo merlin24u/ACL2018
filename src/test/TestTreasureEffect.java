@@ -1,16 +1,11 @@
 package test;
 
 import static org.junit.Assert.*;
-import java.util.ArrayList;
-
 import model.PacmanGame;
 import model.effect.TreasureEffect;
-import model.movable.character.Character;
 import model.movable.character.Pacman;
-
 import org.junit.Before;
 import org.junit.Test;
-import engine.Cmd;
 
 public class TestTreasureEffect {
 
@@ -21,11 +16,10 @@ public class TestTreasureEffect {
 
 	@Before
 	public void initialise() {
-		game = new PacmanGame("");
+		game = new PacmanGame("test_map.xml");
 		player = game.getPlayer();
 		startMoneyAmount = player.getMoneyAmount();
-		te = new TreasureEffect(player, null, 10, 2);
-
+		te = new TreasureEffect(player, "treasureEffect", 10, 2);
 	}
 
 	@Test

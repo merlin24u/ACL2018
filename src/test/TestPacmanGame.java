@@ -1,6 +1,5 @@
 package test;
 
-
 import model.PacmanGame;
 import model.movable.character.monster.Monster;
 
@@ -23,7 +22,7 @@ public class TestPacmanGame {
 
 	@Before
 	public void initialise() {
-		game = new PacmanGame("src/test/res/test_map_1.xml");
+		game = new PacmanGame("test_map.xml");
 
 		listM = new ArrayList<>();
 		for (Character c : game.getMap().getCharacters()) {
@@ -35,7 +34,7 @@ public class TestPacmanGame {
 	@Test
 	public void checkSumOfWall() {
 
-		int numberOfWallsInXML = 25;
+		int numberOfWallsInXML = 35;
 		int numberOfWallsInMap = 0;
 
 		for (int width = 0; width < game.getMap().getWidth(); width++) {
