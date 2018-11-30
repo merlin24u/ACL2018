@@ -33,7 +33,7 @@ public class TestPacmanGame {
 	@Test
 	public void checkSumOfWall() {
 
-		int numberOfWallsInXML = 35;
+		int numberOfWallsInXML = 40;
 		int numberOfWallsInMap = 0;
 
 		for (int width = 0; width < game.getMap().getWidth(); width++) {
@@ -50,7 +50,7 @@ public class TestPacmanGame {
 	@Test
 	public void checkSumOfEmptyFields() {
 
-		int numberOfEmptyFieldsInXML = 65;
+		int numberOfEmptyFieldsInXML = 60;
 		int numberOfEmptyFieldsInMap = 0;
 
 		for (int width = 0; width < game.getMap().getWidth(); width++) {

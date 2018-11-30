@@ -6,6 +6,7 @@ import java.awt.*;
 import java.io.IOException;
 
 import model.*;
+import org.junit.Before;
 import org.junit.Test;
 import engine.Cmd;
 import org.xml.sax.SAXException;
@@ -21,11 +22,12 @@ public class TestPacman {
 
     private Point startPoint;
 
-    public void initialize(String pathMap) {
+    @Before
+    public void initialize() {
 
-        test_game = new PacmanGame(pathMap);
+        test_game = new PacmanGame("src/test/res/test_map_1.xml");
         map = test_game.getMap();
-        pacman = new Pacman(map);
+        pacman = test_game.getPlayer();
         startPoint = new Point(pacman.getPosition());
         test_game.getGameState().setState(GameState.State.RUNNING);
         monster = MonsterFactory.getInstance().createMonster("warrior", map);
@@ -34,79 +36,78 @@ public class TestPacman {
     @Test
     public void testPlayerCollisionNoneWallRight() {
 
-        initialize("src/test/res/test_map_1.xml");
+        startPoint = new Point(5,5);
+        test_game.getPlayer().setPosition(startPoint.x,startPoint.y);
         test_game.evolve(Cmd.RIGHT);
-        assertEquals("mur", startPoint.x + 1, pacman.getPosition().x);
+        assertEquals("mur", startPoint.x + 1, test_game.getPlayer().getPosition().x);
+
     }
 
     @Test
     public void testPlayerCollisionNoneWallLeft() {
 
-        initialize("src/test/res/test_map_1.xml");
+        startPoint = new Point(5,5);
+        test_game.getPlayer().setPosition(startPoint.x,startPoint.y);
         test_game.evolve(Cmd.LEFT);
-        assertEquals("mur", startPoint.x - 1, pacman.getPosition().x);
+        assertEquals("mur", startPoint.x - 1, test_game.getPlayer().getPosition().x);
     }
 
     @Test
     public void testPlayerCollisionNoneWallUp() {
 
-        initialize("src/test/res/test_map_1.xml");
+        startPoint = new Point(5,5);
+        test_game.getPlayer().setPosition(startPoint.x,startPoint.y);
         test_game.evolve(Cmd.UP);
-        assertEquals("mur", startPoint.y - 1, pacman.getPosition().y);
+        assertEquals("mur", startPoint.y - 1, test_game.getPlayer().getPosition().y);
     }
 
     @Test
     public void testPlayerCollisionNoneWallDown() {
 
-        initialize("src/test/res/test_map_1.xml");
+        startPoint = new Point(6,6);
+        test_game.getPlayer().setPosition(startPoint.x,startPoint.y);
+        test_game.getMap().getCharacters().get(1).setPosition(startPoint.x,startPoint.y);
         test_game.evolve(Cmd.DOWN);
-        assertEquals("mur", startPoint.y + 1, pacman.getPosition().y);
+        assertEquals("mur", startPoint.y + 1, test_game.getPlayer().getPosition().y);
     }
 
     @Test
     public void testPlayerCollisionWallRight() {
 
-        initialize("src/test/res/test_map_2.xml");
         test_game.evolve(Cmd.RIGHT);
-        assertEquals("pas de mur", startPoint.x, pacman.getPosition().x);
+        assertEquals("pas de mur", startPoint.x, test_game.getPlayer().getPosition().x);
     }
 
     @Test
     public void testPlayerCollisionWallLeft() {
 
-        initialize("src/test/res/test_map_2.xml");
         test_game.evolve(Cmd.LEFT);
-        assertEquals("pas de mur", startPoint.x, pacman.getPosition().x);
+        assertEquals("pas de mur", startPoint.x, test_game.getPlayer().getPosition().x);
 
     }
 
     @Test
     public void testPlayerCollisionWallUp() {
 
-        initialize("src/test/res/test_map_2.xml");
         test_game.evolve(Cmd.UP);
-        assertEquals("pas de mur", startPoint.y, pacman.getPosition().y);
+        assertEquals("pas de mur", startPoint.y, test_game.getPlayer().getPosition().y);
     }
 
     @Test
     public void testPlayerCollisionWallDown() {
 
-        initialize("src/test/res/test_map_2.xml");
         test_game.evolve(Cmd.DOWN);
-        assertEquals("pas de mur", startPoint.y, pacman.getPosition().y);
+        assertEquals("pas de mur", startPoint.y, test_game.getPlayer().getPosition().y);
     }
 
     @Test
     public void testPlayerGetMoneyAmount() {
 
-        initialize("src/test/res/test_map_1.xml");
         assertEquals(pacman.getMoneyAmount(), 0);
     }
 
     @Test
     public void testPlayerIncreaseMoneyAmount() {
-
-        initialize("src/test/res/test_map_1.xml");
 
         int beginMoney = 0;
         int endMoney = 10;
@@ -125,8 +126,6 @@ public class TestPacman {
     @Test
     public void testPlayerAddItemAddOneKey() {
 
-        initialize("src/test/res/test_map_1.xml");
-
         String keyId = "First key";
         String keyName = "Powerful Key";
 
@@ -137,8 +136,6 @@ public class TestPacman {
 
     @Test
     public void testPlayerAddItemAddSameKey() {
-
-        initialize("src/test/res/test_map_1.xml");
 
         String keyId = "First key";
         String keyName = "Powerful Key 1";
@@ -152,8 +149,6 @@ public class TestPacman {
 
     @Test
     public void testPlayerAddItemAddTwoKey() {
-
-        initialize("src/test/res/test_map_1.xml");
 
         String keyId_1 = "First key";
         String keyName_1 = "Powerful Key 1";
@@ -173,8 +168,6 @@ public class TestPacman {
     @Test
     public void testPlayerAddItemAddTwoKeysWithSameName() {
 
-        initialize("src/test/res/test_map_1.xml");
-
         String keyId_1 = "First key";
         String keyName_1 = "Powerful Key 1";
 
@@ -192,8 +185,6 @@ public class TestPacman {
 
     @Test
     public void testPlayerAddItemAddTwoKeysWithSameId() {
-
-        initialize("src/test/res/test_map_1.xml");
 
         String keyId_1 = "First key";
         String keyName_1 = "Powerful Key 1";
@@ -213,8 +204,6 @@ public class TestPacman {
     @Test
     public void testPlayerRemoveItem() {
 
-        initialize("src/test/res/test_map_1.xml");
-
         String keyId = "First key";
         String keyName = "Powerful Key 1";
 
@@ -228,8 +217,6 @@ public class TestPacman {
 
     @Test
     public void testPlayerRemoveTwoItemsWithTheSameKey() {
-
-        initialize("src/test/res/test_map_1.xml");
 
         String keyId = "First key";
         String keyName = "Powerful Key 1";
@@ -245,8 +232,6 @@ public class TestPacman {
 
     @Test
     public void testPlayerRemoveTwoItemsWithTheSameId() {
-
-        initialize("src/test/res/test_map_1.xml");
 
         String keyId_1 = "First key";
         String keyName_1 = "Powerful Key 1";
@@ -270,12 +255,11 @@ public class TestPacman {
     @Test
     public void testTakeDamage() {
 
-        initialize("src/test/res/test_map_1.xml");
-
         int beginHP = pacman.getCurrentHp();
 
         assertEquals(beginHP, pacman.getCurrentHp());
         monster.attack(pacman);
+        pacman.update();
         assertEquals(beginHP - 1, pacman.getCurrentHp());
 
     }
@@ -283,20 +267,17 @@ public class TestPacman {
     @Test
     public void testTakeDamageOnCollision() {
 
-        initialize("src/test/res/test_map_1.xml");
-
         int beginHP = pacman.getCurrentHp();
 
         assertEquals(beginHP, pacman.getCurrentHp());
         monster.onCollision(pacman);
+        pacman.update();
         assertEquals("Le pacman n'a pas obtenu des dégâts", beginHP - 1, pacman.getCurrentHp());
 
     }
 
     @Test
     public void testDestroyPacman() {
-
-        initialize("src/test/res/test_map_1.xml");
 
         pacman.applyDamages(pacman.getCurrentHp());
         pacman.update();
@@ -306,8 +287,6 @@ public class TestPacman {
 
     @Test
     public void testDestroyPacmanOnCollision() {
-
-        initialize("src/test/res/test_map_1.xml");
 
         int beginHP = pacman.getCurrentHp();
         for (int i = 0; i < beginHP; i++) {

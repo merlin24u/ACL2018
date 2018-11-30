@@ -4,8 +4,8 @@
     <sizeY>10</sizeY>
   </size>
   <start>
-    <posX>4</posX>
-    <posY>4</posY>
+    <posX>1</posX>
+    <posY>3</posY>
   </start>
   <finish>
     <posX>0</posX>
@@ -27,9 +27,9 @@
     <tab index="1">
       <tab2D index="0">noneCollision</tab2D>
       <tab2D index="1">noneCollision</tab2D>
-      <tab2D index="2">noneCollision</tab2D>
+      <tab2D index="2">wallCollision</tab2D>
       <tab2D index="3">noneCollision</tab2D>
-      <tab2D index="4">noneCollision</tab2D>
+      <tab2D index="4">wallCollision</tab2D>
       <tab2D index="5">noneCollision</tab2D>
       <tab2D index="6">noneCollision</tab2D>
       <tab2D index="7">noneCollision</tab2D>
@@ -39,9 +39,9 @@
     <tab index="2">
       <tab2D index="0">wallCollision</tab2D>
       <tab2D index="1">noneCollision</tab2D>
-      <tab2D index="2">noneCollision</tab2D>
-      <tab2D index="3">noneCollision</tab2D>
-      <tab2D index="4">noneCollision</tab2D>
+      <tab2D index="2">wallCollision</tab2D>
+      <tab2D index="3">wallCollision</tab2D>
+      <tab2D index="4">wallCollision</tab2D>
       <tab2D index="5">noneCollision</tab2D>
       <tab2D index="6">noneCollision</tab2D>
       <tab2D index="7">noneCollision</tab2D>
@@ -133,16 +133,35 @@
       <tab2D index="9">wallCollision</tab2D>
     </tab>
   </data>
-  <item>
-    <key>
+  <items>
+    <item>
+      <type>key</type>
       <posX>8</posX>
       <posY>3</posY>
-    </key>
-  </item>
+    </item>
+    <item>
+      <type>treasure</type>
+      <posX>6</posX>
+      <posY>3</posY>
+    </item>
+  </items>
   <monsters>
     <monster>
-      <posX>8</posX>
-      <posY>1</posY>
+      <type>warrior</type>
+      <posX>5</posX>
+      <posY>7</posY>
     </monster>
   </monsters>
+  <effects>
+    <effect>
+      <type>health</type>
+      <posX>3</posX>
+      <posY>7</posY>
+    </effect>
+    <effect>
+      <type>damage</type>
+      <posX>8</posX>
+      <posY>6</posY>
+    </effect>
+  </effects>
 </map>
