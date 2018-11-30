@@ -24,6 +24,8 @@ public class TestMovable {
 	public void initialize() {
 
 		pacmanGame = new PacmanGame("test_map.xml");
+		pacmanGame.getMap().getStart().x = 6;
+		pacmanGame.getMap().getStart().y = 6;
 		map = pacmanGame.getMap();
 		movingSpeedXMax = 1;
 		movingSpeedYMax = 1;

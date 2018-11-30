@@ -6,6 +6,7 @@ import model.item.Item;
 import model.item.Key;
 import model.movable.character.Pacman;
 import model.movable.character.monster.Monster;
+import model.movable.character.monster.MonsterFactory;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -26,8 +27,7 @@ public class TestItemEffectFactory {
 	public void initialize() {
 
 		pacman = new Pacman(new Map());
-		monster = new Monster(null, null, 0, 0, 0, null, 0, 0, 0, null, null);
-
+		monster = MonsterFactory.getInstance().createMonster("warrior", new Map());
 		keyId = "KeyId";
 		keyName = "KeyName";
 
