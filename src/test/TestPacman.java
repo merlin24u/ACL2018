@@ -37,7 +37,7 @@ public class TestPacman {
         pacman = new Pacman(map);
         startPoint = new Point(pacman.getPosition());
 
-        GroundCollisionHandler groundCollisionHandler = new GroundCollisionHandler(map);
+        GroundCollisionHandler groundCollisionHandler = new GroundCollisionHandler(map, null);
 
         int movingSpeedXMax = 1;
         int movingSpeedYMax = 1;
@@ -46,7 +46,7 @@ public class TestPacman {
 
         MovableArtificialIntelligence movableArtificialIntelligence = new RandomMovableArtificialIntelligence(map);
 
-		monster = new Monster(null, movableArtificialIntelligence, currentHP, maximumHP, defensePoints, groundCollisionHandler, movingSpeedXMax, movingSpeedYMax, movingSpeedYMax, position) {
+		monster = new Monster(null, movableArtificialIntelligence, currentHP, maximumHP, defensePoints, groundCollisionHandler, movingSpeedXMax, movingSpeedYMax, movingSpeedYMax, position, null) {
         };
     }
 
