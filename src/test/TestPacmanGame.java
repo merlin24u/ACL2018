@@ -2,15 +2,12 @@ package test;
 
 import model.PacmanGame;
 import model.movable.character.monster.Monster;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.xml.sax.SAXException;
-
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.util.ArrayList;
-
 import model.movable.character.Character;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

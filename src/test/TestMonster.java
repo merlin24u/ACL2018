@@ -1,16 +1,11 @@
 package test;
 
 import model.*;
-import org.junit.Test;
-import java.awt.*;
-import model.movable.ai.MovableArtificialIntelligence;
-import model.movable.ai.RandomMovableArtificialIntelligence;
 import model.movable.character.Pacman;
 import model.movable.character.monster.Monster;
 import model.movable.character.monster.MonsterFactory;
-import model.movable.collision.ECollisionType;
-import model.movable.collision.GroundCollisionHandler;
-
+import org.junit.Test;
+import java.awt.*;
 import static org.junit.Assert.assertEquals;
 
 public class TestMonster {
@@ -35,18 +30,15 @@ public class TestMonster {
 
 	@Test
 	public void testTakeDamage() {
-
 		initialize("test_map.xml");
 
 		int beginHP = monster.getCurrentHp();
+
 		assertEquals(beginHP, monster.getCurrentHp());
 		pacman.attack(monster);
 		monster.update();
 		assertEquals(beginHP - 1, monster.getCurrentHp());
-		assertEquals(beginHP, monster.getCurrentHp());
-		pacman.onCollision(monster);
-		monster.update();
-		assertEquals("Le monstre n'a pas obtenu des dégâts", beginHP - 1, monster.getCurrentHp());
+
 	}
 
 	@Test
