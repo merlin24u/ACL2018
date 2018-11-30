@@ -13,7 +13,7 @@ public class Pacman extends Character implements IDamager {
 	private Map map;
 
 	public Pacman(Map m) {
-		super(50, 50, 0, GroundCollisionHandlerFactory.getInstance().getGroundCollisionHandler(m, new ECollisionType[] {ECollisionType.WALL}), 1, 1, 3, m.getStart());
+		super(250, 250, 0, GroundCollisionHandlerFactory.getInstance().getGroundCollisionHandler(m, new ECollisionType[] {ECollisionType.WALL}), 1, 1, 3, m.getStart());
 		this.items = new ArrayList<Item>();
 		this.damageEffectFactory = new DamageEffectFactory(1, 1);
 		this.isAttacking = false;

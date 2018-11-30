@@ -9,16 +9,16 @@ public abstract class CollisionPainterResponsability {
 	// Prochain responsable si la classe actuelle ne permet pas de gerer la
 	// collision donnee
 
-	/* protected CollisionPainterResponsability successor; */
+	protected CollisionPainterResponsability successor;
 
 	public CollisionPainterResponsability(ECollisionType collisionType) {
 		this.collisionType = collisionType;
 	}
 
-	/*
-	 * public void setSuccessor(CollisionPainterResponsability successor) {
-	 * this.successor = successor; }
-	 */
+	
+	public void setSuccessor(CollisionPainterResponsability successor) {
+		this.successor = successor; 
+	}
 
 	protected boolean isResponsible(int collisionValue) {
 		return (this.collisionType.getValue() == collisionValue);

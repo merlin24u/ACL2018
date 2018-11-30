@@ -25,6 +25,8 @@ if (this.isResponsible(collisionValue)) {
 	} catch (Exception e) {
 		e.printStackTrace();
 	}
+}else if(successor != null) {
+	successor.drawCollision(crayon, x, y, drawOffsetX, drawOffsetY, tileWidth, tileHeight, collisionValue);
 }
 }
 }

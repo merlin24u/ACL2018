@@ -50,8 +50,9 @@ public class PacmanPainter implements GamePainter {
 		this.game = game;
 		this.width = width;
 		this.height = height;
-		collisionPainter = new WallCollisionPainterResponsability(ECollisionType.WALL);
-		GroundCollisionPainterResponsability groundCollisionPainter = new GroundCollisionPainterResponsability(ECollisionType.WALL);
+		WallCollisionPainterResponsability wallCollisionPainter = new WallCollisionPainterResponsability(ECollisionType.WALL);
+		collisionPainter = new GroundCollisionPainterResponsability(ECollisionType.NONE);
+		collisionPainter.setSuccessor(wallCollisionPainter);
 	}
 
 	private void drawBar(BufferedImage im) { 
