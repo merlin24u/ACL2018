@@ -3,8 +3,7 @@ package model;
 import java.awt.Point;
 import java.util.ArrayList;
 
-public abstract class OnMoveOver implements IUpdate, ICoordinate,
-		IDestructible, Cloneable {
+public abstract class OnMoveOver implements IUpdate, ICoordinate, IDestructible {
 	private Map map;
 	private Point position;
 	// Si l'objet est visible
@@ -19,8 +18,8 @@ public abstract class OnMoveOver implements IUpdate, ICoordinate,
 	private ArrayList<Character> charactersAlreadyOn;
 	private ArrayList<EffectFactory> effectsFactories;
 
-	public OnMoveOver(Map map, Point position, boolean isVisible,
-			boolean isActivated, boolean isPersistingAfterActivation) {
+	public OnMoveOver(Map map, Point position, boolean isVisible, boolean isActivated,
+			boolean isPersistingAfterActivation) {
 		super();
 		this.map = map;
 		this.position = position;
@@ -88,10 +87,6 @@ public abstract class OnMoveOver implements IUpdate, ICoordinate,
 	@Override
 	public boolean isToDestroy() {
 		return toDestroy;
-	}
-
-	public OnMoveOver getClone() throws CloneNotSupportedException {
-		return (OnMoveOver) super.clone();
 	}
 
 	protected abstract boolean hasRequirements(Character character);

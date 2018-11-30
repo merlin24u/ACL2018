@@ -24,21 +24,16 @@ public class Map implements IUpdate {
 
 		// Creation de la map statique
 		grid = new int[][] {
-				{ wallCollision, wallCollision, wallCollision, wallCollision,
-						wallCollision, wallCollision, wallCollision,
-						wallCollision, wallCollision, wallCollision },
-				{ noneCollision, noneCollision, noneCollision, noneCollision,
-						noneCollision, noneCollision, noneCollision,
-						noneCollision, noneCollision, wallCollision },
-				{ wallCollision, noneCollision, noneCollision, wallCollision,
-						noneCollision, noneCollision, noneCollision,
-						noneCollision, noneCollision, wallCollision },
-				{ wallCollision, noneCollision, noneCollision, noneCollision,
-						noneCollision, noneCollision, noneCollision,
-						noneCollision, noneCollision, wallCollision },
-				{ wallCollision, wallCollision, wallCollision, wallCollision,
-						wallCollision, wallCollision, wallCollision,
-						wallCollision, wallCollision, wallCollision } };
+				{ wallCollision, wallCollision, wallCollision, wallCollision, wallCollision, wallCollision,
+						wallCollision, wallCollision, wallCollision, wallCollision },
+				{ noneCollision, noneCollision, noneCollision, noneCollision, noneCollision, noneCollision,
+						noneCollision, noneCollision, noneCollision, wallCollision },
+				{ wallCollision, noneCollision, noneCollision, wallCollision, noneCollision, noneCollision,
+						noneCollision, noneCollision, noneCollision, wallCollision },
+				{ wallCollision, noneCollision, noneCollision, noneCollision, noneCollision, noneCollision,
+						noneCollision, noneCollision, noneCollision, wallCollision },
+				{ wallCollision, wallCollision, wallCollision, wallCollision, wallCollision, wallCollision,
+						wallCollision, wallCollision, wallCollision, wallCollision } };
 
 		start = new Point(1, 1);
 		finish = new Point(0, 1);
@@ -47,8 +42,7 @@ public class Map implements IUpdate {
 
 	}
 
-	public Map(int[][] g, Point s, Point f, ArrayList<MapXmlDAO.TmpType> items,
-			ArrayList<MapXmlDAO.TmpType> effects,
+	public Map(int[][] g, Point s, Point f, ArrayList<MapXmlDAO.TmpType> items, ArrayList<MapXmlDAO.TmpType> effects,
 			ArrayList<MapXmlDAO.TmpType> monsters) {
 		grid = g;
 		start = s;
@@ -59,8 +53,7 @@ public class Map implements IUpdate {
 		toDestroy = new ArrayList<Object>();
 
 		for (MapXmlDAO.TmpType tmpM : monsters) {
-			Monster m = MonsterFactory.getInstance().createMonster(
-					tmpM.getType(), this);
+			Monster m = MonsterFactory.getInstance().createMonster(tmpM.getType(), this);
 			m.setPosition(tmpM.getX(), tmpM.getY());
 			this.characters.add(m);
 		}
@@ -78,18 +71,16 @@ public class Map implements IUpdate {
 				case "key":
 					Point posKey = new Point(tmpM.getX(), tmpM.getY());
 					ief = new ItemEffectFactory(key);
-					onMove = new SimpleOnMoveOver(this, posKey, true, false,
-							false);
+					onMove = new SimpleOnMoveOver(this, posKey, true, false, false);
 					onMove.addEffectFactory(ief);
 					this.events.add(onMove);
 					break;
 				case "treasure":
 					Point posTreasure = new Point(tmpM.getX(), tmpM.getY());
 					iefT = new TreasureEffectFactory(1, 10);
-					onMove = new SimpleOnMoveOver(this, posTreasure, true,
-							false, false);
+					onMove = new SimpleOnMoveOver(this, posTreasure, true, false, false);
 					onMove.addEffectFactory(iefT);
-					this.events.add(onMove.getClone());
+					this.events.add(onMove);
 					break;
 				}
 			}
@@ -99,18 +90,16 @@ public class Map implements IUpdate {
 				case "health":
 					Point posHealth = new Point(tmpM.getX(), tmpM.getY());
 					iefH = new HealthEffectFactory(1, 10);
-					onMove = new SimpleOnMoveOver(this, posHealth, true, false,
-							false);
+					onMove = new SimpleOnMoveOver(this, posHealth, true, false, false);
 					onMove.addEffectFactory(iefH);
-					this.events.add(onMove.getClone());
+					this.events.add(onMove);
 					break;
 				case "damage":
 					Point posDamage = new Point(tmpM.getX(), tmpM.getY());
 					iefD = new DamageEffectFactory(1, 10);
-					onMove = new SimpleOnMoveOver(this, posDamage, true, false,
-							false);
+					onMove = new SimpleOnMoveOver(this, posDamage, true, false, false);
 					onMove.addEffectFactory(iefD);
-					this.events.add(onMove.getClone());
+					this.events.add(onMove);
 					break;
 				}
 			}
@@ -123,8 +112,7 @@ public class Map implements IUpdate {
 		ArrayList<Item> itemsRequired = new ArrayList<Item>();
 		itemsRequired.add(key);
 		ExitEffectFactory ef = new ExitEffectFactory(1);
-		OnMoveOver onMove2 = new ItemRequiredOnMoveOver(this, finish, true,
-				false, true, itemsRequired, true);
+		OnMoveOver onMove2 = new ItemRequiredOnMoveOver(this, finish, true, false, true, itemsRequired, true);
 		onMove2.addEffectFactory(ef);
 		this.events.add(onMove2);
 	}
@@ -137,8 +125,7 @@ public class Map implements IUpdate {
 		Item item1 = new Key("K01", "Exit key");
 		// Case qui donnera la clef
 		ItemEffectFactory ief = new ItemEffectFactory(item1);
-		OnMoveOver onMove1 = new SimpleOnMoveOver(this, new Point(1, 2), true,
-				false, false);
+		OnMoveOver onMove1 = new SimpleOnMoveOver(this, new Point(1, 2), true, false, false);
 		onMove1.addEffectFactory(ief);
 		this.events.add(onMove1);
 
@@ -146,8 +133,7 @@ public class Map implements IUpdate {
 		ArrayList<Item> itemsRequired = new ArrayList<Item>();
 		itemsRequired.add(item1);
 		ExitEffectFactory ef = new ExitEffectFactory(1);
-		OnMoveOver onMove2 = new ItemRequiredOnMoveOver(this, finish, true,
-				false, true, itemsRequired, true);
+		OnMoveOver onMove2 = new ItemRequiredOnMoveOver(this, finish, true, false, true, itemsRequired, true);
 		onMove2.addEffectFactory(ef);
 		this.events.add(onMove2);
 	}
