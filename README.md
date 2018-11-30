@@ -13,3 +13,7 @@ Executer les commandes suivantes à la racine du projet :
 
 - Pour compiler uniquement : ant -f build.xml compile
 
+Remarque :
+
+- Sous eclipse ou autre IDE, ajouter le dossier res au build path
+
